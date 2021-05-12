@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['login']['nama'])) {
-    header("Location: Pages/login/login.php");
+    header("Location: Pages/halamanUtama/index.php");
     exit;
 }
 ?>
@@ -57,29 +57,6 @@ if (!isset($_SESSION['login']['nama'])) {
             if ($_SESSION['login']['level'] == '2') :
             ?>
 
-                <!-- C4.5 -->
-                <div class="sidebar-heading">
-                    Algoritma C 4.5
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>C 4.5</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Algoritma C4.5:</h6>
-                            <a class="collapse-item" href="#">Mining</a>
-                            <a class="collapse-item" href="#">Pohon Keputusan</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Data Jalan
@@ -89,20 +66,19 @@ if (!isset($_SESSION['login']['nama'])) {
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Data</span>
+                        <span>Data Jalan</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Data Olahan C45</h6>
-                            <a class="collapse-item" href="login.html">Data Training</a>
-                            <a class="collapse-item" href="register.html">Data jalan</a>
-                            <a class="collapse-item" href="forgot-password.html">Hasil Prediksi</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Data User</h6>
-                            <a class="collapse-item" href="404.html">Data Masyarakat</a>
-                            <a class="collapse-item" href="blank.html">Data Pejabat</a>
+                            <h6 class="collapse-header">Data Jalan</h6>
+                            <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
                         </div>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=aspirasi">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Aspirasi</span></a>
                 </li>
 
                 <!-- JIKA LEVELNYA 1 MAKA AKAN MENAMPILKAN -->
@@ -124,14 +100,26 @@ if (!isset($_SESSION['login']['nama'])) {
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Data Olahan C45</h6>
                             <a class="collapse-item" href="index.php?page=datatraining">Data Training</a>
-                            <a class="collapse-item" href="register.html">Data jalan</a>
-                            <a class="collapse-item" href="forgot-password.html">Hasil Prediksi</a>
+                            <a class="collapse-item" href="index.php?page=mining">Mining</a>
+                            <a class="collapse-item" href="#">Pohon Keputusan</a>
+                            <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
+                            <a class="collapse-item" href="#">Hasil Prediksi</a>
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Data User</h6>
-                            <a class="collapse-item" href="404.html">Data Masyarakat</a>
+                            <a class="collapse-item" href="index.php?page=dataMasyarakat">Data Masyarakat</a>
                             <a class="collapse-item" href="blank.html">Data Pejabat</a>
                         </div>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=aspirasi">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Aspirasi</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=dashboard">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Profile</span></a>
                 </li>
 
                 <!-- JIKA LEVELNYA 2 MAKA AKAN MENAMPILKAN -->

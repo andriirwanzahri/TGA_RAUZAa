@@ -65,16 +65,13 @@ if (isset($_POST["login"])) {
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-lg-7">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block ">
-                                <center><img src="../../img/pnl.png" width="400" height="400"></center>
-                            </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
@@ -87,7 +84,7 @@ if (isset($_POST["login"])) {
                                             <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                                         </div>
 
-                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" name="login" class="btn btn-warning btn-user btn-block">
                                             Login
                                         </button>
                                         <hr>
@@ -98,7 +95,10 @@ if (isset($_POST["login"])) {
                                     <hr>
 
                                     <div class="text-center">
-                                        <a class="small" href="registrasi.php">Create an Account!</a>
+                                        <a class="small" href="registrasi.php">Daftar Akun!</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="../halamanUtama/index.php">Kembali</a>
                                     </div>
                                 </div>
                             </div>

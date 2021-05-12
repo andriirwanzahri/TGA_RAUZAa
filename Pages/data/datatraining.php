@@ -1,117 +1,127 @@
 <?php
 include 'koneksi.php';
 if (isset($_GET['berhasil'])) {
-    echo "<p>" . $_GET['berhasil'] . " Data berhasil di import.</p>";
+    echo "
+    <div class='alert alert-info alert-dismissable' id='divAlert'>
+            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+            Data Tersimpan Sebanyak " . $_GET['berhasil'] . "
+            </div>";
+} else if (isset($_GET['gagal'])) {
+    echo "
+    <div class='alert alert-danger alert-dismissable' id='divAlert'>
+            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+            Data Gagal Tersimpan " . $_GET['gagal'] . "
+            </div>";
 }
-
 if (isset($_POST["hapus"])) {
-    $data = mysqli_query($conn, "DELETE FROM data_training");
+    $data = mysqli_query($conn, "DELETE FROM datapreprocessing");
+    mysqli_query($conn, "DELETE FROM dataset");
     if ($data > 0) {
         echo "
-            <script>
-                alert('data berhasil dihapus!');
-                document.location.href = 'index.php?page=datatraining';
-            </script>
-        ";
+        <div class='alert alert-info alert-dismissable' id='divAlert'>
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+        Data Berhasil di Hapus Semua
+        </div>";
     } else {
         echo "
-            <script>
-                alert('data gagal ditambahkan!');
-                document.location.href = 'index.php?page=datatraining';
-            </script>
-        ";
+        <div class='alert alert-danger alert-dismissable' id='divAlert'>
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+        Data Gagal di hapus
+        </div>";
     }
 }
+
+
 ?>
-<center>
-    <h1>Data Training</h1>
-</center>
-
-<form method="post" enctype="multipart/form-data" action="Pages/data/upload_aksi.php">
-    <div class="input-group mb-3 ">
-        <div class="custom-file">
-            <input name="datatraining" type="file" required="required" class="custom-file-input" id="inputGroupFile02">
-            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Pages/data/upload_aksi.php -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-1">
+            <form method="post" class="float-right" enctype="multipart/form-data" action="Pages/data/upload_aksi.php">
+                <div class="input-group">
+                    <input type="file" name="datatraining" class="form-control border-2 small">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" name="upload" type="submit" id="inputGroupFileAddon04">Upload</button>
+                    </div>
+                </div>
+            </form>
+            <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#HapusModal">Hapus Semua Data</button>
+            <form action="" method="post">
+                <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data</button>
+            </form>
+            <h5 class="font-weight-bold text-primary">Data Training</h5>
         </div>
-        <div class="input-group-append">
-            <input name="upload" type="submit" class="input-group-text" value="Import">
-        </div>
-
-    </div>
-</form>
-<form action="" method="post">
-    <button type="submit" name="hapus" class="btn btn-danger btn-lg">Hapus Data</button>
-</form>
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Training</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Ruas</th>
-                        <th>Thn_Pen_Ak</th>
-                        <th>Nama Lintas Kecamatan</th>
-                        <th>Ura_Dukung</th>
-                        <th>Panjang Tanah_Kri</th>
-                        <th>Aspal</th>
-                        <th>Jns_Pen</th>
-                        <th>Kondisi Baik</th>
-                        <th>kondisi sedang</th>
-                        <th>kondisi rusak ringan</th>
-                        <th>kondisi rusak berat</th>
-                    </tr>
-                </thead>
-                <tfoot>
-
-
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Ruas</th>
-                        <th>Thn_Pen_Ak</th>
-                        <th>Nama Lintas Kecamatan</th>
-                        <th>Ura_Dukung</th>
-                        <th>Panjang Tanah_Kri</th>
-                        <th>Aspal</th>
-                        <th>Jns_Pen</th>
-                        <th>Kondisi Baik</th>
-                        <th>kondisi sedang</th>
-                        <th>kondisi rusak ringan</th>
-                        <th>kondisi rusak berat</th>
-                    </tr>
-
-                </tfoot>
-                <tbody>
-                    <?php
-                    $no = 1;
-
-
-                    $data = mysqli_query($conn, "select * from data_training");
-                    while ($d = mysqli_fetch_array($data)) {
-                    ?>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
                         <tr>
-                            <td><?php echo $no++; ?></td>
-                            <td><?php echo $d['nama_ruas']; ?></td>
-                            <td><?php echo $d['thn_pen_ak']; ?></td>
-                            <td><?php echo $d['kecamatan']; ?></td>
-                            <td><?php echo $d['ura_dukung']; ?></td>
-                            <td><?php echo $d['tanah_krikil']; ?></td>
-                            <td><?php echo $d['aspal']; ?></td>
-                            <td><?php echo $d['jns_pen']; ?></td>
-                            <td><?php echo $d['kon_baik']; ?></td>
-                            <td><?php echo $d['kon_sedang']; ?></td>
-                            <td><?php echo $d['kon_rusakringan']; ?></td>
-                            <td><?php echo $d['kon_rusakberat']; ?></td>
+                            <th>No</th>
+                            <th>Ura Dukung</th>
+                            <th>Lintas</th>
+                            <th>Panjang</th>
+                            <th>Jns_Pen</th>
+                            <th>Krikil</th>
+                            <th>Aspal</th>
+                            <th>rigit</th>
+                            <th>Kondisi</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+
+
+                        $data = mysqli_query($conn, "select * from datapreprocessing");
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $d['ura_dukung']; ?></td>
+                                <td><?php echo $d['namaLintas']; ?></td>
+                                <td><?php echo $d['panjangRuas']; ?></td>
+                                <td><?php echo $d['jns_pen']; ?></td>
+                                <td><?php echo $d['tanah_krikil']; ?></td>
+                                <td><?php echo $d['aspal']; ?></td>
+                                <td><?php echo $d['rigit']; ?></td>
+                                <td><?php echo $d['target']; ?></td>
+                                <td><a href="#" class="btn btn-danger btn-circle">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-warning btn-circle">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="HapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Siap untuk Menghapus?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Apakah Anda Yakin Ingin menghapus Semua Data.</div>
+            <div class="modal-footer">
+                <form action="" method="post">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                    <button class="btn btn-danger" name="hapus">Hapus</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

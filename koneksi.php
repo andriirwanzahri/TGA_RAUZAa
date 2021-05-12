@@ -12,6 +12,71 @@ function query($query)
 	return $rows;
 }
 
+function uploadDataSet($dataset)
+{
+	global $conn;
+	include "Pages/excel_reader2.php";
+	// mengambil isi file xls
+	$data = new Spreadsheet_Excel_Reader($dataset['name'], false);
+	// menghitung jumlah baris data yang ada
+	$jumlah_baris = $data->rowcount($sheet_index = 0);
+
+	// jumlah default data yang berhasil di import
+	$berhasil = 0;
+	for ($i = 2; $i <= $jumlah_baris; $i++) {
+
+		// menangkap data dan memasukkan ke variabel sesuai dengan kolumnya masing-masing
+
+		$ura_dukung     = $data->val($i, 1);
+		$kecamatan  = $data->val($i, 2);
+		$namaLintas = $data->val($i, 3);
+		$panjangRuas = $data->val($i, 4);
+		$jns_pen = $data->val($i, 5);
+		$tanah_krikil = $data->val($i, 6);
+		$aspal = $data->val($i, 7);
+		$rigit = $data->val($i, 8);
+		$kondisi = $data->val($i, 9);
+
+		if (
+			$ura_dukung != ""
+			&& $kecamatan != ""
+			&& $namaLintas != ""
+			&& $panjangRuas != ""
+			&& $jns_pen != ""
+			&& $tanah_krikil != ""
+			&& $aspal != ""
+			&& $rigit != ""
+			&& $kondisi != ""
+		) {
+			// input data ke database (table data_trainig)
+			mysqli_query($conn, "INSERT into dataset values($i,'$ura_dukung',
+			'$kecamatan',
+			'$namaLintas',
+			'$panjangRuas',
+			'$jns_pen',
+			'$tanah_krikil',
+			'$aspal',
+			'$rigit',
+			'$kondisi'
+			)");
+
+
+
+			mysqli_query($conn, "INSERT into datapreprocessing values($i,'$ura_dukung',
+			'$kecamatan',
+			'$namaLintas',
+			'$pR',
+			'$jns_pen',
+			'$tK',
+			'$aspl',
+			'$rgt',
+			'$kon'
+			)");
+			$berhasil++;
+		}
+	}
+}
+
 
 function tambah($data)
 {
@@ -87,12 +152,6 @@ function upload()
 
 
 
-function hapusDatatraining()
-{
-	global $conn;
-	mysqli_query($conn, "DELETE FROM datatraining");
-	return mysqli_affected_rows($conn);
-}
 
 
 function ubah($data)
