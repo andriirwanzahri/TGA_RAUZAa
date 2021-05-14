@@ -88,13 +88,12 @@ include_once "Pages/proses/prosesmining.php";
                         mysqli_query($conn, "TRUNCATE t_keputusan");
                         pembentukan_tree($conn, "", "");
                         echo "<br><h3><center>---PROSES SELESAI---</center></h3>";
-                        //echo "<center><a href='index.php?menu=pohon_keputusan' accesskey='5' "
-                        //. "title='pohon keputusan'>Lihat pohon keputusan yang terbentuk</a></center>";
+                        echo "<center><a href='index.php?menu=pohon_keputusan' accesskey='5' "
+                            . "title='pohon keputusan'>Lihat pohon keputusan yang terbentuk</a></center>";
 
                         $akhir = microtime(true);
                         $lama = $akhir - $awal;
-                        //echo "<br>Lama eksekusi script adalah: ".$lama." detik";
-
+                        echo "<br>Lama eksekusi adalah: " . $lama . " detik";
                     }
                     ?>
                     </div>

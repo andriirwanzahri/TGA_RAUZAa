@@ -38,6 +38,7 @@ if (isset($_POST["hapus"])) {
     <!-- Pages/data/upload_aksi.php -->
     <div class="card shadow mb-4">
         <div class="card-header py-1">
+            <!-- Tombol hapus Tambah data training -->
             <form method="post" class="float-right" enctype="multipart/form-data" action="Pages/data/upload_aksi.php">
                 <div class="input-group">
                     <input type="file" name="datatraining" class="form-control border-2 small">
@@ -47,9 +48,8 @@ if (isset($_POST["hapus"])) {
                 </div>
             </form>
             <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#HapusModal">Hapus Semua Data</button>
-            <form action="" method="post">
-                <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data</button>
-            </form>
+            <a href="#" class="btn btn-primary float-right">Tambah Data</a>
+            <!-- End Tombol data training -->
             <h5 class="font-weight-bold text-primary">Data Training</h5>
         </div>
         <div class="card-body">
@@ -105,7 +105,7 @@ if (isset($_POST["hapus"])) {
     </div>
 </div>
 
-<!-- Logout Modal-->
+<!-- Hapus Modal-->
 <div class="modal fade" id="HapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
