@@ -137,10 +137,9 @@ function pembentukan_tree($conn, $N_parent, $kasus)
         echo "<br>================================<br>";
 
         if ($max_gain == 0) {
-            echo "Gain adalah 0";
             echo "<br>LEAF ";
             // var_dump($kondisi);
-            die;
+            // die;
             $NB = $kondisi . " AND 'target'='B'";
             $NS = $kondisi . " AND 'target'='S'";
             $NRR = $kondisi . " AND 'target'='RR'";
@@ -154,21 +153,21 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                 $jumlahB >= $jumlahRR &&
                 $jumlahB >= $jumlahRB
             ) {
-                $keputusan = 'B';
+                $keputusan = 'Baik';
             } elseif (
                 $jumlahS >= $jumlahB &&
                 $jumlahS >= $jumlahRR &&
                 $jumlahS >= $jumlahRB
             ) {
-                $keputusan = 'S';
+                $keputusan = 'Sedang';
             } elseif (
                 $jumlahRR >= $jumlahB &&
                 $jumlahRR >= $jumlahS &&
                 $jumlahRR >= $jumlahRB
             ) {
-                $keputusan = 'RR';
+                $keputusan = 'Rusak Ringan';
             } else {
-                $keputusan = 'RB';
+                $keputusan = 'Rusak Berat';
             }
             //insert atau lakukan pemangkasan cabang
             pangkas($conn, $N_parent, $kasus, $keputusan);
@@ -192,42 +191,6 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                 }
             }
         }
-        // //jika max_gain >0 lanjut..
-        // else {
-        //     echo "Gain adalah lebih besar dari 0";
-
-        //     if ($atribut == "jns_pen") {
-        //         proses_DT($conn, $kondisi, "(jns_pen ='PB')", "(jns_pen ='P')", "", "", "", "", "", "", "", "");
-        //     }
-        //     // jenis kelamin terpilih
-        //     if ($atribut == "aspal") {
-        //         proses_DT($conn, $kondisi, "($atribut='SPES')", "($atribut='SPE')", "($atribut='PE')", "($atribut='SS')", "($atribut='CS')", "($atribut='S')", "($atribut='PA')", "($atribut='CP')", "($atribut='SPA')", "($atribut='SPAS')");
-        //     }
-
-        //     if ($atribut == "panjangRuas") {
-        //         proses_DT($conn, $kondisi, "($atribut='SPES')", "($atribut='SPE')", "($atribut='PE')", "($atribut='SS')", "($atribut='CS')", "($atribut='S')", "($atribut='PA')", "($atribut='CP')", "($atribut='SPA')", "($atribut='SPAS')");
-        //     }
-
-        //     // sekolah terpilih
-        //     if ($atribut == "tanah_krikil") {
-        //         proses_DT($conn, $kondisi, "($atribut='SPES')", "($atribut='SPE')", "($atribut='PE')", "($atribut='SS')", "($atribut='CS')", "($atribut='S')", "($atribut='PA')", "($atribut='CP')", "($atribut='SPA')", "($atribut='SPAS')");
-        //     }
-
-        //     if ($atribut == "rigit") {
-        //         proses_DT($conn, $kondisi, "($atribut='SPES')", "($atribut='SPE')", "($atribut='PE')", "($atribut='SS')", "($atribut='CS')", "($atribut='S')", "($atribut='PA')", "($atribut='CP')", "($atribut='SPA')", "($atribut='SPAS')");
-        //     }
-
-        //     // Jawaban D Terpilih
-        //     // if ($atribut == "Jawaban D v=5") {
-        //     //     proses_DT($conn, $kondisi, "(jawaban_d<=5)", "(jawaban_d>5)");
-        //     // } else if ($atribut == "Jawaban D v=10") {
-        //     //     proses_DT($conn, $kondisi, "(jawaban_d<=10)", "(jawaban_d>10)");
-        //     // } else if ($atribut == "Jawaban D v=15") {
-        //     //     proses_DT($conn, $kondisi, "(jawaban_d<=15)", "(jawaban_d>15)");
-        //     // } else if ($atribut == "Jawaban D v=20") {
-        //     //     proses_DT($conn, $kondisi, "(jawaban_d<=20)", "(jawaban_d>20)");
-        //     // }
-        // }
     }
 }
 

@@ -101,7 +101,7 @@ if (!isset($_SESSION['login']['nama'])) {
                             <h6 class="collapse-header">Data Olahan C45</h6>
                             <a class="collapse-item" href="index.php?page=datatraining">Data Training</a>
                             <a class="collapse-item" href="index.php?page=mining">Mining</a>
-                            <a class="collapse-item" href="#">Pohon Keputusan</a>
+                            <a class="collapse-item" href="index.php?page=pohonKeputusan">Pohon Keputusan</a>
                             <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
                             <a class="collapse-item" href="#">Hasil Prediksi</a>
                             <div class="collapse-divider"></div>

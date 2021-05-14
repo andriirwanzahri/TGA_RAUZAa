@@ -12,6 +12,8 @@ include "Pages/template/header.php";
       include 'Pages/data/datatraining.php';
     } elseif ($_GET['page'] == "dataMasyarakat") {
       include 'Pages/data/masyarakat.php';
+    } elseif ($_GET['page'] == "pohonKeputusan") {
+      include 'Pages/proses/pohonKeputusan.php';
     } elseif ($_GET['page'] == "mining") {
       include 'Pages/data/mining.php';
     } elseif ($_GET['page'] == "datajalan") {
