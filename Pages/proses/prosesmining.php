@@ -73,20 +73,46 @@ function pembentukan_tree($conn, $N_parent, $kasus)
 
         $jml_total = $jml_baik + $jml_sedang + $jml_rusak_ringan + $jml_rusak_berat;
 
-
+        //Hitung Nilai nama lintas
         $nilai_namaLintas = array();
         $nilai_namaLintas = cek_nilaiAtribut($conn, 'namaLintas', $kondisi);
         $jmlnamaLintas = count($nilai_namaLintas);
+        //hitung nilai ura dukung
+        $nilai_ura_dukung = array();
+        $nilai_ura_dukung = cek_nilaiAtribut($conn, 'ura_dukung', $kondisi);
+        $jml_ura_dukung = count($nilai_ura_dukung);
         //hitung entropy semua
         $entropy_all = hitung_entropy($jml_baik, $jml_sedang, $jml_rusak_ringan, $jml_rusak_berat);
         echo "Entropy All = " . $entropy_all . "<br>";
         echo "<table class='table table-bordered table-striped  table-hover'>";
         echo "<tr><th>Nilai Atribut</th> <th>Jumlah data</th> <th>Jumlah Baik</th> <th>Jumlah Sedang</th> "
-            . "<th>Jumlah Rusak Ringan</th> <th>Jumlah Rusak Berat</th> <th>Entropy</th> <th>Gain</th><tr>";
+            . "<th>Jumlah Rusak Ringan</th> <th>Jumlah Rusak Berat</th> <th>Entropy</th> <th>Gain</th><th>Split Info</th><th>Gain rasio</th><tr>";
         mysqli_query($conn, "TRUNCATE gain");
         totalData($jml_total, $jml_baik, $jml_sedang, $jml_rusak_ringan, $jml_rusak_berat, $entropy_all);
         //hitung gain atribut KATEGORIKAL
-        // hitung_gain($conn, $kondisi, "ura_dukung", $entropy_all, "ura_dukung='KA'", "ura_dukung='KCT'", "ura_dukung='KM'", "ura_dukung='KMI'", "ura_dukung='KP'", "", "", "", "", "", "");
+        // hitung_gain($conn, $kondisi, "ura_dukung", $entropy_all, "ura_dukung='KA'", "ura_dukung='KCT'", "ura_dukung='KM'", "ura_dukung='KMI'", "ura_dukung='KP'");
+        if ($jml_ura_dukung != 1) {
+            $NA1_ura_dukung = "ura_dukung='$nilai_ura_dukung[0]'";
+            $NA2_ura_dukung = "";
+            $NA3_ura_dukung = "";
+            if ($jml_ura_dukung == 2) {
+                $NA2_ura_dukung = "ura_dukung='$nilai_ura_dukung[1]'";
+            } else if ($jml_ura_dukung == 3) {
+                $NA2_ura_dukung = "ura_dukung='$nilai_ura_dukung[1]'";
+                $NA3_ura_dukung = "ura_dukung='$nilai_ura_dukung[2]'";
+            } else if ($jml_ura_dukung == 4) {
+                $NA2_ura_dukung = "ura_dukung='$nilai_ura_dukung[1]'";
+                $NA3_ura_dukung = "ura_dukung='$nilai_ura_dukung[2]'";
+                $NA4_ura_dukung = "ura_dukung='$nilai_ura_dukung[3]'";
+            } else if ($jml_ura_dukung == 5) {
+                $NA2_ura_dukung = "ura_dukung='$nilai_ura_dukung[1]'";
+                $NA3_ura_dukung = "ura_dukung='$nilai_ura_dukung[2]'";
+                $NA4_ura_dukung = "ura_dukung='$nilai_ura_dukung[3]'";
+                $NA5_ura_dukung = "ura_dukung='$nilai_ura_dukung[4]'";
+            }
+            hitung_gain($conn, $kondisi, "ura_dukung", $entropy_all, $NA1_ura_dukung, $NA2_ura_dukung, $NA3_ura_dukung, "$NA4_ura_dukung", "$NA5_ura_dukung", "", "", "", "", "", "");
+        }
+
         if ($jmlnamaLintas != 1) {
             $NA1namaLintas = "namaLintas='$nilai_namaLintas[0]'";
             $NA2namaLintas = "";
@@ -100,25 +126,6 @@ function pembentukan_tree($conn, $N_parent, $kasus)
             hitung_gain($conn, $kondisi, "namaLintas", $entropy_all, $NA1namaLintas, $NA2namaLintas, $NA3namaLintas, "", "", "", "", "", "", "", "");
         }
         // hitung_gain($conn, $kondisi, "namaLintas", $entropy_all, "namaLintas='LJK'", "namaLintas='LJN'", "namaLintas='LJP'", "", "", "", "", "", "", "", "");
-
-
-        // hitung_gain(
-        //     $conn,
-        //     $kondisi,
-        //     "panjangRuas",
-        //     $entropy_all,
-        //     "panjangRuas='SPES'",
-        //     "panjangRuas='SPE'",
-        //     "panjangRuas='PE'",
-        //     "panjangRuas='SS'",
-        //     "panjangRuas='CS'",
-        //     "panjangRuas='S'",
-        //     "panjangRuas='PA'",
-        //     "panjangRuas='CP'",
-        //     "panjangRuas='SPA'",
-        //     "panjangRuas='SPAS'",
-        //     ""
-        // );
         hitung_gain($conn, $kondisi, "jns_pen", $entropy_all, "jns_pen='P'", "jns_pen='PB'", "", "", "", "", "", "", "", "", "");
         // hitung_gain($conn, $kondisi, "tanah_krikil", $entropy_all, "tanah_krikil='SPES'", "tanah_krikil='SPE'", "tanah_krikil='PE'", "tanah_krikil='SS'", "tanah_krikil='CS'", "tanah_krikil='S'", "tanah_krikil='PA'", "tanah_krikil='CP'", "tanah_krikil='SPA'", "tanah_krikil='SPAS'", "");
         // hitung_gain($conn, $kondisi, "aspal", $entropy_all, "aspal='SPES'", "aspal='SPE'", "aspal='PE'", "aspal='SS'", "aspal='CS'", "aspal='S'", "aspal='PA'", "aspal='CP'", "aspal='SPA'", "aspal='SPAS'", "");
@@ -172,6 +179,7 @@ function pembentukan_tree($conn, $N_parent, $kasus)
             //insert atau lakukan pemangkasan cabang
             pangkas($conn, $N_parent, $kasus, $keputusan);
         } else {
+
             if ($atribut == "jns_pen") {
                 proses_DT($conn, $kondisi, "(jns_pen ='PB')", "(jns_pen ='P')");
             }
@@ -181,13 +189,105 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                 if ($jmlnamaLintas == 3) {
                     //hitung rasio
                     $cabang = array();
-                    $cabang = hitung_rasio($conn, $kondisi, 'namaLintas', $max_gain, $nilai_namaLintas[0], $nilai_namaLintas[1], $nilai_namaLintas[2], '', '');
+                    $cabang = hitung_rasio($conn, $kondisi, 'namaLintas', $max_gain, $nilai_namaLintas[0], $nilai_namaLintas[1], $nilai_namaLintas[2], '', '', '');
                     $exp_cabang = explode(" , ", $cabang[1]);
-                    proses_DT($conn, $kondisi, "($atribut='$cabang[0]')", "($atribut='$exp_cabang[0]' OR $atribut='$exp_cabang[1]')");
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$cabang[0]')",
+                        "($atribut='$exp_cabang[0]' OR $atribut='$exp_cabang[1]')"
+                    );
                 }
+
                 //jika nilai atribut 2
                 else if ($jmlnamaLintas == 2) {
-                    proses_DT($conn, $kondisi, "($atribut='$nilai_namaLintas[0]')", "($atribut='$nilai_namaLintas[1]')");
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_namaLintas[0]')",
+                        "($atribut='$nilai_namaLintas[1]')"
+                    );
+                }
+            }
+
+            if ($atribut == "ura_dukung") {
+                //jika nilai atribut 5
+                if ($jml_ura_dukung == 5) {
+                    //hitung rasio
+                    $cabang = array();
+                    $cabang = hitung_rasio(
+                        $conn,
+                        $kondisi,
+                        'ura_dukung',
+                        $max_gain,
+                        $nilai_ura_dukung[0],
+                        $nilai_ura_dukung[1],
+                        $nilai_ura_dukung[2],
+                        $nilai_ura_dukung[3],
+                        $nilai_ura_dukung[4],
+                        ''
+                    );
+                    $exp_cabang = explode(" , ", $cabang[1]);
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$cabang[0]')",
+                        "($atribut='$exp_cabang[0]' OR $atribut='$exp_cabang[1]')",
+                        "($atribut='$exp_cabang[1]' OR $atribut='$exp_cabang[2]')",
+                        "($atribut='$exp_cabang[2]' OR $atribut='$exp_cabang[3]')",
+                        "($atribut='$exp_cabang[3]' OR $atribut='$exp_cabang[4]')"
+                    );
+                } else if ($jml_ura_dukung == 4) {
+                    //hitung rasio
+                    $cabang = array();
+                    $cabang = hitung_rasio(
+                        $conn,
+                        $kondisi,
+                        'ura_dukung',
+                        $max_gain,
+                        $nilai_ura_dukung[0],
+                        $nilai_ura_dukung[1],
+                        $nilai_ura_dukung[2],
+                        $nilai_ura_dukung[3],
+                        '',
+                        ''
+                    );
+                    $exp_cabang = explode(" , ", $cabang[1]);
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$cabang[0]')",
+                        "($atribut='$exp_cabang[0]' OR $atribut='$exp_cabang[1]')",
+                        "($atribut='$exp_cabang[1]' OR $atribut='$exp_cabang[2]')",
+                        "($atribut='$exp_cabang[2]' OR $atribut='$exp_cabang[3]')"
+                    );
+                } else if ($jml_ura_dukung == 3) {
+                    //hitung rasio
+                    $cabang = array();
+                    $cabang = hitung_rasio(
+                        $conn,
+                        $kondisi,
+                        'ura_dukung',
+                        $max_gain,
+                        $nilai_ura_dukung[0],
+                        $nilai_ura_dukung[1],
+                        $nilai_ura_dukung[2],
+                        $nilai_ura_dukung[3],
+                        '',
+                        ''
+                    );
+                    $exp_cabang = explode(" , ", $cabang[1]);
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$cabang[0]')",
+                        "($atribut='$exp_cabang[0]' OR $atribut='$exp_cabang[1]')",
+                        "($atribut='$exp_cabang[1]' OR $atribut='$exp_cabang[2]')"
+                    );
+                }
+                //jika nilai atribut 2
+                else if ($jml_ura_dukung == 2) {
+                    proses_DT($conn, $kondisi, "($atribut='$nilai_ura_dukung[0]')", "($atribut='$nilai_ura_dukung[1]')");
                 }
             }
         }
@@ -692,24 +792,115 @@ function cek_nilaiAtribut($conn, $field, $kondisi)
 
 
 //fungsi hitung rasio
-function hitung_rasio($conn, $kasus, $atribut, $gain, $nilai1, $nilai2, $nilai3, $nilai4, $nilai5)
+function hitung_rasio($conn, $kasus, $atribut, $gain, $nilai1, $nilai2, $nilai3, $nilai4, $nilai5, $nilai6)
 {
     $data_kasus = '';
     if ($kasus != '') {
         $data_kasus = $kasus . " AND ";
     }
-    //menentukan jumlah nilai
-    $jmlNilai = 10;
-    //jika nilai 5 kosong maka nilai atribut-nya 4
-    if ($nilai5 == '') {
-        $jmlNilai = 4;
-    }
-    //jika nilai 4 kosong maka nilai atribut-nya 3
-    if ($nilai4 == '') {
-        $jmlNilai = 3;
-    }
+
     mysqli_query($conn, "TRUNCATE rasio_gain");
-    if ($jmlNilai == 3) {
+    //jika nilai= 5
+    if ($nilai6 == '') {
+        $opsi11 = jumlah_data($conn, "$data_kasus ($atribut='$nilai2' OR $atribut='$nilai3')");
+        $opsi12 = jumlah_data($conn, "$data_kasus $atribut='$nilai1'");
+        $tot_opsi1 = $opsi11 + $opsi12;
+        $opsi21 = jumlah_data($conn, "$data_kasus ($atribut='$nilai3' OR $atribut='$nilai1')");
+        $opsi22 = jumlah_data($conn, "$data_kasus $atribut='$nilai2'");
+        $tot_opsi2 = $opsi21 + $opsi22;
+        $opsi31 = jumlah_data($conn, "$data_kasus ($atribut='$nilai1' OR $atribut='$nilai2')");
+        $opsi32 = jumlah_data($conn, "$data_kasus $atribut='$nilai3'");
+        $tot_opsi3 = $opsi31 + $opsi32;
+        $opsi41 = jumlah_data($conn, "$data_kasus ($atribut='$nilai3' OR $atribut='$nilai5')");
+        $opsi42 = jumlah_data($conn, "$data_kasus $atribut='$nilai4'");
+        $tot_opsi4 = $opsi41 + $opsi42;
+        $opsi51 = jumlah_data($conn, "$data_kasus ($atribut='$nilai1' OR $atribut='$nilai4')");
+        $opsi52 = jumlah_data($conn, "$data_kasus $atribut='$nilai5'");
+        $tot_opsi5 = $opsi51 + $opsi52;
+        //hitung split info
+        $opsi1 = @(- ($opsi11 / $tot_opsi1) * (log(($opsi11 / $tot_opsi1), 2))) + (- ($opsi12 / $tot_opsi1) * (log(($opsi12 / $tot_opsi1), 2)));
+        $opsi2 = @(- ($opsi21 / $tot_opsi2) * (log(($opsi21 / $tot_opsi2), 2))) + (- ($opsi22 / $tot_opsi2) * (log(($opsi22 / $tot_opsi2), 2)));
+        $opsi3 = @(- ($opsi31 / $tot_opsi3) * (log(($opsi31 / $tot_opsi3), 2))) + (- ($opsi32 / $tot_opsi3) * (log(($opsi32 / $tot_opsi3), 2)));
+        $opsi4 = @(- ($opsi41 / $tot_opsi4) * (log(($opsi41 / $tot_opsi4), 2))) + (- ($opsi42 / $tot_opsi4) * (log(($opsi42 / $tot_opsi4), 2)));
+        $opsi5 = @(- ($opsi51 / $tot_opsi5) * (log(($opsi51 / $tot_opsi5), 2))) + (- ($opsi52 / $tot_opsi5) * (log(($opsi52 / $tot_opsi5), 2)));
+        //desimal 3 angka dibelakang koma
+        $opsi1 = format_decimal($opsi1);
+        $opsi2 = format_decimal($opsi2);
+        $opsi3 = format_decimal($opsi3);
+        $opsi4 = format_decimal($opsi4);
+        $opsi5 = format_decimal($opsi5);
+        //hitung rasio
+        $rasioA = @$gain / $opsi1;
+        $rasioB = @$gain / $opsi2;
+        $rasioC = @$gain / $opsi3;
+        $rasioD = @$gain / $opsi4;
+        $rasio5 = @$gain / $opsi5;
+        //desimal 3 angka dibelakang koma
+        $rasioA = format_decimal($rasioA);
+        $rasioB = format_decimal($rasioB);
+        $rasioC = format_decimal($rasioC);
+        $rasioD = format_decimal($rasioD);
+        $rasio5 = format_decimal($rasio5);
+
+        //insert 
+        mysqli_query($conn, "INSERT INTO rasio_gain VALUES 
+                                    ('' , 'opsi1' , '$nilai1' , '$nilai2 , $nilai3' , '$rasioA'),
+                                    ('' , 'opsi2' , '$nilai2' , '$nilai3 , $nilai1' , '$rasioB'),
+                                    ('' , 'opsi3' , '$nilai3' , '$nilai1 , $nilai2' , '$rasioC'),
+                                    ('' , 'opsi4' , '$nilai4' , '$nilai3 , $nilai5' , '$rasioD'),
+                                    ('' , 'opsi5' , '$nilai5' , '$nilai4 , $nilai1' , '$rasio5')
+                                    ");
+    }
+    if ($nilai6 == '') {
+        $opsi11 = jumlah_data($conn, "$data_kasus ($atribut='$nilai2' OR $atribut='$nilai3')");
+        $opsi12 = jumlah_data($conn, "$data_kasus $atribut='$nilai1'");
+        $tot_opsi1 = $opsi11 + $opsi12;
+        $opsi21 = jumlah_data($conn, "$data_kasus ($atribut='$nilai3' OR $atribut='$nilai1')");
+        $opsi22 = jumlah_data($conn, "$data_kasus $atribut='$nilai2'");
+        $tot_opsi2 = $opsi21 + $opsi22;
+        $opsi31 = jumlah_data($conn, "$data_kasus ($atribut='$nilai1' OR $atribut='$nilai2')");
+        $opsi32 = jumlah_data($conn, "$data_kasus $atribut='$nilai3'");
+        $tot_opsi3 = $opsi31 + $opsi32;
+        $opsi41 = jumlah_data($conn, "$data_kasus ($atribut='$nilai3' OR $atribut='$nilai5')");
+        $opsi42 = jumlah_data($conn, "$data_kasus $atribut='$nilai4'");
+        $tot_opsi4 = $opsi41 + $opsi42;
+        $opsi51 = jumlah_data($conn, "$data_kasus ($atribut='$nilai1' OR $atribut='$nilai4')");
+        $opsi52 = jumlah_data($conn, "$data_kasus $atribut='$nilai5'");
+        $tot_opsi5 = $opsi51 + $opsi52;
+        //hitung split info
+        $opsi1 = @(- ($opsi11 / $tot_opsi1) * (log(($opsi11 / $tot_opsi1), 2))) + (- ($opsi12 / $tot_opsi1) * (log(($opsi12 / $tot_opsi1), 2)));
+        $opsi2 = @(- ($opsi21 / $tot_opsi2) * (log(($opsi21 / $tot_opsi2), 2))) + (- ($opsi22 / $tot_opsi2) * (log(($opsi22 / $tot_opsi2), 2)));
+        $opsi3 = @(- ($opsi31 / $tot_opsi3) * (log(($opsi31 / $tot_opsi3), 2))) + (- ($opsi32 / $tot_opsi3) * (log(($opsi32 / $tot_opsi3), 2)));
+        $opsi4 = @(- ($opsi41 / $tot_opsi4) * (log(($opsi41 / $tot_opsi4), 2))) + (- ($opsi42 / $tot_opsi4) * (log(($opsi42 / $tot_opsi4), 2)));
+        $opsi5 = @(- ($opsi51 / $tot_opsi5) * (log(($opsi51 / $tot_opsi5), 2))) + (- ($opsi52 / $tot_opsi5) * (log(($opsi52 / $tot_opsi5), 2)));
+        //desimal 3 angka dibelakang koma
+        $opsi1 = format_decimal($opsi1);
+        $opsi2 = format_decimal($opsi2);
+        $opsi3 = format_decimal($opsi3);
+        $opsi4 = format_decimal($opsi4);
+        $opsi5 = format_decimal($opsi5);
+        //hitung rasio
+        $rasioA = @$gain / $opsi1;
+        $rasioB = @$gain / $opsi2;
+        $rasioC = @$gain / $opsi3;
+        $rasioD = @$gain / $opsi4;
+        $rasio5 = @$gain / $opsi5;
+        //desimal 3 angka dibelakang koma
+        $rasioA = format_decimal($rasioA);
+        $rasioB = format_decimal($rasioB);
+        $rasioC = format_decimal($rasioC);
+        $rasioD = format_decimal($rasioD);
+        $rasio5 = format_decimal($rasio5);
+
+        //insert 
+        mysqli_query($conn, "INSERT INTO rasio_gain VALUES 
+                                    ('' , 'opsi1' , '$nilai1' , '$nilai2 , $nilai3' , '$rasioA'),
+                                    ('' , 'opsi2' , '$nilai2' , '$nilai3 , $nilai1' , '$rasioB'),
+                                    ('' , 'opsi3' , '$nilai3' , '$nilai1 , $nilai2' , '$rasioC'),
+                                    ('' , 'opsi4' , '$nilai4' , '$nilai3 , $nilai5' , '$rasioD'),
+                                    ('' , 'opsi5' , '$nilai5' , '$nilai4 , $nilai1' , '$rasio5')
+                                    ");
+    } else if ($nilai4 == '') {
         $opsi11 = jumlah_data($conn, "$data_kasus ($atribut='$nilai2' OR $atribut='$nilai3')");
         $opsi12 = jumlah_data($conn, "$data_kasus $atribut='$nilai1'");
         $tot_opsi1 = $opsi11 + $opsi12;
@@ -735,19 +926,6 @@ function hitung_rasio($conn, $kasus, $atribut, $gain, $nilai1, $nilai2, $nilai3,
         $rasio1 = format_decimal($rasio1);
         $rasio2 = format_decimal($rasio2);
         $rasio3 = format_decimal($rasio3);
-        //cetak
-        echo "Opsi 1 : <br>jumlah " . $nilai2 . "/" . $nilai3 . " = " . $opsi11 .
-            "<br>jumlah " . $nilai1 . " = " . $opsi12 .
-            "<br>Split = " . $opsi1 .
-            "<br>Rasio = " . $rasio1 . "<br>";
-        echo "Opsi 2 : <br>jumlah " . $nilai3 . "/" . $nilai1 . " = " . $opsi21 .
-            "<br>jumlah " . $nilai2 . " = " . $opsi22 .
-            "<br>Split = " . $opsi2 .
-            "<br>Rasio = " . $rasio2 . "<br>";
-        echo "Opsi 3 : <br>jumlah " . $nilai1 . "/" . $nilai2 . " = " . $opsi31 .
-            "<br>jumlah " . $nilai3 . " = " . $opsi32 .
-            "<br>Split = " . $opsi3 .
-            "<br>Rasio = " . $rasio3 . "<br>";
 
         //insert 
         mysqli_query($conn, "INSERT INTO rasio_gain VALUES 
@@ -755,6 +933,48 @@ function hitung_rasio($conn, $kasus, $atribut, $gain, $nilai1, $nilai2, $nilai3,
                                     ('' , 'opsi2' , '$nilai2' , '$nilai3 , $nilai1' , '$rasio2'),
                                     ('' , 'opsi3' , '$nilai3' , '$nilai1 , $nilai2' , '$rasio3')");
     }
+
+
+    if ($nilai4 == "") {
+        //cetak
+        echo "Opsi 1 : <br>jumlah " . $nilai2 . "/" . $nilai3 . " = " . $opsi11 .
+            "<br>jumlah " . $nilai1 . " = " . $opsi12 .
+            "<br>Split = " . $opsi1 .
+            "<br>Rasio = " . $rasioA . "<br>";
+        echo "Opsi 2 : <br>jumlah " . $nilai3 . "/" . $nilai1 . " = " . $opsi21 .
+            "<br>jumlah " . $nilai2 . " = " . $opsi22 .
+            "<br>Split = " . $opsi2 .
+            "<br>Rasio = " . $rasioB . "<br>";
+        echo "Opsi 3 : <br>jumlah " . $nilai1 . "/" . $nilai2 . " = " . $opsi31 .
+            "<br>jumlah " . $nilai3 . " = " . $opsi32 .
+            "<br>Split = " . $opsi3 .
+            "<br>Rasio = " . $rasioC . "<br>";
+    } else {
+        //cetak
+        echo "Opsi 1 : <br>jumlah " . $nilai2 . "/" . $nilai3 . " = " . $opsi11 .
+            "<br>jumlah " . $nilai1 . " = " . $opsi12 .
+            "<br>Split = " . $opsi1 .
+            "<br>Rasio = " . $rasioA . "<br>";
+        echo "Opsi 2 : <br>jumlah " . $nilai3 . "/" . $nilai1 . " = " . $opsi21 .
+            "<br>jumlah " . $nilai2 . " = " . $opsi22 .
+            "<br>Split = " . $opsi2 .
+            "<br>Rasio = " . $rasioB . "<br>";
+        echo "Opsi 3 : <br>jumlah " . $nilai1 . "/" . $nilai2 . " = " . $opsi31 .
+            "<br>jumlah " . $nilai3 . " = " . $opsi32 .
+            "<br>Split = " . $opsi3 .
+            "<br>Rasio = " . $rasioC . "<br>";
+        echo "Opsi 4 : <br>jumlah " . $nilai3 . "/" . $nilai5 . " = " . $opsi41 .
+            "<br>jumlah " . $nilai4 . " = " . $opsi42 .
+            "<br>Split = " . $opsi4 .
+            "<br>Rasio = " . $rasioD . "<br>";
+        echo "Opsi 5 : <br>jumlah " . $nilai4 . "/" . $nilai4 . " = " . $opsi51 .
+            "<br>jumlah " . $nilai5 . " = " . $opsi52 .
+            "<br>Split = " . $opsi5 .
+            "<br>Rasio = " . $rasio5 . "<br>";
+    }
+
+
+
 
     $sql_max = mysqli_query($conn, "SELECT MAX(rasio_gain) FROM rasio_gain");
     $row_max = mysqli_fetch_array($sql_max);
