@@ -2,8 +2,11 @@
 include 'koneksi.php';
 $datajalan = query("SELECT * FROM datajalan");
 ?>
-<div class="card shadow mb-4 mt-3">
+<div>
     <div class="card-header py-3">
+        <?php if ($_SESSION['login']['level'] == '1') : ?>
+            <a href="#" class="btn btn-info float-right">Tambah Data</a>
+        <?php endif; ?>
         <h6 class="m-0 font-weight-bold text-info">Data Jalan</h6>
     </div>
     <div class="card-body">
@@ -12,15 +15,12 @@ $datajalan = query("SELECT * FROM datajalan");
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Ura_Dukung</th>
+                        <th>Nama Jalan</th>
+                        <th>Desa</th>
+                        <th>Provinsi</th>
                         <th>Kecamatan</th>
                         <th>Nama Lintas</th>
-                        <th>Panjang Ruas</th>
-                        <th>Jns_Pen</th>
-                        <th>Panjang Tanah_Kri</th>
-                        <th>Aspal</th>
-                        <th>rigit</th>
-                        <th>Target</th>
+                        <th>Lainnya</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,15 +30,22 @@ $datajalan = query("SELECT * FROM datajalan");
                     ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
-                            <td><?php echo $d['ura_dukung']; ?></td>
+                            <td><?php echo $d['namajalan']; ?></td>
+                            <td><?php echo $d['desa']; ?></td>
+                            <td><?php echo $d['provinsi']; ?></td>
                             <td><?php echo $d['kecamatan']; ?></td>
-                            <td><?php echo $d['namaLintas']; ?></td>
-                            <td><?php echo $d['panjangRuas']; ?></td>
-                            <td><?php echo $d['jns_pen']; ?></td>
-                            <td><?php echo $d['tanah_krikil']; ?></td>
-                            <td><?php echo $d['aspal']; ?></td>
-                            <td><?php echo $d['rigit']; ?></td>
-                            <td><?php echo $d['target']; ?></td>
+                            <td><?php echo $d['namalintas']; ?></td>
+                            <?php if ($_SESSION['login']['level'] == '1') : ?>
+                                <td>
+                                    <button>hapus</button>
+                                    <button>edit</button>
+                                    <a href="index.php?page=aspirasi&id=<?php echo $d['id']; ?>" class="btn btn-info">detail</a>
+                                </td>
+                            <?php else : ?>
+                                <td>
+                                    <a href="" class="btn btn-info">detail</a>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php
                     endforeach;

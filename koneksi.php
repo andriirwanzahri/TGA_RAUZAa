@@ -11,6 +11,13 @@ function query($query)
 	}
 	return $rows;
 }
+function redairec($table, $url)
+{
+	global $conn;
+	$qry = mysqli_query($conn, "SELECT * FROM $table WHERE $url");
+	$pecah = mysqli_fetch_array($qry);
+	return $pecah;
+}
 
 function uploadDataSet($dataset)
 {

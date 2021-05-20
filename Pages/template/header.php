@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED | E_USER_WARNING | E_PARSE));
+error_reporting(0);
 session_start();
 if (!isset($_SESSION['login']['nama'])) {
     header("Location: Pages/halamanUtama/index.php");
@@ -24,6 +26,7 @@ if (!isset($_SESSION['login']['nama'])) {
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
 
 </head>
 
@@ -36,8 +39,12 @@ if (!isset($_SESSION['login']['nama'])) {
         <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="justify-content-center align-items-center">
-                <center><img src="img/pnl.png" width="150" height="150"></center>
+            <a class=" mt-3 justify-content-center">
+                <!-- <div class="sidebar-brand-icon"> -->
+                <center><img src="img/pnl.png" width="100" height="100"></center>
+                <!-- <i class="fas fa-laugh-wink"></i> -->
+                <!-- </div> -->
+                <!-- <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div> -->
             </a>
 
             <!-- Divider -->
@@ -75,11 +82,6 @@ if (!isset($_SESSION['login']['nama'])) {
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=aspirasi">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Aspirasi</span></a>
-                </li>
 
                 <!-- JIKA LEVELNYA 1 MAKA AKAN MENAMPILKAN -->
             <?php
@@ -100,7 +102,7 @@ if (!isset($_SESSION['login']['nama'])) {
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Data Olahan C45</h6>
                             <a class="collapse-item" href="index.php?page=datatraining">Data Training</a>
-                            <a class="collapse-item" href="index.php?page=mining">Mining</a>
+                            <a class="collapse-item" href="index.php?page=mining">Mining C 4.5</a>
                             <a class="collapse-item" href="index.php?page=pohonKeputusan">Pohon Keputusan</a>
                             <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
                             <a class="collapse-item" href="#">Hasil Prediksi</a>
@@ -111,31 +113,38 @@ if (!isset($_SESSION['login']['nama'])) {
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=aspirasi">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Aspirasi</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=dashboard">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Profile</span></a>
-                </li>
+
 
                 <!-- JIKA LEVELNYA 2 MAKA AKAN MENAMPILKAN -->
             <?php
 
 
-            else :
+            elseif ($_SESSION['login']['level'] == '3') :
             ?>
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Data Jalan
                 </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Data Jalan</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Data Jalan</h6>
+                            <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
+                        </div>
+                    </div>
+                </li>
             <?php
             endif;
             ?>
-
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?page=profile">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Profile</span></a>
+            </li>
 
 
             <!-- Divider -->
@@ -158,11 +167,9 @@ if (!isset($_SESSION['login']['nama'])) {
                 <nav class="navbar navbar-expand navbar-dark bg-black topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
-                    </button> -->
-                    <h3>Klasifikasi Jalan Pada Dinas PUPR Pidie</h3>
-
+                    </button>
 
 
 

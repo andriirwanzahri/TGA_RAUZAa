@@ -32,7 +32,7 @@
         </div>
 
         <center>
-            <a href="#" class="btn btn-warning" type="submit">Data Jalan</a>
+            <a href="datajalanuser.php" class="btn btn-warning" type="submit">Data Jalan</a>
             <a href="../login/login.php" class="btn btn-warning" type="submit">Login</a>
             <h1 class="h3 mb-4 text-gray-800 mt-5">Data Jalan Pidie</h1>
         </center>

@@ -36,7 +36,7 @@ if (isset($_POST["hapus"])) {
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Pages/data/upload_aksi.php -->
-    <div class="card shadow mb-4">
+    <div>
         <div class="card-header py-1">
             <!-- Tombol hapus Tambah data training -->
             <form method="post" class="float-right" enctype="multipart/form-data" action="Pages/data/upload_aksi.php">
@@ -52,7 +52,7 @@ if (isset($_POST["hapus"])) {
             <!-- End Tombol data training -->
             <h5 class="font-weight-bold text-primary">Data Training</h5>
         </div>
-        <div class="card-body">
+        <div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

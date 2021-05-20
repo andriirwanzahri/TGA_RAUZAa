@@ -1,8 +1,20 @@
 <?php
-
-
+error_reporting(E_ALL ^  E_NOTICE);
+error_reporting(0);
 include_once "koneksi.php";
 include_once "Pages/proses/prosesmining.php";
+function target($kondisi)
+{
+    global $conn;
+    $qry = mysqli_query($conn, "SELECT COUNT(*) FROM datapreprocessing WHERE $kondisi");
+    $row = mysqli_fetch_array($qry);
+    $jml = $row['0'];
+    return $jml;
+}
+$baik = target("target='B'");
+$sedang = target("target='S'");
+$rusakringan = target("target='RR'");
+$rusakberat = target("target='RB'");
 ?>
 <div class="content">
     <!--typography-page -->
@@ -25,16 +37,19 @@ include_once "Pages/proses/prosesmining.php";
                 $sql = "SELECT * FROM datapreprocessing";
                 $query = mysqli_query($conn, $sql);
                 $jumlah = mysqli_num_rows($query);
+                $jum = mysqli_num_rows($query);
             ?>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 justify-content-center">
                         <!--UPLOAD EXCEL FORM-->
                         <form method="post" enctype="multipart/form-data" action="">
                             <div class="form-group">
                                 <!--<input name="submit" type="submit" value="Upload Data" class="btn btn-success">-->
-                                <button name="proses_mining" type="submit" class="btn btn-outline-secondary" onclick="">
-                                    <i class="fa fa-check"></i> Proses Mining
-                                </button>
+                                <center>
+                                    <button name="proses_mining" type="submit" class="btn btn-outline-secondary justify-content-center" onclick="">
+                                        <i class="fa fa-check"></i> Proses C4.5
+                                    </button>
+                                </center>
                             </div>
                         </form>
 
@@ -43,41 +58,100 @@ include_once "Pages/proses/prosesmining.php";
 
 
                     if (!isset($_POST['proses_mining'])) { //tidak muncul jika diklik proses mining
-                        echo "Jumlah data: " . $jumlah . "<br>";
+                        // echo "Jumlah data: " . $jumlah . "<br>";
                         if ($jumlah == 0) {
                             echo "Data kosong...";
                         } else {
                         ?>
-                            <table class='table table-bordered table-striped  table-hover'>
-                                <tr>
-                                    <th>No</th>
-                                    <th>ura_dukung</th>
-                                    <th>nama lintas</th>
-                                    <th>Panjang Ruas</th>
-                                    <th>Jenis pen</th>
-                                    <th>krikil</th>
-                                    <th>aspal</th>
-                                    <th>rigit</th>
-                                    <th>kondisi</th>
-                                </tr>
-                                <?php
-                                $no = 1;
-                                while ($row = mysqli_fetch_array($query)) {
-                                    echo "<tr>";
-                                    echo "<td>" . $no . "</td>";
-                                    echo "<td>" . $row['ura_dukung'] . "</td>";
-                                    echo "<td>" . $row['namaLintas'] . "</td>";
-                                    echo "<td>" . $row['panjangRuas'] . "</td>";
-                                    echo "<td>" . $row['jns_pen'] . "</td>";
-                                    echo "<td>" . $row['tanah_krikil'] . "</td>";
-                                    echo "<td>" . $row['aspal'] . "</td>";
-                                    echo "<td>" . $row['rigit'] . "</td>";
-                                    echo "<td>" . $row['target'] . "</td>";
-                                    echo "</tr>";
-                                    $no++;
-                                }
-                                ?>
-                            </table>
+                            <div class="row mt-3">
+
+                                <!-- Jumlaah Data jalan -->
+                                <div class="col-xl-4 col-md-12 mb-8">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Jumlah Data Training</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah; ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Jumlaah Data jalan -->
+                                <div class="col-xl-4 col-md-12 mb-8">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Jumlah Data Jalan Baik</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $baik; ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><br class="mt-5">
+                                <!-- Jumlaah Data jalan -->
+                                <div class="col-xl-4 col-md-12 mb-8">
+                                    <div class="card border-left-warning shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Jumlah Data Kondisi Jalan Sedang</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $sedang; ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Jumlaah Data jalan -->
+                                <div class="col-xl-4 col-md-12 mb-8">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Jumlah Data Kondisi Jalan Rusak Ringan</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $rusakringan; ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Jumlaah Data jalan -->
+                                <div class="col-xl-4 col-md-12 mb-8">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Jumlah Data Kondisi Jalan Rusak Berat</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $rusakberat; ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     <?php
                         }
                     }
