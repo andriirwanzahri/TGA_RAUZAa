@@ -5,7 +5,7 @@ $adm = redairec('datajalan', $id);
 ?>
 <div class="row mt-0">
 
-    <div class="col-xl-4 col-md-12 mb-8">
+    <div class="col-xl-8 col-md-12 mb-8">
 
         <div class="card o-hidden border-0 shadow-lg ">
             <div class="card-body p-0">
@@ -16,83 +16,103 @@ $adm = redairec('datajalan', $id);
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 ">Detail Jalan</h1>
                             </div>
-                            <form class="user" method="post" action="">
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Nama Jalan</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['namajalan']; ?>" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Nama Desa</label>
-
-                                    <input type="text" class="form-control" value="<?php echo $adm['desa']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Provinsi</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['provinsi']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Ura Dukung</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['uradukung']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">kecamatan</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['kecamatan']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Nama Lintas Jalan</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['namalintas']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Panjang Jalan</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['panjang']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Jenis Pembaharuan</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['jnspen']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Tanah Krikil</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['tanahkrikil']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Aspal</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['aspal']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Rigit</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['rigit']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">kondisi Baik</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['konbaik']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Kondisi Sedang</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['konsedang']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Kondsi Rusak Ringan</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['konringan']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Kondisi Rusak Berat</label>
-                                    <input type="text" class="form-control" value="<?php echo $adm['konrusak']; ?>" required>
-                                </div>
-                                <!-- <div class=" row">
-                                    <div class="col-lg col-3">
-                                        <input type="reset" class="btn btn-info btn-user btn-block" value="Bersihkan">
-                                        </input>
-                                    </div>
-                                    <div class="col-lg col-3">
-                                        <button type="submit" class="btn btn-info btn-user btn-block" id="tekan">
-                                            Jalan
-                                        </button>
-                                    </div>
-                                </div> -->
-                            </form>
+                            <table class="table">
+                                <tr>
+                                    <th>Nama Jalan</th>
+                                    <td>
+                                        <?php echo $adm['namajalan']; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nama Desa</td>
+                                    <td>
+                                        <?php echo $adm['desa']; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ura dukung</td>
+                                    <td>
+                                        <?php echo $adm['uradukung']; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Pen</td>
+                                    <td>
+                                        <?php echo $adm['jnspen']; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Kecamatan</td>
+                                    <td>
+                                        <?php echo $adm['kecamatan']; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Provinsi</td>
+                                    <td>
+                                        <?php echo $adm['provinsi']; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Panjang</td>
+                                    <td>
+                                        <?php echo $adm['panjang']; ?> (Km)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Krikil</td>
+                                    <td>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h6 mb-0 mr-3 text-gray-800"><?php echo $adm['tanahkrikil']; ?>%</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm mr-2">
+                                                    <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo $adm['tanahkrikil']; ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Aspal</td>
+                                    <td>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h6 mb-0 mr-3 text-gray-800"><?php echo $adm['aspal']; ?>%</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm mr-2">
+                                                    <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo $adm['aspal']; ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Rigid</td>
+                                    <td>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h6 mb-0 mr-3 text-gray-800"><?php echo $adm['rigit']; ?>%</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm mr-2">
+                                                    <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo $adm['rigid']; ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg col-xl-12 col-md-12 mb-8">
+                        <div class="p-5">
                             <div class="text-center">
-                                <a class="small" href="#">Kembali</a>
+                                <h1 class="h4 text-gray-900 ">PETA</h1>
                             </div>
+                            <div id="map"></div>
                         </div>
                     </div>
                 </div>
@@ -101,7 +121,8 @@ $adm = redairec('datajalan', $id);
 
     </div>
 
-    <div class="col-xl-8 col-md-12 mb-8">
+    <!-- Halaman Aspirasi -->
+    <div class="col-xl-4 col-md-12 mb-8">
 
         <div class="card o-hidden border-0 shadow-lg ">
             <div class="card-body">
@@ -125,15 +146,59 @@ $adm = redairec('datajalan', $id);
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta distinctio ipsa, perspiciatis quidem doloremque velit voluptatem sequi iure nulla, ipsum, itaque assumenda delectus. Repellat quam architecto non. Officiis, molestias modi.</p>
                             </div>
                         </div>
-                        <div class="col-lg">
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Tambahkan Aspirasi</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="exampleFormControlTextarea1">Nama Pengirim</label>
+                                    <input type="text" name="longitude" class="form-control" placeholder="KM" value="<?php echo $_SESSION['login']['nama'];?>" readonly>
+                                </div>
+                                </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Tambahkan Aspirasi</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                                <button class="btn btn-info float-right">Kirim</button>
                             </div>
-                            <button class="btn btn-info float-right">Kirim</button>
                         </div>
                     </div>
                 </center>
             </div>
         </div>
     </div>
+
+    <script>
+        function initMap() {
+            var myLatlng = new google.maps.LatLng(<?php echo $adm['latitude']; ?>, <?php echo $adm['longitude']; ?>);
+            var mapOptions = {
+                zoom: 15,
+                center: myLatlng
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            var contentString = '<div id="content">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                '<h1 id="firstHeading" class="firstHeading"><?php echo $adm['namajalan']; ?></h1>' +
+                '<div id="bodyContent">' +
+                '<p><?php echo $adm['namajalan']; ?></p>' +
+                '</div>' +
+                '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Maps Info',
+                icon: 'img/marker.png'
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>

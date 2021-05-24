@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED | E_USER_WARNING | E_PARSE));
-error_reporting(0);
+// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED | E_USER_WARNING | E_PARSE));
+// error_reporting(0);
 session_start();
 if (!isset($_SESSION['login']['nama'])) {
     header("Location: Pages/halamanUtama/index.php");
@@ -27,6 +27,15 @@ if (!isset($_SESSION['login']['nama'])) {
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <style type="text/css">
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
 
 </head>
 
@@ -42,9 +51,6 @@ if (!isset($_SESSION['login']['nama'])) {
             <a class=" mt-3 justify-content-center">
                 <!-- <div class="sidebar-brand-icon"> -->
                 <center><img src="img/pnl.png" width="100" height="100"></center>
-                <!-- <i class="fas fa-laugh-wink"></i> -->
-                <!-- </div> -->
-                <!-- <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div> -->
             </a>
 
             <!-- Divider -->
@@ -79,6 +85,8 @@ if (!isset($_SESSION['login']['nama'])) {
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Data Jalan</h6>
                             <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
+                            <a class="collapse-item" href="#">Hasil Klasifikasi</a>
+
                         </div>
                     </div>
                 </li>
@@ -134,6 +142,7 @@ if (!isset($_SESSION['login']['nama'])) {
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Data Jalan</h6>
                             <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
+                            <a class="collapse-item" href="#">Hasil Klasifikasi</a>
                         </div>
                     </div>
                 </li>

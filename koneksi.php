@@ -14,7 +14,7 @@ function query($query)
 function redairec($table, $url)
 {
 	global $conn;
-	$qry = mysqli_query($conn, "SELECT * FROM $table WHERE $url");
+	$qry = mysqli_query($conn, "SELECT * FROM $table WHERE id='$url'");
 	$pecah = mysqli_fetch_array($qry);
 	return $pecah;
 }
@@ -88,22 +88,51 @@ function uploadDataSet($dataset)
 function tambah($data)
 {
 	global $conn;
+	$namajalan = htmlspecialchars($data["namajalan"]);
+	$desa = htmlspecialchars($data["desa"]);
+	$provinsi = htmlspecialchars($data["provinsi"]);
+	$uradukung = $data["uradukung"];
+	$kecamatan = htmlspecialchars($data["kecamatan"]);
+	$namalintas = $data["namalintas"];
+	$panjang = $data["panjang"];
+	$jnspen = $data["jnspen"];
+	$tanah_krikil = $data["tanahkrikil"];
+	$aspal = $data["aspal"];
+	$rigit = $data["rigit"];
+	$konbaik = $data["konbaik"];
+	$konsedang = $data["konsedang"];
+	$konringan = $data["konringan"];
+	$konrusak = $data["konrusak"];
+	$latitude = $data["latitude"];
+	$longitude = $data["longitude"];
 
-	$nrp = htmlspecialchars($data["nrp"]);
-	$nama = htmlspecialchars($data["nama"]);
-	$email = htmlspecialchars($data["email"]);
-	$jurusan = htmlspecialchars($data["jurusan"]);
+	// // upload gambar
+	// $gambar = upload();
+	// if (!$gambar) {
+	// 	return false;
+	// }
 
-	// upload gambar
-	$gambar = upload();
-	if (!$gambar) {
-		return false;
-	}
-
-	$query = "INSERT INTO mahasiswa
+	$query = "INSERT INTO datajalan
 				VALUES
-			  ('', '$nrp', '$nama', '$email', '$jurusan', '$gambar')
-			";
+			  ('', 
+			  '$namajalan',
+			   '$desa',
+			    '$provinsi',
+				 '$uradukung',
+				 '$kecamatan',
+				 '$namalintas',
+				 '$panjang',
+				 '$jnspen',
+				 '$tanah_krikil',
+				 '$aspal',
+				 '$rigit',
+				 '$konbaik',
+				 '$konsedang',
+				 '$konringan',
+				 '$konrusak',
+				 '$latitude',
+				 '$longitude'
+				 )";
 	mysqli_query($conn, $query);
 
 	return mysqli_affected_rows($conn);
@@ -155,21 +184,34 @@ function upload()
 
 	return $namaFileBaru;
 }
+//alert PHP
+function display_error($msg)
+{
+	echo "<div class='alert alert-danger alert-dismissable'>
+            
+            <h4><i class='icon fa fa-ban'></i> Error! </h4>
+            " . $msg . "
+        </div>";
+}
 
+function display_success($msg)
+{
+	echo "<div class='alert alert-success alert-dismissable'>
+                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                    <h4><i class='icon fa fa-check'></i> Success. </h4>
+                    " . $msg . "
+                  </div>";
+}
 
-
-
-
-
-function ubah($data)
+function ubahdataset($data)
 {
 	global $conn;
 
 	$id = $data["id"];
-	$nrp = htmlspecialchars($data["nrp"]);
+	$nrp = htmlspecialchars($data["nama"]);
 	$nama = htmlspecialchars($data["nama"]);
 	$email = htmlspecialchars($data["email"]);
-	$jurusan = htmlspecialchars($data["jurusan"]);
+	$jalan = htmlspecialchars($data["jalan"]);
 	$gambarLama = htmlspecialchars($data["gambarLama"]);
 
 	// cek apakah user pilih gambar baru atau tidak
@@ -180,11 +222,10 @@ function ubah($data)
 	}
 
 
-	$query = "UPDATE mahasiswa SET
-				nrp = '$nrp',
+	$query = "UPDATE dataset SET
+				nrp = '$nama',
 				nama = '$nama',
 				email = '$email',
-				jurusan = '$jurusan',
 				gambar = '$gambar'
 			  WHERE id = $id
 			";
@@ -194,20 +235,54 @@ function ubah($data)
 	return mysqli_affected_rows($conn);
 }
 
-
-function cari($keyword)
+function ubahdatajalan($data)
 {
-	$query = "SELECT * FROM mahasiswa
-				WHERE
-			  nama LIKE '%$keyword%' OR
-			  nrp LIKE '%$keyword%' OR
-			  email LIKE '%$keyword%' OR
-			  jurusan LIKE '%$keyword%'
+	global $conn;
+
+	$id = $data["id"];
+	$namajalan = htmlspecialchars($data["namajalan"]);
+	$desa = htmlspecialchars($data["desa"]);
+	$provinsi = htmlspecialchars($data["provinsi"]);
+	$uradukung = $data["uradukung"];
+	$kecamatan = htmlspecialchars($data["kecamatan"]);
+	$namalintas = $data["namalintas"];
+	$panjang = $data["panjang"];
+	$jnspen = $data["jnspen"];
+	$tanah_krikil = $data["tanahkrikil"];
+	$aspal = $data["aspal"];
+	$rigit = $data["rigit"];
+	$konbaik = $data["konbaik"];
+	$konsedang = $data["konsedang"];
+	$konringan = $data["konringan"];
+	$konrusak = $data["konrusak"];
+	$latitude = $data["latitude"];
+	$longitude = $data["longitude"];
+
+	$query = "UPDATE datajalan SET
+				namajalan = '$namajalan',
+				desa = '$desa',
+				provinsi = '$provinsi',
+				uradukung = '$uradukung',
+				kecamatan = '$kecamatan',
+				namalintas = '$namalintas',
+				panjang = '$panjang',
+				jnspen = '$jnspen',
+				tanahkrikil = '$tanah_krikil',
+				aspal = '$aspal',
+				rigit = '$rigit',
+				konbaik = '$konbaik',
+				konsedang = '$konsedang',
+				konrigan = '$konringan',
+				konrusak = '$konrusak',
+				latitude = '$latitude',
+				longitude = '$longitude'
+			  WHERE id = $id
 			";
-	return query($query);
+
+	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
 }
-
-
 function registrasi($data)
 {
 	global $conn;
@@ -240,7 +315,7 @@ function registrasi($data)
 	$password = password_hash($password, PASSWORD_DEFAULT);
 
 	// tambahkan userbaru ke database
-	mysqli_query($conn, "INSERT INTO user VALUES('','$nama','$username', '$password','$alamat','1','default.png')");
+	mysqli_query($conn, "INSERT INTO user VALUES('','$nama','$username', '$password','$alamat','3','default.png')");
 
 	return mysqli_affected_rows($conn);
 }

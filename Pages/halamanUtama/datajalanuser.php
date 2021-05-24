@@ -36,7 +36,7 @@ $datajalan = query("SELECT * FROM datajalan");
                                 <td><?php echo $d['provinsi']; ?></td>
                                 <td><?php echo $d['kecamatan']; ?></td>
                                 <td><?php echo $d['namalintas']; ?></td>
-                                <td><a href="aspirasiuser.php?id=<?php echo $d['id']; ?>" class="btn btn-info">detail</a> </td>
+                                <td><a href="aspirasiuser.php?id=<?php echo $d['id']; ?>" class="badge badge-pill badge-info">detail</a> </td>
                             </tr>
                         <?php
                         endforeach;

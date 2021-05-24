@@ -14,3 +14,10 @@
     scrollbar-track-color: #FFE8C1;
     scrollbar-arrow-color: #6F4709;
 }
+
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+}

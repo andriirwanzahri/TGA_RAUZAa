@@ -1,3 +1,4 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-ndub7Wp6y-DZtdfCFqd-smlpXPnoGBs&callback=initMap" type="text/javascript"></script>
 <!-- Bootstrap core JavaScript-->
 <script src="../../vendor/jquery/jquery.min.js"></script>
 <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -7,6 +8,7 @@
 
 <!-- Custom scripts for all pages-->
 <script src="../../js/sb-admin-2.min.js"></script>
+<!-- <script src="../../js/index.js"></script> -->
 
 <!-- Page level plugins -->
 <script src="../../vendor/chart.js/Chart.min.js"></script>
