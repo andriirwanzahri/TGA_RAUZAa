@@ -1,27 +1,23 @@
 <?php
 include 'koneksi.php';
-$datajalan = query("SELECT * FROM datajalan");
+$datajalan = query("SELECT * FROM datajalan ORDER BY id DESC");
 
 if (isset($_GET["hapus"])) {
-    $data = mysqli_query($conn, "DELETE FROM datajalan WHERE id='$hapus'");
-    if ($data > 0) {
-?>
-        <script>
+    $hapus = $_GET['hapus'];
+    if (hapusJalan($_GET) > 0) {
+        echo ' <script>
             location.replace("index.php?page=datajalan&pesan_success=Data berhasil dihapus");
-        </script>
-    <?php
-    } else { ?>
-        <script>
+        </script>';
+    } else {
+        echo '<script>
             location.replace("index.php?page=datajalan&pesan_error=Data gagal dihapus");
-        </script>
-    <?php
-
+        </script>';
     }
 }
 if (isset($_POST["tambah"])) {
 
     if (tambah($_POST) > 0) {
-    ?>
+?>
         <script>
             location.replace("index.php?page=datajalan&pesan_success=Data berhasil ditambahkan");
         </script>
@@ -113,7 +109,7 @@ if (isset($_POST["ubah"])) {
                                 </td>
                             <?php elseif ($_SESSION['login']['level'] == '2') : ?>
                                 <td>
-                                    <a href="" class="badge badge-pill badge-warning">Usulkan</a>
+                                    <a href="index.php?page=datausulan&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-warning">Usulkan</a>
                                     <a href="index.php?page=aspirasi&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-info">Detail</a>
                                 </td>
 
@@ -138,7 +134,7 @@ if (isset($_POST["ubah"])) {
                                             <form method="POST" action="">
                                                 <?php
                                                 $id = $d['id'];
-                                                $adm = redairec('datajalan', $id);
+                                                $adm = redairec('datajalan', 'id', $id);
                                                 ?>
                                                 <div class="row">
                                                     <div class="col-md-6">

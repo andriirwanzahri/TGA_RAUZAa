@@ -29,17 +29,18 @@ include_once "koneksi.php";
                 echo "<center><button><h3> Pohon keputusan belum terbentuk...</h3></button></center>";
             } else {
                 //hanya kaprodi yang bisa menghapus pohon keputusan dan menguji akurasi
-                if ($_SESSION['kepribadian_c45_level'] == 1) {
+
             ?>
-                    <p>
-                        <!-- <a href="?page=pohonKeputusan&act=delete" class="btn btn-danger" onClick="return confirm('Anda yakin akan hapus pohon keputusan?')">
-                            Hapus Pohon Keputusan
-                        </a> -->
-                        <!--<a href="?menu=pohon_tree" >Lihat Pohon Keputusan</a> |-->
-                        <!-- <a href="?menu=uji_rule" class="btn btn-default">Uji Rule</a> -->
-                    </p>
+                <p>
+                    <a href="index.php?page=pohonKeputusan&hapus=delete" class="btn btn-danger float-right" onClick="return confirm('Anda yakin akan hapus pohon keputusan?')">
+                        <i class="fas fa-trash"></i>
+                        Hapus Pohon Keputusan
+                    </a>
+                    <!--<a href="?menu=pohon_tree" >Lihat Pohon Keputusan</a> |-->
+                    <!-- <a href="?menu=uji_rule" class="btn btn-default">Uji Rule</a> -->
+                </p>
                 <?php
-                }
+
                 echo "Jumlah rule : " . $jumlah . "<br>";
                 ?>
                 <table class='table table-bordered '>

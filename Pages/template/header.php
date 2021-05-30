@@ -85,7 +85,7 @@ if (!isset($_SESSION['login']['nama'])) {
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Data Jalan</h6>
                             <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
-                            <a class="collapse-item" href="#">Hasil Klasifikasi</a>
+                            <a class="collapse-item" href="index.php?page=hasilKlasifikasi">Hasil Klasifikasi</a>
 
                         </div>
                     </div>
@@ -113,15 +113,25 @@ if (!isset($_SESSION['login']['nama'])) {
                             <a class="collapse-item" href="index.php?page=mining">Mining C 4.5</a>
                             <a class="collapse-item" href="index.php?page=pohonKeputusan">Pohon Keputusan</a>
                             <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
-                            <a class="collapse-item" href="#">Hasil Prediksi</a>
-                            <div class="collapse-divider"></div>
+                            <!-- <a class="collapse-item" href="index.php?page=hasilKlasifikasi">Hasil Prediksi</a> -->
+                            <!-- <a class="collapse-item" href="index.php?page=hitungAkurasi">Akurasi</a> -->
+                            <!-- <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Data User</h6>
                             <a class="collapse-item" href="index.php?page=dataMasyarakat">Data Masyarakat</a>
-                            <a class="collapse-item" href="blank.html">Data Pejabat</a>
+                            <a class="collapse-item" href="blank.html">Data Pejabat</a> -->
                         </div>
                     </div>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=hasilKlasifikasi">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Hasil Klasifikasi</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=hitungAkurasi">
+                        <i class="fas fa-percent"></i>
+                        <span>Akurasi</span></a>
+                </li>
 
                 <!-- JIKA LEVELNYA 2 MAKA AKAN MENAMPILKAN -->
             <?php
@@ -142,7 +152,7 @@ if (!isset($_SESSION['login']['nama'])) {
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Data Jalan</h6>
                             <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
-                            <a class="collapse-item" href="#">Hasil Klasifikasi</a>
+                            <a class="collapse-item" href="index.php?page=hasilKlasifikasi">Hasil Klasifikasi</a>
                         </div>
                     </div>
                 </li>
@@ -151,7 +161,7 @@ if (!isset($_SESSION['login']['nama'])) {
             ?>
             <li class="nav-item">
                 <a class="nav-link" href="index.php?page=profile">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-user"></i>
                     <span>Profile</span></a>
             </li>
 
@@ -173,7 +183,7 @@ if (!isset($_SESSION['login']['nama'])) {
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-dark bg-black topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand  navbar-dark bg-black topbar mb-0 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -209,3 +219,4 @@ if (!isset($_SESSION['login']['nama'])) {
 
                 </nav>
                 <!-- End of Topbar -->
+                <div class="main-panel">

@@ -11,10 +11,10 @@ function query($query)
 	}
 	return $rows;
 }
-function redairec($table, $url)
+function redairec($table, $field, $url)
 {
 	global $conn;
-	$qry = mysqli_query($conn, "SELECT * FROM $table WHERE id='$url'");
+	$qry = mysqli_query($conn, "SELECT * FROM $table WHERE $field='$url'");
 	$pecah = mysqli_fetch_array($qry);
 	return $pecah;
 }
@@ -134,6 +134,45 @@ function tambah($data)
 				 '$longitude'
 				 )";
 	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+}
+
+function tAspirasi($data)
+{
+	global $conn;
+	$namaUser = htmlspecialchars($data["nama"]);
+	$idjalan = $data["idjalan"];
+	$komentar = htmlspecialchars($data["aspirasi"]);
+
+	$query = "INSERT INTO aspirasi
+				VALUES
+			  ('', 
+			  '$namaUser',
+			   '$idjalan',
+			    now(),
+				'$komentar'
+				 )";
+	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+}
+
+function hapusJalan($id)
+{
+	global $conn;
+	$id = $_GET['hapus'];
+	$as = mysqli_query($conn, "SELECT * FROM aspirasi WHERE idjalan='$id'");
+	$data = mysqli_num_rows($as);
+	if ($data > 0) {
+		$query = "DELETE FROM datajalan WHERE id='$id'";
+		$aspirasi = "DELETE FROM aspirasi WHERE idjalan='$id'";
+		mysqli_query($conn, $query);
+		mysqli_query($conn, $aspirasi);
+	} else {
+		$query = "DELETE FROM datajalan WHERE id='$id'";
+		mysqli_query($conn, $query);
+	}
 
 	return mysqli_affected_rows($conn);
 }

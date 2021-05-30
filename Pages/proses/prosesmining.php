@@ -392,15 +392,15 @@ function pembentukan_tree($conn, $N_parent, $kasus)
         } else {
 
             if ($atribut == "jns_pen") {
-                proses_DT($conn, $kondisi, "(jns_pen ='PB')", "(jns_pen ='P')", "", "", "", "", "", "", "", "", "");
+                proses_DT($conn, $kondisi, "(jns_pen='PB')", "(jns_pen='P')", "", "", "", "", "", "", "", "", "");
             }
             if ($atribut == "namaLintas") {
                 proses_DT(
                     $conn,
                     $kondisi,
                     "(namaLintas='LJK')",
-                    "(namaLintas ='LJN')",
-                    "(namaLintas ='LJP')",
+                    "(namaLintas='LJN')",
+                    "(namaLintas='LJP')",
                     "",
                     "",
                     "",
@@ -416,10 +416,10 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                     $conn,
                     $kondisi,
                     "(ura_dukung='KMI')",
-                    "(ura_dukung ='KA')",
-                    "(ura_dukung ='KP')",
-                    "(ura_dukung ='KM')",
-                    "(ura_dukung ='KCT')",
+                    "(ura_dukung='KA')",
+                    "(ura_dukung='KP')",
+                    "(ura_dukung='KM')",
+                    "(ura_dukung='KCT')",
                     "",
                     "",
                     "",
@@ -433,15 +433,15 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                     $conn,
                     $kondisi,
                     "(aspal='SPES')",
-                    "(aspal ='SPE')",
-                    "(aspal ='PE')",
-                    "(aspal ='SS')",
-                    "(aspal ='CS')",
-                    "(aspal ='S')",
-                    "(aspal ='PA')",
-                    "(aspal ='CP')",
-                    "(aspal ='SPA')",
-                    "(aspal ='SPAS')",
+                    "(aspal='SPE')",
+                    "(aspal='PE')",
+                    "(aspal='SS')",
+                    "(aspal='CS')",
+                    "(aspal='S')",
+                    "(aspal='PA')",
+                    "(aspal='CP')",
+                    "(aspal='SPA')",
+                    "(aspal='SPAS')",
                     ""
                 );
             }
@@ -450,15 +450,15 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                     $conn,
                     $kondisi,
                     "(tanah_krikil='SPES')",
-                    "(tanah_krikil ='SPE')",
-                    "(tanah_krikil ='PE')",
-                    "(tanah_krikil ='SS')",
-                    "(tanah_krikil ='CS')",
-                    "(tanah_krikil ='S')",
-                    "(tanah_krikil ='PA')",
-                    "(tanah_krikil ='CP')",
-                    "(tanah_krikil ='SPA')",
-                    "(tanah_krikil ='SPAS')",
+                    "(tanah_krikil='SPE')",
+                    "(tanah_krikil='PE')",
+                    "(tanah_krikil='SS')",
+                    "(tanah_krikil='CS')",
+                    "(tanah_krikil='S')",
+                    "(tanah_krikil='PA')",
+                    "(tanah_krikil='CP')",
+                    "(tanah_krikil='SPA')",
+                    "(tanah_krikil='SPAS')",
                     ""
                 );
             }
@@ -467,15 +467,15 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                     $conn,
                     $kondisi,
                     "(rigit='SPES')",
-                    "(rigit ='SPE')",
-                    "(rigit ='PE')",
-                    "(rigit ='SS')",
-                    "(rigit ='CS')",
-                    "(rigit ='S')",
-                    "(rigit ='PA')",
-                    "(rigit ='CP')",
-                    "(rigit ='SPA')",
-                    "(rigit ='SPAS')",
+                    "(rigit='SPE')",
+                    "(rigit='PE')",
+                    "(rigit='SS')",
+                    "(rigit='CS')",
+                    "(rigit='S')",
+                    "(rigit='PA')",
+                    "(rigit='CP')",
+                    "(rigit='SPA')",
+                    "(rigit='SPAS')",
                     ""
                 );
             }
@@ -484,15 +484,15 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                     $conn,
                     $kondisi,
                     "(panjangRuas='SPES')",
-                    "(panjangRuas ='SPE')",
-                    "(panjangRuas ='PE')",
-                    "(panjangRuas ='SS')",
-                    "(panjangRuas ='CS')",
-                    "(panjangRuas ='S')",
-                    "(panjangRuas ='PA')",
-                    "(panjangRuas ='CP')",
-                    "(panjangRuas ='SPA')",
-                    "(panjangRuas ='SPAS')",
+                    "(panjangRuas='SPE')",
+                    "(panjangRuas='PE')",
+                    "(panjangRuas='SS')",
+                    "(panjangRuas='CS')",
+                    "(panjangRuas='S')",
+                    "(panjangRuas='PA')",
+                    "(panjangRuas='CP')",
+                    "(panjangRuas='SPA')",
+                    "(panjangRuas='SPAS')",
                     ""
                 );
             }
@@ -1121,4 +1121,152 @@ function cek_nilaiAtribut($conn, $field, $kondisi)
         $a++;
     }
     return $hasil;
+}
+
+function klasifikasi(
+    $conn,
+    $n_ura_dukung,
+    $n_namaLintas,
+    $n_panjangRuas,
+    $n_jns_pen,
+    $n_tanah_krikil,
+    $n_aspal,
+    $n_rigit
+) {
+    $sql = mysqli_query($conn, "SELECT * FROM t_keputusan");
+    $keputusan = $id_rule_keputusan = "";
+
+    while ($row = mysqli_fetch_array($sql)) {
+        //menggabungkan parent dan akar dengan kata AND
+        if ($row['parent'] != '') {
+            $rule = $row['parent'] . " AND " . $row['akar'];
+        } else {
+            $rule = $row['akar'];
+        }
+        //=============================================PEMbENTUKAN KARKTER=================================///
+        //mengubah parameter
+        $rule = str_replace("=", " s ", $rule);
+        //mengganti nilai
+        $rule = str_replace("ura_dukung", "$n_ura_dukung", $rule);
+        $rule = str_replace("namaLintas", "$n_namaLintas", $rule);
+        $rule = str_replace("panjangRuas", "$n_panjangRuas", $rule);
+        $rule = str_replace("jns_pen", "$n_jns_pen", $rule);
+        $rule = str_replace("tanah_krikil", "$n_tanah_krikil", $rule);
+        $rule = str_replace("aspal", "$n_aspal", $rule);
+        $rule = str_replace("rigit", "$n_rigit", $rule);
+        // // die;
+        // //menghilangkan '
+        $rule = str_replace("'", "", $rule);
+
+        // // // //explode and
+        $explodeAND = explode(" AND ", $rule);
+
+        $jmlAND = count($rule);
+        // // //menghilangkan ()
+        $explodeAND = str_replace("(", "", $explodeAND);
+        $explodeAND = str_replace(")", "", $explodeAND);
+        // var_dump($explodeAND);
+        // //deklarasi bol
+        //===========================================END PEMBENTUKAN KARAKTER=============================///
+        $bolAND = array();
+        $n = 0;
+        while ($n < $jmlAND) {
+            //     //explode or
+            $explodeOR = explode("OR", $explodeAND[$n]);
+            // var_dump($explodeOR);
+            //     // die;
+            $jmlOR = count($explodeOR);
+            //deklarasi bol
+            $bol = array();
+            $a = 0;
+            while ($a < $jmlOR) {
+                //pecah  dengan spasi
+                $exrule2 = explode(" ", $explodeAND[$n]);
+                // var_dump($exrule2);
+                $parameter = $exrule2[1];
+                if ($parameter == 's') {
+                    //pecah  dengan s
+                    $explodeRule = explode(" s ", $explodeOR[$a]);
+                    // var_dump($explodeRule);
+                    //nilai true false						
+                    if ($explodeRule[0] == $explodeRule[1]) {
+                        $bol[$a] = "Benar";
+                    } else if ($explodeRule[0] != $explodeRule[1]) {
+                        $bol[$a] = "Salah";
+                    }
+                    // var_dump($explodeRule);
+                } elseif ($parameter == 's') {
+                    //pecah  dengan s
+                    $explodeRule = explode(" s ", $explodeOR[$a]);
+                    //nilai true false						
+                    if ($explodeRule[0] == $explodeRule[1]) {
+                        $bol[$a] = "Benar";
+                    } else if ($explodeRule[0] != $explodeRule[1]) {
+                        $bol[$a] = "Salah";
+                    }
+                }
+                $a++;
+            }
+            // var_dump($bolAND[$n]);
+            //isi false
+            $bolAND[$n] = "Salah";
+            $b = 0;
+            while ($b < $jmlOR) {
+                //jika $bol[$b] benar bolAND benar
+                if ($bol[$b] == "Benar") {
+                    $bolAND[$n] = "Benar";
+                }
+                $b++;
+            }
+            $n++;
+        }
+        // var_dump($bolAND);
+        //========================================================isi boolrule=====================================================================
+        $boolRule = "Benar";
+        $a = 0;
+        while ($a < $jmlAND) {
+            //jika ada yang salah boolrule diganti salah
+            if ($bolAND[$a] == "Salah") {
+                $boolRule = "Salah";
+                break;
+            }
+            $a++;
+        }
+        if ($boolRule == "Benar") {
+            $keputusan = $row['keputusan'];
+            $id_rule_keputusan = $row['id'];
+            break;
+        }
+
+        //==============================================================================================================////        
+        // //jika tidak ada rule yang memenuhi kondisi data uji 
+        // //maka ambil rule paling bawah(ambil konisi yg paling panjang)????....
+        if ($keputusan == '') {
+            $que = mysqli_query($conn, "SELECT parent FROM t_keputusan");
+            $jml = array();
+            $exParent = array();
+            $i = 0;
+            while ($row_baris = mysqli_fetch_array($que)) {
+                $exParent = explode(" AND ", $row_baris['parent']);
+                $jml[$i] = count($exParent);
+                $i++;
+            }
+            $maxParent = max($jml);
+            $sql_query = mysqli_query($conn, "SELECT * FROM t_keputusan");
+            while ($row_bar = mysqli_fetch_array($sql_query)) {
+                $explP = explode(" AND ", $row_bar['parent']);
+                $jmlT = count($explP);
+                if ($jmlT == $maxParent) {
+                    $keputusan = $row_bar['keputusan'];
+                    $id_rule = $row_bar['id'];
+                    $id_rule_keputusan = $row_bar['id'];
+                    break;
+                    // var_dump($id_rule);
+                    // die;
+                }
+            }
+        }
+        //=============================================================================================================////        
+    }
+    return array('keputusan' => $keputusan, 'id_rule' => $id_rule_keputusan);
 }

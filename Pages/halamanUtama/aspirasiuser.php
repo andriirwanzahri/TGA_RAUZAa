@@ -2,7 +2,7 @@
 include '../template/headeruser.php';
 include '../../koneksi.php';
 $id = $_GET['id'];
-$adm = redairec('datajalan', $id);
+$adm = redairec('datajalan', 'id', $id);
 ?>
 <div class="container">
     <div class="row mt-4">
@@ -136,6 +136,11 @@ $adm = redairec('datajalan', $id);
             <div class="card o-hidden border-0 shadow-lg ">
                 <div class="card-body">
                     <!-- Nested Row within Card Body -->
+                    <?php
+                    $id = $adm['id'];
+                    $as = mysqli_query($conn, "SELECT * FROM aspirasi WHERE idjalan='$id'");
+                    $ad = mysqli_num_rows($as);
+                    ?>
                     <center>
                         <div class="row">
                             <div class="col-lg col-xl-12 col-md-12 mb-8">
@@ -143,78 +148,99 @@ $adm = redairec('datajalan', $id);
                                     <h1 class="h4 text-gray-900 mb-4">Aspirasi</h1>
                                 </div>
                                 <div class="scroll col-lg col-xl-12 col-md-12 mb-8">
-                                    <h4 id="fat">User4</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita impedit natus totam doloribus dolorem laborum neque, eius dolorum alias deserunt facere veniam voluptas asperiores? Sunt, inventore assumenda! Laudantium, eveniet recusandae.</p>
-                                    <h4 id="mdo">User5</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam possimus facilis maxime id sunt vel laudantium consequatur nam. Accusamus nobis veritatis hic magnam dolore quaerat explicabo quasi deserunt porro reprehenderit?</p>
-                                    <h4 id="one">User6</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta distinctio ipsa, perspiciatis quidem doloremque velit voluptatem sequi iure nulla, ipsum, itaque assumenda delectus. Repellat quam architecto non. Officiis, molestias modi.</p>
-                                    <h4 id="two">User7</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta distinctio ipsa, perspiciatis quidem doloremque velit voluptatem sequi iure nulla, ipsum, itaque assumenda delectus. Repellat quam architecto non. Officiis, molestias modi.</p>
-                                    <h4 id="three">user9</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta distinctio ipsa, perspiciatis quidem doloremque velit voluptatem sequi iure nulla, ipsum, itaque assumenda delectus. Repellat quam architecto non. Officiis, molestias modi.</p>
+                                    <?php
+                                    if ($ad > 0) {
+                                        # code...
+                                        while ($asp = mysqli_fetch_array($as)) {
+                                    ?>
+                                            <h5><?php echo $asp['namaUser']; ?></h5>
+                                            <p><?php echo $asp['komentar']; ?></p>
+                                            <hr>
+                                    <?php
+                                        }
+                                    } else {
+                                        echo "<h3>Belum Ada Aspirasi</h3>";
+                                    }
+                                    ?>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <form action="" method="POST">
-                        <div class="row">
-                    <div class="col-md-12">
-                            <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Nama Pengirim</label>
-                                    <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Anda...">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Nama Pengirim</label>
+                                        <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Anda...">
+                                        <input type="hidden" name="idjalan" value="<?php echo $adm['id']; ?>">
+                                    </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Tambahkan Aspirasi</label>
+                                        <textarea class="form-control h6" name="aspirasi" id="exampleFormControlTextarea1" rows="3" placeholder="Berilah Aspirasi anda akan jalan ini...."></textarea>
+                                    </div>
+                                    <button class="btn btn-info float-right" name="kirim">Kirim</button>
                                 </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Tambahkan Aspirasi</label>
-                                    <textarea class="form-control h6" name="aspirasi" id="exampleFormControlTextarea1" rows="3" placeholder="Berilah Aspirasi anda akan jalan ini...."></textarea>
-                                </div>
-                                <button class="btn btn-info float-right" name="kirim">Kirim</button>
                             </div>
-                        </div>
-                    </div>
-                        </form>
-                    </center>
                 </div>
+                </form>
+                <?php
+                if (
+                    isset($_POST['kirim'])
+                ) {
+                    if (tAspirasi($_POST) > 0) {
+
+                        echo "<script>
+                        location.replace('aspirasiUser.php?id=$id&pesan_success=Data berhasil ditambahkan');
+                    </script>";
+                    } else {
+                        echo "<script>
+                        location.replace('aspirasiUser.php?id=$id&pesan_error=Data gagal ditambahkan');
+                    </script>";
+                    }
+                }
+                ?>
+                </center>
             </div>
         </div>
     </div>
-    <script>
-        function initMap() {
-            var myLatlng = new google.maps.LatLng(<?php echo $adm['latitude']; ?>, <?php echo $adm['longitude']; ?>);
-            var mapOptions = {
-                zoom: 15,
-                center: myLatlng
-            };
+</div>
+<script>
+    function initMap() {
+        var myLatlng = new google.maps.LatLng(<?php echo $adm['latitude']; ?>, <?php echo $adm['longitude']; ?>);
+        var mapOptions = {
+            zoom: 15,
+            center: myLatlng
+        };
 
-            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-            var contentString = '<div id="content">' +
-                '<div id="siteNotice">' +
-                '</div>' +
-                '<h1 id="firstHeading" class="firstHeading"><?php echo $adm['namajalan']; ?></h1>' +
-                '<div id="bodyContent">' +
-                '<p><?php echo $adm['namajalan']; ?></p>' +
-                '</div>' +
-                '</div>';
+        var contentString = '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h1 id="firstHeading" class="firstHeading"><?php echo $adm['namajalan']; ?></h1>' +
+            '<div id="bodyContent">' +
+            '<p><?php echo $adm['namajalan']; ?></p>' +
+            '</div>' +
+            '</div>';
 
-            var infowindow = new google.maps.InfoWindow({
-                content: contentString
-            });
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
 
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                map: map,
-                title: 'Maps Info',
-                icon: '../../img/marker.png'
-            });
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map, marker);
-            });
-        }
-    </script>
-    <?php
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Maps Info',
+            icon: '../../img/marker.png'
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+        });
+    }
+</script>
+<?php
 
-    include '../template/footeruser.php';
-    ?>
+include '../template/footeruser.php';
+?>

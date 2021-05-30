@@ -2,7 +2,7 @@
 include '../template/headeruser.php';
 include '../../koneksi.php';
 
-$datajalan = query("SELECT * FROM datajalan");
+$datajalan = query("SELECT * FROM datajalan ORDER BY id DESC");
 ?>
 <div class="container">
 

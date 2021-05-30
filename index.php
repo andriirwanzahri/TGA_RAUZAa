@@ -14,10 +14,16 @@ include "Pages/template/header.php";
       include 'Pages/data/masyarakat.php';
     } elseif ($_GET['page'] == "pohonKeputusan") {
       include 'Pages/proses/pohonKeputusan.php';
+    } elseif ($_GET['page'] == "hasilKlasifikasi") {
+      include 'Pages/proses/hasilKlasifikasi.php';
+    } elseif ($_GET['page'] == "hitungAkurasi") {
+      include 'Pages/proses/hitungAkurasi.php';
     } elseif ($_GET['page'] == "mining") {
       include 'Pages/data/mining.php';
     } elseif ($_GET['page'] == "datajalan") {
       include 'Pages/data/datajalan.php';
+    } elseif ($_GET['page'] == "datausulan") {
+      include 'Pages/data/datausulan.php';
     } elseif ($_GET['page'] == "dashboard") {
       include 'Pages/dashboard.php';
     } elseif ($_GET['page'] == "aspirasi") {

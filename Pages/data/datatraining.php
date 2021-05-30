@@ -62,7 +62,7 @@ if (isset($_GET['pesan_success'])) {
 <div class="container-fluid">
     <!-- Pages/data/upload_aksi.php -->
     <div>
-        <div class="card-header py-1">
+        <div class="card-header py-1 mt-3">
             <!-- Tombol hapus Tambah data training -->
             <?php
             if (!empty($pesan_error)) {
@@ -145,7 +145,7 @@ if (isset($_GET['pesan_success'])) {
                                                 <form method="POST" action="">
                                                     <?php
                                                     $id = $d['id'];
-                                                    $adm = redairec('dataset', $id);
+                                                    $adm = redairec('dataset', 'id', $id);
                                                     ?>
                                                     <div class="row">
                                                         <div class="col-md-12">
