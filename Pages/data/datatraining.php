@@ -1,5 +1,11 @@
 <?php
 include 'koneksi.php';
+if (isset($_GET['hapus'])) {
+    $id = $_GET['hapus'];
+    mysqli_query($conn, "DELETE FROM datapreprocessing WHERE id='$id'");
+    mysqli_query($conn, "DELETE FROM dataset WHERE id='$id'");
+    // header('location:index.php?page=datatraining');
+}
 if (isset($_GET['berhasil'])) {
     echo "
     <div class='alert alert-info alert-dismissable' id='divAlert'>
@@ -28,24 +34,6 @@ if (isset($_POST["hapus"])) {
         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
         Data Gagal di hapus
         </div>";
-    }
-}
-
-if (isset($_GET["hapusPerId"])) {
-    $data = mysqli_query($conn, "DELETE FROM dataset WHERE id='$hapus'");
-    mysqli_query($conn, "DELETE FROM datapreprocessing WHERE id='$hapus'");
-    if ($data > 0) {
-?>
-        <script>
-            location.replace("index.php?page=datatraining&pesan_success=Data berhasil dihapus");
-        </script>
-    <?php
-    } else { ?>
-        <script>
-            location.replace("index.php?page=datatraining&pesan_error=Data gagal dihapus");
-        </script>
-<?php
-
     }
 }
 
@@ -121,12 +109,13 @@ if (isset($_GET['pesan_success'])) {
                                 <td><?php echo $d['rigit']; ?></td>
                                 <td><?php echo $d['target']; ?></td>
                                 <td>
-                                    <a href="#" type="button" data-toggle="modal" data-target="#HapusPerId" class="btn btn-danger btn-circle">
+                                    <a href="index.php?page=datatraining&hapus=<?= $d['id']; ?>" class="btn btn-danger btn-circle" onClick="return confirm('Anda yakin akan hapus ?')">
                                         <i class="fas fa-trash"></i>
-                                    </a>|
-                                    <a href="#" data-toggle="modal" data-target="#edit<?= $d['id']; ?>" class="btn btn-warning btn-circle">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                        <a>
+
+                                            <a href="#" data-toggle="modal" data-target="#edit<?= $d['id']; ?>" class="btn btn-warning btn-circle">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
                                 </td>
                             </tr>
 
@@ -385,25 +374,6 @@ if (isset($_GET['pesan_success'])) {
                 <button type="submit" name="tambah" class="btn btn-primary">Tambahkan</button>
             </div>
             </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="HapusPerId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Siap untuk Menghapus?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Apakah Anda Yakin Ingin menghapus <?= $d['id']; ?> .</div>
-            <div class="modal-footer">
-                <form action="" method="post">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <button class="btn btn-danger" name="hapusPerId">Hapus</button>
-                </form>
-            </div>
         </div>
     </div>
 </div>

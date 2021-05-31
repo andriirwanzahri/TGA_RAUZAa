@@ -99,7 +99,9 @@ $datajalan = jumlah('datajalan');
     <div class="col-12 mb-3">
       <div class="card">
         <div class="card-body shadow">
-          <div id="map" style="height: 400px; width: 100%;"></div>
+          <div id="map" style="height: 400px; width: 100%;">
+            <Center>Data Internet Non Aktif</Center>
+          </div>
         </div>
       </div>
     </div>

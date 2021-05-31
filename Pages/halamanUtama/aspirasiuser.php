@@ -121,7 +121,9 @@ $adm = redairec('datajalan', 'id', $id);
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 ">PETA</h1>
                                 </div>
-                                <div id="map">data internet tidak ada</div>
+                                <div id="map">
+                                    <Center>Data Internet Non Aktif</Center>
+                                </div>
                             </div>
                         </div>
                     </div>

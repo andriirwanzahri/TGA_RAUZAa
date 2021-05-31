@@ -163,7 +163,9 @@
             <div class="col-12 mb-3">
                 <div class="card">
                     <div class="card-body shadow">
-                        <div id="map"></div>
+                        <div id="map">
+                            <Center>Data Internet Non Aktif</Center>
+                        </div>
                     </div>
                 </div>
             </div>
