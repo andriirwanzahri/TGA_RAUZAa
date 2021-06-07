@@ -105,17 +105,17 @@ if (isset($_POST["ubah"])) {
                                     <a href="#" data-toggle="modal" data-target="#HapusModal" class="badge badge-pill badge-danger">
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                    <a href="index.php?page=aspirasi&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-info">detail</a>
+                                    <a href="index.php?page=detailjalan&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-info">detail</a>
                                 </td>
                             <?php elseif ($_SESSION['login']['level'] == '2') : ?>
                                 <td>
                                     <a href="index.php?page=datausulan&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-warning">Usulkan</a>
-                                    <a href="index.php?page=aspirasi&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-info">Detail</a>
+                                    <a href="index.php?page=detailjalan&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-info">Detail</a>
                                 </td>
 
                             <?php else : ?>
                                 <td>
-                                    <a href="index.php?page=aspirasi&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-info">detail</a>
+                                    <a href="index.php?page=detailjalan&id=<?php echo $d['id']; ?>" class="badge badge-pill badge-info">detail</a>
                                 </td>
                             <?php endif; ?>
                         </tr>

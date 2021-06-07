@@ -28,6 +28,8 @@ include "Pages/template/header.php";
       include 'Pages/dashboard.php';
     } elseif ($_GET['page'] == "aspirasi") {
       include 'Pages/aspirasi/aspirasi.php';
+    } elseif ($_GET['page'] == "detailjalan") {
+      include 'Pages/data/detailjalan.php';
     } elseif ($_GET['page'] == "profile") {
       include 'Pages/profile/profile.php';
     } elseif ($_GET['page'] == "registrasi") {

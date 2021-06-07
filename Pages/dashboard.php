@@ -164,7 +164,7 @@ $datajalan = jumlah('datajalan');
         '<h5 id="firstHeading" class="firstHeading">' + office[1] + '</h5>' +
         '<h6 id="firstHeading">' + office[2] + '</h6>' +
         '<div id="bodyContent">' +
-        '<center><a href=index.php?page=aspirasi&id=' + office[0] + '>Info Detail</a></center>' +
+        '<center><a href=index.php?page=detailjalan&id=' + office[0] + '>Info Detail</a></center>' +
         '</div>' +
         '</div>';
 

@@ -1,6 +1,6 @@
 <?php
-// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED | E_USER_WARNING | E_PARSE));
-// error_reporting(0);
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED | E_USER_WARNING | E_PARSE));
+error_reporting(0);
 session_start();
 if (!isset($_SESSION['login']['nama'])) {
     header("Location: Pages/halamanUtama/index.php");
@@ -90,6 +90,11 @@ if (!isset($_SESSION['login']['nama'])) {
                         </div>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=hitungAkurasi">
+                        <i class="fas fa-percent"></i>
+                        <span>Laporan</span></a>
+                </li>
 
                 <!-- JIKA LEVELNYA 1 MAKA AKAN MENAMPILKAN -->
             <?php
@@ -113,12 +118,6 @@ if (!isset($_SESSION['login']['nama'])) {
                             <a class="collapse-item" href="index.php?page=mining">Mining C 4.5</a>
                             <a class="collapse-item" href="index.php?page=pohonKeputusan">Pohon Keputusan</a>
                             <a class="collapse-item" href="index.php?page=datajalan">Data jalan</a>
-                            <!-- <a class="collapse-item" href="index.php?page=hasilKlasifikasi">Hasil Prediksi</a> -->
-                            <!-- <a class="collapse-item" href="index.php?page=hitungAkurasi">Akurasi</a> -->
-                            <!-- <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Data User</h6>
-                            <a class="collapse-item" href="index.php?page=dataMasyarakat">Data Masyarakat</a>
-                            <a class="collapse-item" href="blank.html">Data Pejabat</a> -->
                         </div>
                     </div>
                 </li>
@@ -131,6 +130,11 @@ if (!isset($_SESSION['login']['nama'])) {
                     <a class="nav-link" href="index.php?page=hitungAkurasi">
                         <i class="fas fa-percent"></i>
                         <span>Akurasi</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=hitungAkurasi">
+                        <i class="fas fa-percent"></i>
+                        <span>Laporan</span></a>
                 </li>
 
                 <!-- JIKA LEVELNYA 2 MAKA AKAN MENAMPILKAN -->
@@ -159,6 +163,11 @@ if (!isset($_SESSION['login']['nama'])) {
             <?php
             endif;
             ?>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?page=aspirasi">
+                    <i class="fas fa-user"></i>
+                    <span>Aspirasi</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php?page=profile">
                     <i class="fas fa-user"></i>
