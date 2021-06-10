@@ -12,12 +12,8 @@ include_once "koneksi.php";
             </Center>
             <?php
             if (isset($_GET['hapus'])) {
-                $action = $_GET['hapus'];
-                $id = $_GET['id'];
-                if ($action == 'delete') {
-                    mysqli_query($conn, "TRUNCATE t_keputusan");
-                    header('location:index.php?page=pohonKeputusan');
-                }
+                mysqli_query($conn, "TRUNCATE t_keputusan");
+                header('location:index.php?page=pohonKeputusan');
             }
 
             $query = mysqli_query($conn, "select * from t_keputusan order by(id)");

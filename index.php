@@ -32,6 +32,8 @@ include "Pages/template/header.php";
       include 'Pages/data/detailjalan.php';
     } elseif ($_GET['page'] == "profile") {
       include 'Pages/profile/profile.php';
+    } elseif ($_GET['page'] == "ubahprofile") {
+      include 'Pages/profile/ubahprofile.php';
     } elseif ($_GET['page'] == "registrasi") {
       include 'Pages/login/registrasi.php';
     } elseif ($_GET['page'] == "logout") {

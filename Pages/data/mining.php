@@ -175,5 +175,5 @@ $rusakberat = target("target='RB'");
         </div>
     </div>
     <!-- //typography-page -->
-
+</div>
 </div>
