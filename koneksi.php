@@ -72,8 +72,184 @@ function tambah($data)
 				 )";
 	mysqli_query($conn, $query);
 
+
 	return mysqli_affected_rows($conn);
 }
+
+function preprocessingdata(
+	$conn,
+	$uradukung,
+	$namalintas,
+	$panjang,
+	$jnspen,
+	$tanah_krikil,
+	$aspal,
+	$rigit
+) {
+	if ($panjang >= 23 and $panjang <= 25) {
+		$pR = "SPAS";
+	} else if ($panjang >= 20) {
+		$pR = "SPA";
+	} else if ($panjang >= 18) {
+		$pR = "CP";
+	} elseif ($panjang >= 15) {
+		$pR = "PA";
+	} elseif ($panjang >= 13) {
+		$pR = "S";
+	} elseif ($panjang >= 10) {
+		$pR = "CS";
+	} elseif ($panjang >= 8) {
+		$pR = "SS";
+	} elseif ($panjang >= 5) {
+		$pR = "PE";
+	} elseif ($panjang >= 3) {
+		$pR = "SPE";
+	} elseif ($panjang >= 0) {
+		$pR = "SPES";
+	} else {
+		$pR = "Panjang tidak terdeteksi";
+	}
+
+	// menghitung precocessing data Tanah Kerikil
+	if ($tanah_krikil >= 90 and $tanah_krikil <= 100) {
+		$tK = "SPAS";
+	} else if ($tanah_krikil >= 80) {
+		$tK = "SPA";
+	} else if ($tanah_krikil >= 70) {
+		$tK = "CP";
+	} elseif ($tanah_krikil >= 60) {
+		$tK = "PA";
+	} elseif ($tanah_krikil >= 50) {
+		$tK = "S";
+	} elseif ($tanah_krikil >= 40) {
+		$tK = "CS";
+	} elseif ($tanah_krikil >= 30) {
+		$tK = "SS";
+	} elseif ($tanah_krikil >= 20) {
+		$tK = "PE";
+	} elseif ($tanah_krikil >= 10) {
+		$tK = "SPE";
+	} elseif ($tanah_krikil >= 0) {
+		$tK = "SPES";
+	} else {
+		$tK = "Panjang tidak terdeteksi";
+	}
+
+	// menghitung precocessing data Tanah Kerikil
+	if ($aspal >= 90 and $aspal <= 100) {
+		$aspl = "SPAS";
+	} elseif ($aspal >= 80) {
+		$aspl = "SPA";
+	} elseif ($aspal >= 70) {
+		$aspl = "CP";
+	} elseif ($aspal >= 60) {
+		$aspl = "PA";
+	} elseif ($aspal >= 50) {
+		$aspl = "S";
+	} elseif ($aspal >= 40) {
+		$aspl = "CS";
+	} elseif ($aspal >= 30) {
+		$aspl = "SS";
+	} elseif ($aspal >= 20) {
+		$aspl = "PE";
+	} elseif ($aspal >= 10) {
+		$aspl = "SPE";
+	} elseif ($aspal >= 0) {
+		$aspl = "SPES";
+	} else {
+		$aspl = "Panjang tidak terdeteksi";
+	}
+
+	// menghitung precocessing data Tanah Kerikil
+	if ($rigit >= 90 and $rigit <= 100) {
+		$rgt = "SPAS";
+	} elseif ($rigit >= 80) {
+		$rgt = "SPA";
+	} elseif ($rigit >= 70) {
+		$rgt = "CP";
+	} elseif ($rigit >= 60) {
+		$rgt = "PA";
+	} elseif ($rigit >= 50) {
+		$rgt = "S";
+	} elseif ($rigit >= 40) {
+		$rgt = "CS";
+	} elseif ($rigit >= 30) {
+		$rgt = "SS";
+	} elseif ($rigit >= 20) {
+		$rgt = "PE";
+	} elseif ($rigit >= 10) {
+		$rgt = "SPE";
+	} elseif ($rigit >= 0) {
+		$rgt = "SPES";
+	} else {
+		$rgt = "Panjang tidak terdeteksi";
+	}
+
+
+	// menghitung precocessing data uradukung
+	if ($uradukung == "Kawasan Cepat Tumbuh") {
+		$ura = "KCT";
+	} elseif ($uradukung == "Kawasan Agropolitan") {
+		$ura = "KA";
+	} elseif ($uradukung == "Kawasan Minapolitan") {
+		$ura = "KM";
+	} elseif ($uradukung == "Kawasan Minapolitan dan Kawasan Industri") {
+		$ura = "KMI";
+	} elseif ($uradukung == "Kawasan Pertanian / Kawasan Perikanan dan Kawasan Hutan Produksi") {
+		$ura = "KP";
+	}
+
+	// menghitung precocessing data Nama Lintas
+	if ($namalintas == "Lintas Jalan Kabupaten") {
+		$NL = "LJK";
+	} else if ($namalintas == "Lintas Jalan Nasional") {
+		$NL = "LJN";
+	} else if ($namalintas == "Lintas Jalan Provinsi") {
+		$NL = "LJP";
+	} else {
+		$NL = "Panjang tidak terdeteksi";
+	}
+
+	if ($jnspen == "pemeliharaan Berkala") {
+		$JP = "PB";
+	} else if ($jnspen == "Peningkatan") {
+		$JP = "P";
+	} else {
+		$JP = "Panjang tidak terdeteksi";
+	}
+
+
+	return array(
+		'uradukung' => $ura,
+		'namalintas' => $NL,
+		'panjang' => $pR,
+		'jnspen' => $JP,
+		'tanah_krikil' => $tK,
+		'aspal' => $aspl,
+		'rigit' => $rgt
+	);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function tAspirasi($data)
 {
@@ -122,6 +298,53 @@ function hapusJalan($id)
 
 	return mysqli_affected_rows($conn);
 }
+// ====================================== FUNGSI UPLOAD =========================================================//
+function uploadprofile()
+{
+	$namaFile = $_FILES['gambar']['name'];
+	$ukuranFile = $_FILES['gambar']['size'];
+	$error = $_FILES['gambar']['error'];
+	$tmpName = $_FILES['gambar']['tmp_name'];
+	// var_dump($namaFile);
+	// die;
+	// cek apakah tidak ada gambar yang diupload
+	if ($error === 4) {
+		echo "<script>
+				alert('Masukkan lampiran terlebih dahulu!');
+			  </script>";
+		return false;
+	}
+
+	// cek apakah yang diupload adalah gambar
+	$ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+	$ekstensiGambar = explode('.', $namaFile);
+	$ekstensiGambar = strtolower(end($ekstensiGambar));
+	if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+		echo "<script>
+				alert('yang anda upload bukan gambar!');
+			  </script>";
+		return false;
+	}
+
+	// cek jika ukurannya terlalu besar
+	if ($ukuranFile > 1000000) {
+		echo "<script>
+				alert('ukuran gambar terlalu besar!');
+			  </script>";
+		return false;
+	}
+
+	// lolos pengecekan, gambar siap diupload
+	// generate nama gambar baru
+	$namaFileBaru = uniqid();
+	$namaFileBaru .= '.';
+	$namaFileBaru .= $ekstensiGambar;
+
+	move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
+
+	return $namaFileBaru;
+}
+
 
 function uploadLampiran()
 {
@@ -206,6 +429,10 @@ function upload($gambar)
 
 	return $namaFileBaru;
 }
+
+// ==============================================END FUNGSI UPLOAD ============================//
+
+// ================================================= FUNGSI ALERT ================================//
 //alert PHP
 function display_error($msg)
 {
@@ -225,6 +452,9 @@ function display_success($msg)
                   </div>";
 }
 
+// ==============================================END FUNGSI ALERT ==================================//
+
+// ============================================ FUNGSI UBAH DATA =====================================//
 function ubahdataset($data)
 {
 	global $conn;
@@ -316,6 +546,43 @@ function ubahdatajalan($data)
 
 	return mysqli_affected_rows($conn);
 }
+
+function ubahprofile($data)
+{
+	global $conn;
+
+	$id = $data["id"];
+	$nama = htmlspecialchars($data["nama"]);
+	$username = htmlspecialchars($data["username"]);
+	$password = $data["password"];
+	$level = $data["level"];
+	$alamat = htmlspecialchars($data["alamat"]);
+	$gambar = $data["gambarLama"];
+
+	// cek apakah user pilih gambar baru atau tidak
+	if ($_FILES['gambar']['error'] === 4) {
+		$gambarbaru1 = $gambar;
+	} else {
+		$gambarbaru1 = uploadprofile();
+	}
+
+	$query = "UPDATE user SET
+				nama = '$nama',
+				username = '$username',
+				password = '$password',
+				alamat = '$alamat',
+				level = '$level',
+				gambar = '$gambarbaru1'
+			  WHERE id = $id
+			";
+
+	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+}
+
+
+// =============================================== REGISTRASI =========================================
 function registrasi($data)
 {
 	global $conn;

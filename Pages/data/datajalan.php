@@ -14,36 +14,87 @@ if (isset($_GET["hapus"])) {
         </script>';
     }
 }
-if (isset($_POST["tambah"])) {
 
+if (isset($_POST["tambah"])) {
     if (tambah($_POST) > 0) {
-?>
+        echo '
         <script>
             location.replace("index.php?page=datajalan&pesan_success=Data berhasil ditambahkan");
-        </script>
-    <?php
-    } else { ?>
+        </script>';
+    } else {
+        echo '
         <script>
             location.replace("index.php?page=datajalan&pesan_error=Data gagal ditambahkan");
-        </script>
-    <?php
+        </script>';
     }
 }
 
 if (isset($_POST["ubah"])) {
 
     if (ubahdatajalan($_POST) > 0) {
-
-    ?>
+        echo '
         <script>
             location.replace("index.php?page=datajalan&pesan_success=Data berhasil di ubah");
-        </script>
-    <?php
-    } else { ?>
+        </script>';
+    } else {
+        echo '
         <script>
             location.replace("index.php?page=datajalan&pesan_error=Data gagal di ubah");
-        </script>
-<?php
+        </script>';
+    }
+}
+
+if (isset($_POST["klas"])) {
+    $query = mysqli_query($conn, "SELECT * FROM datajalan");
+    $id_rule = array();
+    $it = 0;
+    while ($bar = mysqli_fetch_array($query)) {
+        //ambil data uji
+        $uradukung = $bar['ura_dukung'];
+        $namalintas = $bar['namalintas'];
+        $panjang = $bar['panjang'];
+        $jnspen = $bar['jnspen'];
+        $tanahkrikil = $bar['tanahkrikil'];
+        $aspal = $bar['aspal'];
+        $rigit = $bar['rigit'];
+        // $n_target = $bar['target'];
+
+        $preproces = preprocessingdata(
+            $conn,
+            $uradukung,
+            $namalintas,
+            $panjang,
+            $jnspen,
+            $tanahkrikil,
+            $aspal,
+            $rigit
+        );
+
+        $n_ura_dukung = $preproces['uradukung'];
+        $n_namaLintas = $preproces['namalintas'];
+        $n_panjangRuas = $preproces['panjang'];
+        $n_jns_pen = $preproces['jnspen'];
+        $n_tanah_krikil = $preproces['tanah_krikil'];
+        $n_aspal = $preproces['aspal'];
+        $n_rigit = $preproces['rigit'];
+
+
+        $hasil = klasifikasi(
+            $conn,
+            $n_ura_dukung,
+            $n_namaLintas,
+            $n_panjangRuas,
+            $n_jns_pen,
+            $n_tanah_krikil,
+            $n_aspal,
+            $n_rigit
+        );
+        var_dump($hasil);
+        // die;
+        $keputusan = $hasil['keputusan'];
+        $id_rule_keputusan = $hasil['id_rule'];
+        $it++;
+        // mysqli_query($conn, "UPDATE datauji SET target_hasil='$keputusan', id_rule='$id_rule_keputusan' WHERE id=$bar[0]");
     }
 }
 ?>
@@ -69,6 +120,9 @@ if (isset($_POST["ubah"])) {
         if ($_SESSION['login']['level'] == '2') : ?>
         <?php else : ?>
             <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Tambah Data</button>
+            <form action="" method="POST">
+                <button type="submit" name="klas" class="btn btn-info float-right">Klasifikasikan Semua Jalan</button>
+            </form>
         <?php endif; ?>
         <h6 class="m-0 font-weight-bold text-info">Data Jalan</h6>
     </div>
@@ -433,7 +487,7 @@ if (isset($_POST["ubah"])) {
                                     <label for="exampleFormControlSelect1">Jenis Pembaharuan:</label>
                                     <select class="form-control" name="jnspen" id="exampleFormControlSelect1">
                                         <option value="Peningkatan">Peningkatan</option>
-                                        <option value="Pemeliharaan Berkala">Pembaharuan Berkala</option>
+                                        <option value="pemeliharaan Berkala">Pembaharuan Berkala</option>
                                     </select>
                                 </div>
                             </div>

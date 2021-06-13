@@ -12,28 +12,37 @@ $data = mysqli_fetch_assoc($result);
                     <div class="profile mt-3">
                         <center>
                             <div class="avatar">
-                                <img src="img/default.svg" alt="Circle Image" width="200px" class="img-raised rounded-circle img-fluid">
+                                <img src="img/<?= $data['gambar']; ?>" alt="Circle Image" width="200px" class="img-raised rounded-circle img-fluid">
                             </div>
                             <div class="name">
                             </div>
                         </center>
                     </div>
-                    <div data-spy="scroll" data-target=".navbar" data-offset="50" style="position: relative;">
-                        <table>
+                    <div class="container mt-3">
+                        <table class="table">
                             <tr>
-                                <td>Bidang : <?= $data['nama']; ?></td>
+                                <th>Bidang </th>
+                                <td> : </td>
+                                <td> <?= $data['nama']; ?></td>
                             </tr>
                             <tr>
-                                <td>Alamat : <?= $data['alamat']; ?></td>
+                                <th>Alamat </th>
+                                <td> : </td>
+                                <td> <?= $data['alamat']; ?></td>
                             </tr>
                             <tr>
-                                <td>Username : <?= $data['username']; ?></td>
+                                <th>Username </th>
+                                <td> : </td>
+                                <td> <?= $data['username']; ?></td>
                             </tr>
                             <tr>
-                                <td>Level : <?= $data['level']; ?></td>
+                                <th>Level </th>
+                                <td> : </td>
+                                <td> <?= $data['level']; ?></td>
                             </tr>
                         </table>
                     </div>
+                    <a href="#" class="btn btn-success float-right"><i class=" fas fa-check-circle"></i> Ganti Password</a>
                     <a href="index.php?page=ubahprofile" class="btn btn-info float-right">Ubah Profile</a>
                 </div>
             </div>

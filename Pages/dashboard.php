@@ -13,6 +13,77 @@ $datatraining = jumlah('datapreprocessing');
 $datajalan = jumlah('datajalan');
 
 
+
+//perhitungan akurasi
+$que = mysqli_query($conn, "SELECT * FROM datauji");
+$jumlah_uji = mysqli_num_rows($que);
+//$TP=0; $FN=0; $TN=0; $FP=0; $kosong=0;
+$TA = $FB = $FC = $FD =
+  $FE = $TF = $FG = $FH =
+  $FI = $FJ = $TK = $FL =
+  $FM = $FN = $FO = $TP = 0;
+$kosong = 0;
+while ($row = mysqli_fetch_array($que)) {
+  $asli = $row['target'];
+  $prediksi = $row['target_hasil'];
+  if ($asli == 'B' & $prediksi == 'B') {
+    $TA++;
+  } else if ($asli == 'B' & $prediksi == 'S') {
+    $FB++;
+  } else if ($asli == 'B' & $prediksi == 'RR') {
+    $FC++;
+  } else if ($asli == 'B' & $prediksi == 'RB') {
+    $FD++;
+  } else if ($asli == 'S' & $prediksi == 'B') {
+    $FE++;
+  } else if ($asli == 'S' & $prediksi == 'S') {
+    $TF++;
+  } else if ($asli == 'S' & $prediksi == 'RR') {
+    $FG++;
+  } else if ($asli == 'S' & $prediksi == 'RB') {
+    $FH++;
+  } else if ($asli == 'RR' & $prediksi == 'B') {
+    $FI++;
+  } else if ($asli == 'RR' & $prediksi == 'S') {
+    $FJ++;
+  } else if ($asli == 'RR' & $prediksi == 'RR') {
+    $TK++;
+  } else if ($asli == 'RR' & $prediksi == 'RB') {
+    $FL++;
+  } else if ($asli == 'RB' & $prediksi == 'B') {
+    $FM++;
+  } else if ($asli == 'RB' & $prediksi == 'S') {
+    $FN++;
+  } else if ($asli == 'RB' & $prediksi == 'RR') {
+    $FO++;
+  } else if ($asli == 'RB' & $prediksi == 'RB') {
+    $TP++;
+  } else if ($prediksi == '') {
+    $kosong++;
+  }
+}
+$tepat = ($TA + $TF + $TK + $TP);
+$tidak_tepat = ($FB + $FC + $FD + $FE + $FG + $FH + $FI + $FJ + $FL + $FM + $FN + $FO + $kosong);
+$akurasi = ($tepat / $jumlah_uji) * 100;
+$laju_error = ($tidak_tepat / $jumlah_uji) * 100;
+
+$akurasi = round($akurasi, 2);
+$laju_error = round($laju_error, 2);
+$sensitivitas = round($sensitivitas, 2);
+$spesifisitas = round($spesifisitas, 2);
+
+
+// echo "<br><br>";
+// echo "<center><h4>";
+// echo "Jumlah prediksi: $jumlah_uji<br>";
+// echo "Jumlah tepat: $tepat<br>";
+// echo "Jumlah tidak tepat: $tidak_tepat<br>";
+// if ($kosong != 0) {
+//   echo "Jumlah data yang prediksinya kosong: $kosong<br></h4>";
+// }
+// echo "<h2>AKURASI = $akurasi %<br>";
+// echo "LAJU ERROR = $laju_error %<br></h2>";
+
 ?>
 <div class="container-fluid">
   <div class="row mt-3">
@@ -49,11 +120,11 @@ $datajalan = jumlah('datajalan');
                   </div>
                   <div class="row no-gutters align-items-center">
                     <div class="col-auto">
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">80%</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $akurasi; ?>%</div>
                     </div>
                     <div class="col">
                       <div class="progress progress-sm mr-2">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo $akurasi; ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </div>

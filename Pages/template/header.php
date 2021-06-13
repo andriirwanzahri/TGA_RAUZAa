@@ -132,13 +132,14 @@ if (!isset($_SESSION['login']['nama'])) {
                         <i class="fas fa-graduation-cap"></i>
                         <span>Hasil Klasifikasi</span></a>
                 </li>
+                <hr class="sidebar-divider my-0">
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?page=hitungAkurasi">
                         <i class="fas fa-percent"></i>
                         <span>Akurasi</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=hitungAkurasi">
+                    <a class="nav-link" href="index.php?page=laporan">
                         <i class="fas fa-percent"></i>
                         <span>Laporan</span></a>
                 </li>
@@ -169,15 +170,22 @@ if (!isset($_SESSION['login']['nama'])) {
             <?php
             endif;
             ?>
+            <hr class="sidebar-divider my-0">
             <li class="nav-item">
                 <a class="nav-link" href="index.php?page=aspirasi">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-share"></i>
                     <span>Aspirasi</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php?page=profile">
                     <i class="fas fa-user"></i>
                     <span>Profile</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
             </li>
 
 
@@ -219,7 +227,7 @@ if (!isset($_SESSION['login']['nama'])) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['login']['nama']; ?></span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/<?= $_SESSION['login']['gambar']; ?>">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

@@ -1154,73 +1154,53 @@ function klasifikasi(
         $rule = str_replace("tanah_krikil", "$n_tanah_krikil", $rule);
         $rule = str_replace("aspal", "$n_aspal", $rule);
         $rule = str_replace("rigit", "$n_rigit", $rule);
-        // // die;
         // //menghilangkan '
         $rule = str_replace("'", "", $rule);
-
-        // // // //explode and
+        //explode and
         $explodeAND = explode(" AND ", $rule);
-
         $jmlAND = count($rule);
-        // // //menghilangkan ()
         $explodeAND = str_replace("(", "", $explodeAND);
         $explodeAND = str_replace(")", "", $explodeAND);
-        // var_dump($explodeAND);
         // //deklarasi bol
         //===========================================END PEMBENTUKAN KARAKTER=============================///
         $bolAND = array();
         $n = 0;
         while ($n < $jmlAND) {
-            //     //explode or
-            $explodeOR = explode("OR", $explodeAND[$n]);
-            // var_dump($explodeOR);
-            //     // die;
-            $jmlOR = count($explodeOR);
-            //deklarasi bol
-            $bol = array();
-            $a = 0;
-            while ($a < $jmlOR) {
-                //pecah  dengan spasi
-                $exrule2 = explode(" ", $explodeAND[$n]);
-                // var_dump($exrule2);
-                $parameter = $exrule2[1];
-                if ($parameter == 's') {
-                    //pecah  dengan s
-                    $explodeRule = explode(" s ", $explodeOR[$a]);
-                    // var_dump($explodeRule);
-                    //nilai true false						
-                    if ($explodeRule[0] == $explodeRule[1]) {
-                        $bol[$a] = "Benar";
-                    } else if ($explodeRule[0] != $explodeRule[1]) {
-                        $bol[$a] = "Salah";
+            //pecah  dengan spasi
+            $explodeRule = explode(" s ", $explodeAND[0]);
+            $explodeRule1 = explode(" s ", $explodeAND[1]);
+            $explodeRule2 = explode(" s ", $explodeAND[2]);
+            $explodeRule3 = explode(" s ", $explodeAND[3]);
+            //nilai true false						
+            if ($explodeRule[0] == $explodeRule[1]) {
+                if ($explodeRule1[0] == $explodeRule1[1]) {
+                    if ($explodeRule2[0] == $explodeRule2[1]) {
+                        if ($explodeRule3[0] == $explodeRule3[1]) {
+                            $bolAND[$n] = "Benar";
+                        } else if ($explodeRule3 == NULL) {
+                            $bolAND[$n] = "Benar";
+                        } else {
+                            $bolAND[$n] = "Salah";
+                        }
+                        // $bolAND[$n] = "Benar";
+                    } else if ($explodeRule3 == NULL) {
+                        $bolAND[$n] = "Benar";
+                    } else {
+                        $bolAND[$n] = "Salah";
                     }
-                    // var_dump($explodeRule);
-                } elseif ($parameter == 's') {
-                    //pecah  dengan s
-                    $explodeRule = explode(" s ", $explodeOR[$a]);
-                    //nilai true false						
-                    if ($explodeRule[0] == $explodeRule[1]) {
-                        $bol[$a] = "Benar";
-                    } else if ($explodeRule[0] != $explodeRule[1]) {
-                        $bol[$a] = "Salah";
-                    }
-                }
-                $a++;
-            }
-            // var_dump($bolAND[$n]);
-            //isi false
-            $bolAND[$n] = "Salah";
-            $b = 0;
-            while ($b < $jmlOR) {
-                //jika $bol[$b] benar bolAND benar
-                if ($bol[$b] == "Benar") {
+                    // $bolAND[$n] = "Benar";
+                } else if ($explodeRule2 == NULL) {
                     $bolAND[$n] = "Benar";
+                } else {
+                    $bolAND[$n] = "Salah";
                 }
-                $b++;
+            } else if ($explodeRule[0] != $explodeRule[1]) {
+                $bolAND[$n] = "Salah";
             }
             $n++;
         }
-        // var_dump($bolAND);
+
+
         //========================================================isi boolrule=====================================================================
         $boolRule = "Benar";
         $a = 0;
@@ -1232,6 +1212,7 @@ function klasifikasi(
             }
             $a++;
         }
+        // var_export($bolAND);
         if ($boolRule == "Benar") {
             $keputusan = $row['keputusan'];
             $id_rule_keputusan = $row['id'];

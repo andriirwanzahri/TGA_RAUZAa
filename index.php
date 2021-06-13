@@ -36,6 +36,8 @@ include "Pages/template/header.php";
       include 'Pages/profile/ubahprofile.php';
     } elseif ($_GET['page'] == "registrasi") {
       include 'Pages/login/registrasi.php';
+    } elseif ($_GET['page'] == "laporan") {
+      include 'Pages/laporan/laporan.php';
     } elseif ($_GET['page'] == "logout") {
 
       $_SESSION = [];

@@ -33,7 +33,7 @@ include_once "Pages/proses/prosesmining.php";
                     $n_aspal,
                     $n_rigit
                 );
-                var_dump($hasil);
+                // var_dump($hasil);
                 // die;
                 $keputusan = $hasil['keputusan'];
                 $id_rule_keputusan = $hasil['id_rule'];
@@ -45,7 +45,9 @@ include_once "Pages/proses/prosesmining.php";
             //menampilkan data uji dengan hasil prediksi
             $sql = mysqli_query($conn, "SELECT * FROM datauji");
             ?>
-
+            <div class="col-md-12 mt-3 mb-3">
+                <h1 class="text-center">Perhitungan Akurasi Pohon Keputusan</h1>
+            </div>
             <table class='table table-bordered table-striped  table-hover'>
                 <tr align='center'>
                     <th>No</th>
@@ -161,6 +163,38 @@ include_once "Pages/proses/prosesmining.php";
             // echo "<h2>AKURASI = $akurasi %<br>";
             // echo "LAJU ERROR = $laju_error %<br></h2>";
             ?>
+            <div class="col-md-6">
+                <div class="card">
+                    <table class="table">
+                        <tr align='center'>
+                            <th>Jumlah Data Uji</th>
+                            <td><?= $jumlah_uji; ?></td>
+                        </tr>
+                        <tr align='center'>
+                            <th>Jumlah Benar</th>
+                            <td><?= $tepat; ?></td>
+                        </tr>
+                        <tr align='center'>
+                            <th>Jumlah Salah</th>
+                            <td><?= $tidak_tepat; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <table class="table">
+                        <tr align='center'>
+                            <th>Akurasi</th>
+                            <td><?= $akurasi; ?>%</td>
+                        </tr>
+                        <tr align='center'>
+                            <th>Error</th>
+                            <td><?= $laju_error; ?>%</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
