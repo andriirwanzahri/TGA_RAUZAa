@@ -35,7 +35,7 @@ include 'koneksi.php';
                                                     <center>
                                                         <div class="card col-md-3 justify-center"><img src="img/aspirasi/<?= $asp['lampiran']; ?>"></div>
                                                     </center>
-                                                    <a href="#">Lihat Detail Jalan yang di aspirasi</a>
+                                                    <a href="index.php?page=detailjalan&id=<?php echo $asp['idjalan']; ?>">Lihat Detail Jalan yang di aspirasi</a>
                                                 </div>
                                             </div>
                                         </div>

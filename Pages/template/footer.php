@@ -40,7 +40,8 @@
         </div>
     </div>
 </div>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-ndub7Wp6y-DZtdfCFqd-smlpXPnoGBs&callback=initMap" type="text/javascript"></script>
+
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-ndub7Wp6y-DZtdfCFqd-smlpXPnoGBs&callback=initMap" type="text/javascript"></script> -->
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>

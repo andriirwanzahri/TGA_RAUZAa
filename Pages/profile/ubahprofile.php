@@ -53,8 +53,22 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Jenis Kelamin:</label>
-                                    <input type="text" name="desa" value="Laki-Laki" class="form-control" id="recipient-name">
+                                    <label for="exampleFormControlSelect2">Jenis Kelamin</label>
+                                    <select class="form-control" name="jk" value="<?php echo $data['jk']; ?>" id="exampleFormControlSelect1">
+                                        <?php
+                                        if ($data['jk'] == 'laki-laki') {
+                                            echo '
+                                            <option value="laki-laki">Laki-Laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                            ';
+                                        } elseif ($data['jk'] == 'perempuan') {
+                                            echo '
+                                            <option value="perempuan">Perempuan</option>
+                                            <option value="laki-laki">Laki-Laki</option>
+                                            ';
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>

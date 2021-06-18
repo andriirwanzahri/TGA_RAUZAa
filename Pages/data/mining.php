@@ -46,7 +46,7 @@ $rusakberat = target("target='RB'");
                             <div class="form-group">
                                 <!--<input name="submit" type="submit" value="Upload Data" class="btn btn-success">-->
                                 <center>
-                                    <button name="proses_mining" type="submit" class="btn btn-outline-secondary justify-content-center" onclick="">
+                                    <button name="proses_mining" type="submit" class="btn btn-outline-success justify-content-center" onclick="">
                                         <i class="fa fa-check"></i> Proses C4.5
                                     </button>
                                 </center>

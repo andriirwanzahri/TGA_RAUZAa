@@ -26,6 +26,11 @@ $data = mysqli_fetch_assoc($result);
                                 <td> <?= $data['nama']; ?></td>
                             </tr>
                             <tr>
+                                <th>Jenis Kelamin </th>
+                                <td> : </td>
+                                <td> <?= $data['jk']; ?></td>
+                            </tr>
+                            <tr>
                                 <th>Alamat </th>
                                 <td> : </td>
                                 <td> <?= $data['alamat']; ?></td>
@@ -42,7 +47,6 @@ $data = mysqli_fetch_assoc($result);
                             </tr>
                         </table>
                     </div>
-                    <a href="#" class="btn btn-success float-right"><i class=" fas fa-check-circle"></i> Ganti Password</a>
                     <a href="index.php?page=ubahprofile" class="btn btn-info float-right">Ubah Profile</a>
                 </div>
             </div>

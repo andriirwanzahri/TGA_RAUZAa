@@ -93,10 +93,6 @@ if (isset($_POST["login"])) {
                                         <?php endif; ?>
                                     </form>
                                     <hr>
-
-                                    <div class="text-center">
-                                        <a class="small" href="registrasi.php">Daftar Akun!</a>
-                                    </div>
                                     <div class="text-center">
                                         <a class="small" href="../halamanUtama/index.php">Kembali</a>
                                     </div>

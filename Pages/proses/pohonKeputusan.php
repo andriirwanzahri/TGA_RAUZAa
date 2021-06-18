@@ -32,8 +32,6 @@ include_once "koneksi.php";
                     <a href="index.php?page=pohonKeputusan&hapus" class="btn btn-danger float-right" onClick="return confirm('Anda yakin akan hapus pohon keputusan?')">
                         <i class="fas fa-trash"></i>
                     </a>
-                    <!--<a href="?menu=pohon_tree" >Lihat Pohon Keputusan</a> |-->
-                    <!-- <a href="?menu=uji_rule" class="btn btn-default">Uji Rule</a> -->
                 </p>
                 <?php
 

@@ -20,7 +20,7 @@ function redairec($table, $field, $url)
 }
 
 
-function tambah($data)
+function tambah($data, $keputusan, $id_rule_keputusan, $kodeJalan)
 {
 	global $conn;
 	$namajalan = htmlspecialchars($data["namajalan"]);
@@ -36,8 +36,6 @@ function tambah($data)
 	$rigit = $data["rigit"];
 	$konbaik = $data["konbaik"];
 	$konsedang = $data["konsedang"];
-	$latitude = $data["latitude"];
-	$longitude = $data["longitude"];
 
 	// upload gambar
 	$gambar1 = upload('gambar1');
@@ -48,10 +46,12 @@ function tambah($data)
 	if (!$gambar2) {
 		return false;
 	}
-
+	// var_dump($keputusan, $id_rule_keputusan);
+	// die;
+	mysqli_query($conn, "INSERT INTO data_hasil_klasifikasi VALUES('','$kodeJalan','$keputusan','$id_rule_keputusan')");
 	$query = "INSERT INTO datajalan
 				VALUES
-			  ('', 
+			  ('$kodeJalan', 
 			  '$namajalan',
 			   '$desa',
 			    '$provinsi',
@@ -66,9 +66,7 @@ function tambah($data)
 				 '$konbaik',
 				 '$konsedang',
 				 '$gambar1',
-				 '$gambar2',
-				 '$latitude',
-				 '$longitude'
+				 '$gambar2'
 				 )";
 	mysqli_query($conn, $query);
 
@@ -229,27 +227,6 @@ function preprocessingdata(
 		'rigit' => $rgt
 	);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function tAspirasi($data)
 {
@@ -514,11 +491,13 @@ function ubahdatajalan($data)
 		$gambarbaru1 = $gambar1;
 	} else {
 		$gambarbaru1 = upload('gambar1');
+		unlink("img/jalan/$gambar1");
 	}
 	if ($_FILES['gambar2']['error'] === 4) {
 		$gambarbaru2 = $gambar2;
 	} else {
 		$gambarbaru2 = upload('gambar2');
+		unlink("img/jalan/$gambar2");
 	}
 
 	$query = "UPDATE datajalan SET
@@ -557,6 +536,7 @@ function ubahprofile($data)
 	$password = $data["password"];
 	$level = $data["level"];
 	$alamat = htmlspecialchars($data["alamat"]);
+	$jk = htmlspecialchars($data["jk"]);
 	$gambar = $data["gambarLama"];
 
 	// cek apakah user pilih gambar baru atau tidak
@@ -564,6 +544,7 @@ function ubahprofile($data)
 		$gambarbaru1 = $gambar;
 	} else {
 		$gambarbaru1 = uploadprofile();
+		unlink("img/$gambar");
 	}
 
 	$query = "UPDATE user SET
@@ -572,6 +553,7 @@ function ubahprofile($data)
 				password = '$password',
 				alamat = '$alamat',
 				level = '$level',
+				jk = '$jk',
 				gambar = '$gambarbaru1'
 			  WHERE id = $id
 			";
@@ -588,6 +570,8 @@ function registrasi($data)
 	global $conn;
 	$nama = $data["nama"];
 	$alamat = $data["alamat"];
+	$jk = $data["jk"];
+	$level = $data["level"];
 	$username = strtolower(stripslashes($data["username"]));
 	$password = mysqli_real_escape_string($conn, $data["password"]);
 	$password2 = mysqli_real_escape_string($conn, $data["password2"]);
@@ -615,7 +599,7 @@ function registrasi($data)
 	$password = password_hash($password, PASSWORD_DEFAULT);
 
 	// tambahkan userbaru ke database
-	mysqli_query($conn, "INSERT INTO user VALUES('','$nama','$username', '$password','$alamat','3','default.svg')");
+	mysqli_query($conn, "INSERT INTO user VALUES('','$nama','$username', '$password','$alamat','$level','$jk','default.svg')");
 
 	return mysqli_affected_rows($conn);
 }

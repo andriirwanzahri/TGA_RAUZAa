@@ -16,6 +16,8 @@ include "Pages/template/header.php";
       include 'Pages/proses/pohonKeputusan.php';
     } elseif ($_GET['page'] == "hasilKlasifikasi") {
       include 'Pages/proses/hasilKlasifikasi.php';
+    } elseif ($_GET['page'] == "tampilklasifikasi") {
+      include 'Pages/proses/tampil_hasil_klasifikasi.php';
     } elseif ($_GET['page'] == "hitungAkurasi") {
       include 'Pages/proses/hitungAkurasi.php';
     } elseif ($_GET['page'] == "mining") {
