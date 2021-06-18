@@ -34,7 +34,7 @@
         </div>
 
         <center>
-            <a href="#" class="btn btn-warning" type="submit">Data Usulan Perbaikan</a>
+            <a href="../data/tampil_datausulan.php" class="btn btn-warning">Data Usulan Perbaikan</a>
             <a href="datajalanuser.php" class="btn btn-warning" type="submit">Data Jalan</a>
             <a href="../login/login.php" class="btn btn-warning" type="submit">Login</a>
             <h1 class="h3 mb-4 text-gray-800 mt-5">PROFILE DINAS</h1>
@@ -91,13 +91,21 @@
             <div class="row">
                 <div class="container col-md-6 card mt-3 mb-5">
                     <h3 class="text-center">Visi</h3>
-                    <div>Terwujudnya Pidie yang damai dan sejahtera melalui pemerintahan yang bersih,adil dan melayani masyarakat.</div>
+                    <div>
+                        <ul>
+                            <li>Terwujudnya Pidie yang damai dan sejahtera melalui pemerintahan yang bersih,adil dan melayani masyarakat.</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class=" container col-md-6 card mt-3 mb-5">
                     <h3 class="text-center">Misi</h3>
-                    <div>Reformasi birokrasi menuju pemerintahan yang adil,bersih,dan melayani pidie.
-                        Peningkatan kualitas / kuantitas infrastruktur dan lingkungan yang terintegrasi.
-                        Mewujudkan penataan daerah yang bagus.
+                    <div>
+                        <ul>
+                            <li>Reformasi birokrasi menuju pemerintahan yang adil,bersih,dan melayani pidie.</li>
+                            <li>Peningkatan kualitas / kuantitas infrastruktur dan lingkungan yang terintegrasi.
+                            </li>
+                            <li> Mewujudkan penataan daerah yang bagus.</li>
+                        </ul>
                     </div>
                 </div>
             </div>

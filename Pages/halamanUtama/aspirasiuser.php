@@ -159,16 +159,6 @@ if (
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg col-xl-12 col-md-12 mb-8 bg-gray-300">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 ">PETA</h1>
-                                    </div>
-                                    <div id="map">
-                                        <Center>Data Internet Non Aktif</Center>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="card o-hidden border-0 shadow-lg ">
                                 <div class="card-body">
                                     <!-- Nested Row within Card Body -->
@@ -230,8 +220,8 @@ if (
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1">email</label>
-                                                        <input type="text" name="email" class="form-control" placeholder="Masukkan e-mail" required>
+                                                        <label for="exampleFormControlTextarea1">NIK</label>
+                                                        <input type="number" name="email" class="form-control" placeholder="Masukkan NIK anda" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -259,40 +249,6 @@ if (
         </div>
     </div>
 </div>
-<script>
-    function initMap() {
-        var myLatlng = new google.maps.LatLng(<?php echo $adm['latitude']; ?>, <?php echo $adm['longitude']; ?>);
-        var mapOptions = {
-            zoom: 15,
-            center: myLatlng
-        };
-
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        var contentString = '<div id="content">' +
-            '<div id="siteNotice">' +
-            '</div>' +
-            '<h1 id="firstHeading" class="firstHeading"><?php echo $adm['namajalan']; ?></h1>' +
-            '<div id="bodyContent">' +
-            '<p><?php echo $adm['namajalan']; ?></p>' +
-            '</div>' +
-            '</div>';
-
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            title: 'Maps Info',
-            icon: '../../img/marker.png'
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map, marker);
-        });
-    }
-</script>
 <?php
 
 include '../template/footeruser.php';

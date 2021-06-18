@@ -4,7 +4,7 @@
     </div>
     <form>
         <div class="row justify-content-center mt-3 mb-5">
-            <form action="Pages/laporan/cetak_laporan.php" target="_blank" method="get">
+            <form action="cetak_laporan.php" target="_blank" method="get">
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="formGroupExampleInput">Dari</label>
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="col-md-10">
-                    <button type="submit" name="submit" class="btn btn-outline-success float-right"><i class="fa fa-print"></i> Lihat</button>
+                    <a href="Pages/laporan/cetak_laporan.php" target="_blank" type="submit" name="submit" class="btn btn-outline-success float-right"><i class="fa fa-print"></i> Lihat</a>
                 </div>
             </form>
         </div>

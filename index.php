@@ -10,6 +10,8 @@ include "Pages/template/header.php";
       include 'admin.php';
     } elseif ($_GET['page'] == "datatraining") {
       include 'Pages/data/datatraining.php';
+    } elseif ($_GET['page'] == "tampilusulan") {
+      include 'Pages/data/tampil_datausulan.php';
     } elseif ($_GET['page'] == "dataMasyarakat") {
       include 'Pages/data/masyarakat.php';
     } elseif ($_GET['page'] == "pohonKeputusan") {

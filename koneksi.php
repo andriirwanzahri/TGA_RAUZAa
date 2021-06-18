@@ -257,6 +257,31 @@ function tAspirasi($data)
 	return mysqli_affected_rows($conn);
 }
 
+function tambahusulan($data, $idjalan, $iduser)
+{
+	global $conn;
+	$tahun = $data["tahun"];
+	$result = mysqli_query($conn, "SELECT idjalan FROM datausulan WHERE idjalan = '$idjalan'");
+
+	if (mysqli_fetch_assoc($result)) {
+		echo "<div class='alert alert-info alert-dismissable' id='divAlert'>
+		<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+	Jalan Sudah Pernah Di usulkan
+		</div>";
+		return false;
+	}
+	$query = "INSERT INTO datausulan
+				VALUES
+			  ('', 
+			  '$idjalan',
+			  '$iduser',
+			  '$tahun'
+				 )";
+	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+}
+
 function hapusJalan($id)
 {
 	global $conn;
