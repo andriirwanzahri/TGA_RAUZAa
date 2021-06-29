@@ -52,6 +52,7 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+<script src="js/index.js"></script>
 <!-- <script src="js/index.js"></script> -->
 
 <!-- Page level plugins -->

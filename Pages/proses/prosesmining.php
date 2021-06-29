@@ -340,7 +340,7 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                 ""
             );
         }
-        hitung_gain($conn, $kondisi, "rigit", $entropy_all, "SPES", "SPE", "PE", "SS", "CS", "S", "PA", "CP", "SPA", "SPAS", "");
+        // hitung_gain($conn, $kondisi, "rigit", $entropy_all, "SPES", "SPE", "PE", "SS", "CS", "S", "PA", "CP", "SPA", "SPAS", "");
         echo "</table>";
 
 
@@ -951,7 +951,10 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
             + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)))
             + (- ($nilai3 / $tot_opsi1) * (log(($nilai3 / $tot_opsi1), 2)))
             + (- ($nilai4 / $tot_opsi1) * (log(($nilai4 / $tot_opsi1), 2)))
-            + (- ($nilai5 / $tot_opsi1) * (log(($nilai5 / $tot_opsi1), 2)));
+            + (- ($nilai5 / $tot_opsi1) * (log(($nilai5 / $tot_opsi1), 2)))
+            + (- ($nilai6 / $tot_opsi1) * (log(($nilai6 / $tot_opsi1), 2)))
+            + (- ($nilai7 / $tot_opsi1) * (log(($nilai7 / $tot_opsi1), 2)))
+            + (- ($nilai10 / $tot_opsi1) * (log(($nilai10 / $tot_opsi1), 2)));
         $atribut1 = is_nan($atribut1) ? 0 : $atribut1;
         $splitinfo = format_decimal($atribut1);
 

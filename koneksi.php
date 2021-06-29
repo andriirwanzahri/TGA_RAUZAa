@@ -11,6 +11,7 @@ function query($query)
 	}
 	return $rows;
 }
+
 function redairec($table, $field, $url)
 {
 	global $conn;
@@ -291,6 +292,8 @@ function hapusJalan($id)
 	if ($data > 0) {
 		$query = "DELETE FROM datajalan WHERE id='$id'";
 		$aspirasi = "DELETE FROM aspirasi WHERE idjalan='$id'";
+		$dataklasiikasi = "DELETE FROM data_hasil_klasifikasi WHERE idjalan='$id'";
+		mysqli_query($conn, $dataklasiikasi);
 		mysqli_query($conn, $query);
 		mysqli_query($conn, $aspirasi);
 	} else {
@@ -457,42 +460,10 @@ function display_success($msg)
 // ==============================================END FUNGSI ALERT ==================================//
 
 // ============================================ FUNGSI UBAH DATA =====================================//
-function ubahdataset($data)
-{
-	global $conn;
-
-	$id = $data["id"];
-	$nrp = htmlspecialchars($data["nama"]);
-	$nama = htmlspecialchars($data["nama"]);
-	$email = htmlspecialchars($data["email"]);
-	$jalan = htmlspecialchars($data["jalan"]);
-	// $gambarLama = htmlspecialchars($data["gambarLama"]);
-
-	// // cek apakah user pilih gambar baru atau tidak
-	// if ($_FILES['gambar']['error'] === 4) {
-	// 	$gambar = $gambarLama;
-	// } else {
-	// 	$gambar = upload();
-	// }
-
-
-	// $query = "UPDATE dataset SET
-	// 			nrp = '$nama',
-	// 			nama = '$nama',
-	// 			email = '$email',
-	// 			gambar = '$gambar'
-	// 		  WHERE id = $id
-	// ";
-
-	// mysqli_query($conn, $query);
-
-	// return mysqli_affected_rows($conn);
-}
 
 function ubahdatajalan($data)
 {
 	global $conn;
-
 	$id = $data["id"];
 	$namajalan = htmlspecialchars($data["namajalan"]);
 	$desa = htmlspecialchars($data["desa"]);
@@ -505,25 +476,25 @@ function ubahdatajalan($data)
 	$tanah_krikil = $data["tanahkrikil"];
 	$aspal = $data["aspal"];
 	$rigit = $data["rigit"];
-	$konbaik = $data["konbaik"];
-	$konsedang = $data["konsedang"];
+	$thn_pem = $data["konbaik"];
+	$mandor = $data["konsedang"];
 	$gambar1 = $data["gambarLama1"];
 	$gambar2 = $data["gambarLama2"];
-	$latitude = $data["latitude"];
-	$longitude = $data["longitude"];
 	// cek apakah user pilih gambar baru atau tidak
 	if ($_FILES['gambar1']['error'] === 4) {
 		$gambarbaru1 = $gambar1;
 	} else {
 		$gambarbaru1 = upload('gambar1');
-		unlink("img/jalan/$gambar1");
+		// unlink("img/jalan/$gambar1");
 	}
 	if ($_FILES['gambar2']['error'] === 4) {
 		$gambarbaru2 = $gambar2;
 	} else {
 		$gambarbaru2 = upload('gambar2');
-		unlink("img/jalan/$gambar2");
+		// unlink("img/jalan/$gambar2");
 	}
+	// var_dump($id, $namajalan, $desa, $provinsi, $uradukung, $kecamatan, $namalintas, $panjang, $jnspen, $tanah_krikil, $aspal, $rigit, $thn_pem, $mandor, $gambarbaru1, $gambarbaru2);
+	// die;
 
 	$query = "UPDATE datajalan SET
 				namajalan = '$namajalan',
@@ -537,12 +508,10 @@ function ubahdatajalan($data)
 				tanahkrikil = '$tanah_krikil',
 				aspal = '$aspal',
 				rigit = '$rigit',
-				thn_pem = '$konbaik',
-				mandor = '$konsedang',
+				thn_pem = '$thn_pem',
+				mandor = '$mandor',
 				gambar1 = '$gambarbaru1',
-				gambar2 = '$gambarbaru2',
-				latitude = '$latitude',
-				longitude = '$longitude'
+				gambar2 = '$gambarbaru2'
 			  WHERE id = $id
 			";
 

@@ -138,7 +138,20 @@ if (isset($_POST["ubah"])) {
 
             <?php
 
+            $pesan_error = $pesan_success = "";
+            if (isset($_GET['pesan_error'])) {
+                $pesan_error = $_GET['pesan_error'];
+            }
+            if (isset($_GET['pesan_success'])) {
+                $pesan_success = $_GET['pesan_success'];
+            }
 
+            if (!empty($pesan_error)) {
+                display_error($pesan_error);
+            }
+            if (!empty($pesan_success)) {
+                display_success($pesan_success);
+            }
             if ($_SESSION['login']['level'] == '2') : ?>
             <?php else : ?>
                 <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Tambah Data</button>
@@ -320,11 +333,11 @@ if (isset($_POST["ubah"])) {
                                                                     if ($adm['jnspen'] == 'Peningkatan') {
                                                                         echo '
                                                                     <option value="Peningkatan">Peningkatan</option>
-                                                                    <option value="Pemeliharaan Berkala">Pembaharuan Berkala</option>
+                                                                    <option value="pemeliharaan Berkala">Pembaharuan Berkala</option>
                                                                     ';
-                                                                    } elseif ($adm['jnspen'] == 'Pembaharuan Berkala') {
+                                                                    } elseif ($adm['jnspen'] == 'pemeliharaan Berkala') {
                                                                         echo '
-                                                                    <option value="Pemeliharaan Berkala">Pembaharuan Berkala</option>
+                                                                    <option value="pemeliharaan Berkala">Pembaharuan Berkala</option>
                                                                     <option value="Peningkatan">Peningkatan</option>
                                                                 ';
                                                                     }
@@ -362,8 +375,8 @@ if (isset($_POST["ubah"])) {
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="recipient-name" class="col-form-label">Riwayat Pembuatan:</label>
-                                                                <input type="date" name="konbaik" class="form-control" id="recipient-name" value="<?php echo $adm['thn_pem']; ?>" placeholder="Tanggal Pembuatan">
+                                                                <label for="recipient-name" class="col-form-label">Tahun Terakhir Pembuatan:</label>
+                                                                <input type="text" name="konbaik" class="form-control" id="datepicker" value="<?php echo $adm['thn_pem']; ?>" placeholder="Tanggal Pembuatan">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -438,13 +451,13 @@ if (isset($_POST["ubah"])) {
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Nama Jalan:</label>
-                                    <input type="text" name="namajalan" class="form-control" id="recipient-name">
+                                    <input type="text" name="namajalan" class="form-control" id="recipient-name" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Desa:</label>
-                                    <input type="text" name="desa" class="form-control" id="recipient-name">
+                                    <input type="text" name="desa" class="form-control" id="recipient-name" required>
                                 </div>
                             </div>
                         </div>
@@ -466,13 +479,13 @@ if (isset($_POST["ubah"])) {
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Provinsi:</label>
-                                    <input type="text" name="provinsi" class="form-control" id="recipient-name">
+                                    <input type="text" name="provinsi" class="form-control" id="recipient-name" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Kecamatan:</label>
-                                    <input type="text" name="kecamatan" class="form-control" id="recipient-name">
+                                    <input type="text" name="kecamatan" class="form-control" id="recipient-name" required>
                                 </div>
                             </div>
                         </div>
@@ -501,39 +514,39 @@ if (isset($_POST["ubah"])) {
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Panjang:</label>
-                                    <input type="text" name="panjang" class="form-control" id="recipient-name" placeholder="Km">
+                                    <input type="text" name="panjang" class="form-control" id="recipient-name" placeholder="Km" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Tanah Krikil:</label>
-                                    <input type="text" name="tanahkrikil" class="form-control" id="recipient-name" placeholder="%">
+                                    <input type="text" name="tanahkrikil" class="form-control" id="recipient-name" placeholder="%" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Aspal:</label>
-                                    <input type="text" name="aspal" class="form-control" id="recipient-name" placeholder="%">
+                                    <input type="text" name="aspal" class="form-control" id="recipient-name" placeholder="%" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Rigit:</label>
-                                    <input type="text" name="rigit" class="form-control" id="recipient-name" placeholder="%">
+                                    <input type="text" name="rigit" class="form-control" id="recipient-name" placeholder="%" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Riwayat pembuatan:</label>
-                                    <input type="date" name="konbaik" class="form-control" id="recipient-name" placeholder="Tanggal Pembuatan">
+                                    <label for="recipient-name" class="col-form-label">Tahun Terakhir Pembuatan:</label>
+                                    <input type="text" name="konbaik" class="date-own form-control" id="datepicker" placeholder="Tanggal Pembuatan" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Mandor:</label>
-                                    <input type="text" name="konsedang" class="form-control" id="recipient-name" placeholder="Mandor">
+                                    <input type="text" name="konsedang" class="form-control" id="recipient-name" placeholder="Mandor" required>
                                 </div>
                             </div>
                         </div>
@@ -561,3 +574,20 @@ if (isset($_POST["ubah"])) {
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    // When the document is ready
+    // $(document).ready(function() {
+
+    //     $('#example12').datepicker({
+    //         minViewMode: 'years',
+    //         autoclose: true,
+    //         format: 'yyyy'
+    //     });
+
+    // });
+    $("#datepicker").datepicker({
+        format: "yyyy",
+        startView: "years",
+        minViewMode: "years"
+    });
+</script>

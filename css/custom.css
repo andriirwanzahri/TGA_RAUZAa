@@ -2,6 +2,10 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.ui-datepicker-calendar {
+    display: none;
+}
+
 .scroll {
     width: 1200px;
     background: rgb(220, 237, 252);

@@ -12,8 +12,16 @@ $jml = mysqli_num_rows($query);
 
 
 if (isset($_GET['hapus'])) {
-    mysqli_query($conn, "TRUNCATE datauji");
-    header('location:index.php?page=hitungAkurasi');
+    $data = mysqli_query($conn, "TRUNCATE datauji");
+    if ($data > 0) {
+        echo ' <script>
+        location.replace("index.php?page=hitungAkurasi&pesan_success=Data Uji berhasil dihapus");
+    </script>';
+    } else {
+        echo ' <script>
+        location.replace("index.php?page=hitungAkurasi&pesan_error=Data Uji gagal dihapus");
+    </script>';
+    }
 }
 
 
@@ -21,7 +29,22 @@ if (isset($_GET['hapus'])) {
 ?>
 <?php
 if ($jml == 0) :
+    $pesan_error = $pesan_success = "";
+    if (isset($_GET['pesan_error'])) {
+        $pesan_error = $_GET['pesan_error'];
+    }
+    if (isset($_GET['pesan_success'])) {
+        $pesan_success = $_GET['pesan_success'];
+    }
+
+    if (!empty($pesan_error)) {
+        display_error($pesan_error);
+    }
+    if (!empty($pesan_success)) {
+        display_success($pesan_success);
+    }
 ?>
+
     <div class="row justify-content-center mt-3">
         <div class="col-md-12">
             <h1 class="text-center">Data Uji Kosong</h1>
