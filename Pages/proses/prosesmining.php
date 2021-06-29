@@ -33,6 +33,15 @@ function proses_DT(
         pembentukan_tree($conn, $parent, $kasus_cabang2);
         echo "cabang 3<br>";
         pembentukan_tree($conn, $parent, $kasus_cabang3);
+    } elseif ($kasus_cabang5 == '') {
+        echo "cabang 1<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang1);
+        echo "cabang 2<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang2);
+        echo "cabang 3<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang3);
+        echo "cabang 4<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang4);
     } elseif ($kasus_cabang6 == '') {
         echo "cabang 1<br>";
         pembentukan_tree($conn, $parent, $kasus_cabang1);
@@ -44,6 +53,70 @@ function proses_DT(
         pembentukan_tree($conn, $parent, $kasus_cabang4);
         echo "cabang 5<br>";
         pembentukan_tree($conn, $parent, $kasus_cabang5);
+    } elseif ($kasus_cabang7 == '') {
+        echo "cabang 1<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang1);
+        echo "cabang 2<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang2);
+        echo "cabang 3<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang3);
+        echo "cabang 4<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang4);
+        echo "cabang 5<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang5);
+        echo "cabang 6<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang6);
+    } elseif ($kasus_cabang8 == '') {
+        echo "cabang 1<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang1);
+        echo "cabang 2<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang2);
+        echo "cabang 3<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang3);
+        echo "cabang 4<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang4);
+        echo "cabang 5<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang5);
+        echo "cabang 6<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang6);
+        echo "cabang 7<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang7);
+    } elseif ($kasus_cabang9 == '') {
+        echo "cabang 1<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang1);
+        echo "cabang 2<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang2);
+        echo "cabang 3<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang3);
+        echo "cabang 4<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang4);
+        echo "cabang 5<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang5);
+        echo "cabang 6<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang6);
+        echo "cabang 7<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang7);
+        echo "cabang 8<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang8);
+    } elseif ($kasus_cabang10 == '') {
+        echo "cabang 1<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang1);
+        echo "cabang 2<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang2);
+        echo "cabang 3<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang3);
+        echo "cabang 4<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang4);
+        echo "cabang 5<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang5);
+        echo "cabang 6<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang6);
+        echo "cabang 7<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang7);
+        echo "cabang 8<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang8);
+        echo "cabang 9<br>";
+        pembentukan_tree($conn, $parent, $kasus_cabang9);
     } elseif ($kasus_cabang11 == '') {
         echo "cabang 1<br>";
         pembentukan_tree($conn, $parent, $kasus_cabang1);
@@ -100,8 +173,6 @@ function pembentukan_tree($conn, $N_parent, $kasus)
         $jml_rusak_berat = jumlah_data($conn, "$kondisi_target target='RB'");
 
         $jml_total = $jml_baik + $jml_sedang + $jml_rusak_ringan + $jml_rusak_berat;
-        //jumlah data JNS PEN
-        $jnspen = "jns_pen";
 
         //Hitung Nilai nama lintas
         $nilai_namaLintas = array();
@@ -119,6 +190,11 @@ function pembentukan_tree($conn, $N_parent, $kasus)
         $nilai_tanah_krikil = array();
         $nilai_tanah_krikil = cek_nilaiAtribut($conn, 'tanah_krikil', $kondisi);
         $jmltanah_krikil = count($nilai_tanah_krikil);
+        //hitung panjang Ruas
+        $nilai_panjangRuas = array();
+        $nilai_panjangRuas = cek_nilaiAtribut($conn, 'panjangRuas', $kondisi);
+        $jmlpanjangRuas = count($nilai_panjangRuas);
+        //hitung Entropy
         $entropy_all = hitung_entropy($jml_baik, $jml_sedang, $jml_rusak_ringan, $jml_rusak_berat);
         echo "<table class='table table-bordered'width='100%' cellspacing='0'>";
         echo "<tr style='color:#CE7E00;'>
@@ -131,8 +207,6 @@ function pembentukan_tree($conn, $N_parent, $kasus)
         <th>Jumlah Rusak Berat</th>
         <th>Entropy</th>
         <th>Gain</th>
-        <th>Split Info</th>
-        <th>Gain rasio</th>
         <tr>";
         mysqli_query($conn, "TRUNCATE gain");
         totalData($jml_total, $jml_baik, $jml_sedang, $jml_rusak_ringan, $jml_rusak_berat, $entropy_all);
@@ -156,10 +230,10 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                 $NA4ura_dukung = "$nilai_ura_dukung[3]";
                 $NA5ura_dukung = "$nilai_ura_dukung[4]";
             }
-            // var_dump($nilai_ura_dukung);
 
             hitung_gain($conn, $kondisi, "ura_dukung", $entropy_all, $NA1ura_dukung, $NA2ura_dukung, $NA3ura_dukung, $NA4ura_dukung, $NA5ura_dukung, "", "", "", "", "", "");
         }
+        //Menghitung Nama Lintas
         if ($jmlnamaLintas != 1) {
             $NA1namaLintas = "$nilai_namaLintas[0]";
             $NA2namaLintas = "";
@@ -172,24 +246,85 @@ function pembentukan_tree($conn, $N_parent, $kasus)
             }
             hitung_gain($conn, $kondisi, "namaLintas", $entropy_all, $NA1namaLintas, $NA2namaLintas, $NA3namaLintas, "", "", "", "", "", "", "", "");
         }
-        hitung_gain(
-            $conn,
-            $kondisi,
-            "panjangRuas",
-            $entropy_all,
-            "SPES",
-            "SPE",
-            "PE",
-            "SS",
-            "CS",
-            "S",
-            "PA",
-            "CP",
-            "SPA",
-            "SPAS",
-            ""
-        );
+        //Menghitung Panjang Ruas
+        if ($jmlpanjangRuas != 1) {
+            $NA1panjangRuas = "$nilai_panjangRuas[0]";
+            if ($jmlpanjangRuas == 2) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+            } else if ($jmlpanjangRuas == 3) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+                $NA3panjangRuas = "$nilai_panjangRuas[2]";
+            } else if ($jmlpanjangRuas == 4) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+                $NA3panjangRuas = "$nilai_panjangRuas[2]";
+                $NA4panjangRuas = "$nilai_panjangRuas[3]";
+            } else if ($jmlpanjangRuas == 5) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+                $NA3panjangRuas = "$nilai_panjangRuas[2]";
+                $NA4panjangRuas = "$nilai_panjangRuas[3]";
+                $NA5panjangRuas = "$nilai_panjangRuas[4]";
+            } else if ($jmlpanjangRuas == 6) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+                $NA3panjangRuas = "$nilai_panjangRuas[2]";
+                $NA4panjangRuas = "$nilai_panjangRuas[3]";
+                $NA5panjangRuas = "$nilai_panjangRuas[4]";
+                $NA6panjangRuas = "$nilai_panjangRuas[5]";
+            } else if ($jmlpanjangRuas == 7) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+                $NA3panjangRuas = "$nilai_panjangRuas[2]";
+                $NA4panjangRuas = "$nilai_panjangRuas[3]";
+                $NA5panjangRuas = "$nilai_panjangRuas[4]";
+                $NA6panjangRuas = "$nilai_panjangRuas[5]";
+                $NA7panjangRuas = "$nilai_panjangRuas[6]";
+            } else if ($jmlpanjangRuas == 8) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+                $NA3panjangRuas = "$nilai_panjangRuas[2]";
+                $NA4panjangRuas = "$nilai_panjangRuas[3]";
+                $NA5panjangRuas = "$nilai_panjangRuas[4]";
+                $NA6panjangRuas = "$nilai_panjangRuas[5]";
+                $NA7panjangRuas = "$nilai_panjangRuas[6]";
+                $NA8panjangRuas = "$nilai_panjangRuas[7]";
+            } else if ($jmlpanjangRuas == 9) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+                $NA3panjangRuas = "$nilai_panjangRuas[2]";
+                $NA4panjangRuas = "$nilai_panjangRuas[3]";
+                $NA5panjangRuas = "$nilai_panjangRuas[4]";
+                $NA6panjangRuas = "$nilai_panjangRuas[5]";
+                $NA7panjangRuas = "$nilai_panjangRuas[6]";
+                $NA8panjangRuas = "$nilai_panjangRuas[7]";
+                $NA9panjangRuas = "$nilai_panjangRuas[8]";
+            } else if ($jmlpanjangRuas == 10) {
+                $NA2panjangRuas = "$nilai_panjangRuas[1]";
+                $NA3panjangRuas = "$nilai_panjangRuas[2]";
+                $NA4panjangRuas = "$nilai_panjangRuas[3]";
+                $NA5panjangRuas = "$nilai_panjangRuas[4]";
+                $NA6panjangRuas = "$nilai_panjangRuas[5]";
+                $NA7panjangRuas = "$nilai_panjangRuas[6]";
+                $NA8panjangRuas = "$nilai_panjangRuas[7]";
+                $NA9panjangRuas = "$nilai_panjangRuas[8]";
+                $NA10panjangRuas = "$nilai_panjangRuas[9]";
+            }
+            hitung_gain(
+                $conn,
+                $kondisi,
+                "panjangRuas",
+                $entropy_all,
+                $NA1panjangRuas,
+                $NA2panjangRuas,
+                $NA3panjangRuas,
+                $NA4panjangRuas,
+                $NA5panjangRuas,
+                $NA6panjangRuas,
+                $NA7panjangRuas,
+                $NA8panjangRuas,
+                $NA9panjangRuas,
+                $NA10panjangRuas,
+                ""
+            );
+        }
+        // Menghitung JNS PEM 
         hitung_gain($conn, $kondisi, "jns_pen", $entropy_all, "P", "PB", "", "", "", "", "", "", "", "", "");
+        //Menghitung Kondisi Tanah Krikil
         if ($jmltanah_krikil != 1) {
             $NA1tanah_krikil = "$nilai_tanah_krikil[0]";
             if ($jmltanah_krikil == 2) {
@@ -265,6 +400,7 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                 ""
             );
         }
+        //Menghitung Aspall
         if ($jmlaspal != 1) {
             $NA1aspal = "$nilai_aspal[0]";
             if ($jmlaspal == 2) {
@@ -395,106 +531,581 @@ function pembentukan_tree($conn, $N_parent, $kasus)
                 proses_DT($conn, $kondisi, "(jns_pen='PB')", "(jns_pen='P')", "", "", "", "", "", "", "", "", "");
             }
             if ($atribut == "namaLintas") {
-                proses_DT(
-                    $conn,
-                    $kondisi,
-                    "(namaLintas='LJK')",
-                    "(namaLintas='LJN')",
-                    "(namaLintas='LJP')",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    ""
-                );
+                if ($jmlnamaLintas == 3) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_namaLintas[0]')",
+                        "($atribut='$nilai_namaLintas[1]')",
+                        "($atribut='$nilai_namaLintas[2]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlnamaLintas == 2) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_namaLintas[0]')",
+                        "($atribut='$nilai_namaLintas[1]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                }
             }
             if ($atribut == "ura_dukung") {
-                proses_DT(
-                    $conn,
-                    $kondisi,
-                    "(ura_dukung='KMI')",
-                    "(ura_dukung='KA')",
-                    "(ura_dukung='KP')",
-                    "(ura_dukung='KM')",
-                    "(ura_dukung='KCT')",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    ""
-                );
+                if ($jmlura_dukung == 5) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_ura_dukung[0]')",
+                        "($atribut='$nilai_ura_dukung[1]')",
+                        "($atribut='$nilai_ura_dukung[2]')",
+                        "($atribut='$nilai_ura_dukung[3]')",
+                        "($atribut='$nilai_ura_dukung[4]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlura_dukung == 4) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_ura_dukung[0]')",
+                        "($atribut='$nilai_ura_dukung[1]')",
+                        "($atribut='$nilai_ura_dukung[2]')",
+                        "($atribut='$nilai_ura_dukung[3]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlura_dukung == 3) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_ura_dukung[0]')",
+                        "($atribut='$nilai_ura_dukung[1]')",
+                        "($atribut='$nilai_ura_dukung[2]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlura_dukung == 2) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_ura_dukung[0]')",
+                        "($atribut='$nilai_ura_dukung[1]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                }
             }
             if ($atribut == "aspal") {
-                proses_DT(
-                    $conn,
-                    $kondisi,
-                    "(aspal='SPES')",
-                    "(aspal='SPE')",
-                    "(aspal='PE')",
-                    "(aspal='SS')",
-                    "(aspal='CS')",
-                    "(aspal='S')",
-                    "(aspal='PA')",
-                    "(aspal='CP')",
-                    "(aspal='SPA')",
-                    "(aspal='SPAS')",
-                    ""
-                );
+
+                if ($jmlaspal == 10) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "($atribut='$nilai_aspal[2]')",
+                        "($atribut='$nilai_aspal[3]')",
+                        "($atribut='$nilai_aspal[4]')",
+                        "($atribut='$nilai_aspal[5]')",
+                        "($atribut='$nilai_aspal[6]')",
+                        "($atribut='$nilai_aspal[7]')",
+                        "($atribut='$nilai_aspal[8]')",
+                        "($atribut='$nilai_aspal[9]')",
+                        ""
+                    );
+                } elseif ($jmlaspal == 9) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "($atribut='$nilai_aspal[2]')",
+                        "($atribut='$nilai_aspal[3]')",
+                        "($atribut='$nilai_aspal[4]')",
+                        "($atribut='$nilai_aspal[5]')",
+                        "($atribut='$nilai_aspal[6]')",
+                        "($atribut='$nilai_aspal[7]')",
+                        "($atribut='$nilai_aspal[8]')",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlaspal == 8) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "($atribut='$nilai_aspal[2]')",
+                        "($atribut='$nilai_aspal[3]')",
+                        "($atribut='$nilai_aspal[4]')",
+                        "($atribut='$nilai_aspal[5]')",
+                        "($atribut='$nilai_aspal[6]')",
+                        "($atribut='$nilai_aspal[7]')",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlaspal == 7) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "($atribut='$nilai_aspal[2]')",
+                        "($atribut='$nilai_aspal[3]')",
+                        "($atribut='$nilai_aspal[4]')",
+                        "($atribut='$nilai_aspal[5]')",
+                        "($atribut='$nilai_aspal[6]')",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlaspal == 6) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "($atribut='$nilai_aspal[2]')",
+                        "($atribut='$nilai_aspal[3]')",
+                        "($atribut='$nilai_aspal[4]')",
+                        "($atribut='$nilai_aspal[5]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlaspal == 5) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "($atribut='$nilai_aspal[2]')",
+                        "($atribut='$nilai_aspal[3]')",
+                        "($atribut='$nilai_aspal[4]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlaspal == 4) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "($atribut='$nilai_aspal[2]')",
+                        "($atribut='$nilai_aspal[3]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlaspal == 3) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "($atribut='$nilai_aspal[2]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlaspal == 2) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "($atribut='$nilai_aspal[1]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlaspal == 1) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_aspal[0]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                }
             }
             if ($atribut == "tanah_krikil") {
-                proses_DT(
-                    $conn,
-                    $kondisi,
-                    "(tanah_krikil='SPES')",
-                    "(tanah_krikil='SPE')",
-                    "(tanah_krikil='PE')",
-                    "(tanah_krikil='SS')",
-                    "(tanah_krikil='CS')",
-                    "(tanah_krikil='S')",
-                    "(tanah_krikil='PA')",
-                    "(tanah_krikil='CP')",
-                    "(tanah_krikil='SPA')",
-                    "(tanah_krikil='SPAS')",
-                    ""
-                );
+                if ($jmltanah_krikil == 10) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "($atribut='$nilai_tanah_krikil[2]')",
+                        "($atribut='$nilai_tanah_krikil[3]')",
+                        "($atribut='$nilai_tanah_krikil[4]')",
+                        "($atribut='$nilai_tanah_krikil[5]')",
+                        "($atribut='$nilai_tanah_krikil[6]')",
+                        "($atribut='$nilai_tanah_krikil[7]')",
+                        "($atribut='$nilai_tanah_krikil[8]')",
+                        "($atribut='$nilai_tanah_krikil[9]')",
+                        ""
+                    );
+                } elseif ($jmltanah_krikil == 9) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "($atribut='$nilai_tanah_krikil[2]')",
+                        "($atribut='$nilai_tanah_krikil[3]')",
+                        "($atribut='$nilai_tanah_krikil[4]')",
+                        "($atribut='$nilai_tanah_krikil[5]')",
+                        "($atribut='$nilai_tanah_krikil[6]')",
+                        "($atribut='$nilai_tanah_krikil[7]')",
+                        "($atribut='$nilai_tanah_krikil[8]')",
+                        "",
+                        ""
+                    );
+                } elseif ($jmltanah_krikil == 8) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "($atribut='$nilai_tanah_krikil[2]')",
+                        "($atribut='$nilai_tanah_krikil[3]')",
+                        "($atribut='$nilai_tanah_krikil[4]')",
+                        "($atribut='$nilai_tanah_krikil[5]')",
+                        "($atribut='$nilai_tanah_krikil[6]')",
+                        "($atribut='$nilai_tanah_krikil[7]')",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmltanah_krikil == 7) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "($atribut='$nilai_tanah_krikil[2]')",
+                        "($atribut='$nilai_tanah_krikil[3]')",
+                        "($atribut='$nilai_tanah_krikil[4]')",
+                        "($atribut='$nilai_tanah_krikil[5]')",
+                        "($atribut='$nilai_tanah_krikil[6]')",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmltanah_krikil == 6) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "($atribut='$nilai_tanah_krikil[2]')",
+                        "($atribut='$nilai_tanah_krikil[3]')",
+                        "($atribut='$nilai_tanah_krikil[4]')",
+                        "($atribut='$nilai_tanah_krikil[5]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmltanah_krikil == 5) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "($atribut='$nilai_tanah_krikil[2]')",
+                        "($atribut='$nilai_tanah_krikil[3]')",
+                        "($atribut='$nilai_tanah_krikil[4]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmltanah_krikil == 4) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "($atribut='$nilai_tanah_krikil[2]')",
+                        "($atribut='$nilai_tanah_krikil[3]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmltanah_krikil == 3) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "($atribut='$nilai_tanah_krikil[2]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmltanah_krikil == 2) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_tanah_krikil[0]')",
+                        "($atribut='$nilai_tanah_krikil[1]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                }
             }
-            if ($atribut == "rigit") {
-                proses_DT(
-                    $conn,
-                    $kondisi,
-                    "(rigit='SPES')",
-                    "(rigit='SPE')",
-                    "(rigit='PE')",
-                    "(rigit='SS')",
-                    "(rigit='CS')",
-                    "(rigit='S')",
-                    "(rigit='PA')",
-                    "(rigit='CP')",
-                    "(rigit='SPA')",
-                    "(rigit='SPAS')",
-                    ""
-                );
-            }
+            // if ($atribut == "rigit") {
+            //     proses_DT(
+            //         $conn,
+            //         $kondisi,
+            //         "(rigit='SPES')",
+            //         "(rigit='SPE')",
+            //         "(rigit='PE')",
+            //         "(rigit='SS')",
+            //         "(rigit='CS')",
+            //         "(rigit='S')",
+            //         "(rigit='PA')",
+            //         "(rigit='CP')",
+            //         "(rigit='SPA')",
+            //         "(rigit='SPAS')",
+            //         ""
+            //     );
+            // }
             if ($atribut == "panjangRuas") {
-                proses_DT(
-                    $conn,
-                    $kondisi,
-                    "(panjangRuas='SPES')",
-                    "(panjangRuas='SPE')",
-                    "(panjangRuas='PE')",
-                    "(panjangRuas='SS')",
-                    "(panjangRuas='CS')",
-                    "(panjangRuas='S')",
-                    "(panjangRuas='PA')",
-                    "(panjangRuas='CP')",
-                    "(panjangRuas='SPA')",
-                    "(panjangRuas='SPAS')",
-                    ""
-                );
+                if ($jmlpanjangRuas == 10) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "($atribut='$nilai_panjangRuas[2]')",
+                        "($atribut='$nilai_panjangRuas[3]')",
+                        "($atribut='$nilai_panjangRuas[4]')",
+                        "($atribut='$nilai_panjangRuas[5]')",
+                        "($atribut='$nilai_panjangRuas[6]')",
+                        "($atribut='$nilai_panjangRuas[7]')",
+                        "($atribut='$nilai_panjangRuas[8]')",
+                        "($atribut='$nilai_panjangRuas[9]')",
+                        ""
+                    );
+                } elseif ($jmlpanjangRuas == 9) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "($atribut='$nilai_panjangRuas[2]')",
+                        "($atribut='$nilai_panjangRuas[3]')",
+                        "($atribut='$nilai_panjangRuas[4]')",
+                        "($atribut='$nilai_panjangRuas[5]')",
+                        "($atribut='$nilai_panjangRuas[6]')",
+                        "($atribut='$nilai_panjangRuas[7]')",
+                        "($atribut='$nilai_panjangRuas[8]')",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlpanjangRuas == 8) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "($atribut='$nilai_panjangRuas[2]')",
+                        "($atribut='$nilai_panjangRuas[3]')",
+                        "($atribut='$nilai_panjangRuas[4]')",
+                        "($atribut='$nilai_panjangRuas[5]')",
+                        "($atribut='$nilai_panjangRuas[6]')",
+                        "($atribut='$nilai_panjangRuas[7]')",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlpanjangRuas == 7) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "($atribut='$nilai_panjangRuas[2]')",
+                        "($atribut='$nilai_panjangRuas[3]')",
+                        "($atribut='$nilai_panjangRuas[4]')",
+                        "($atribut='$nilai_panjangRuas[5]')",
+                        "($atribut='$nilai_panjangRuas[6]')",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlpanjangRuas == 6) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "($atribut='$nilai_panjangRuas[2]')",
+                        "($atribut='$nilai_panjangRuas[3]')",
+                        "($atribut='$nilai_panjangRuas[4]')",
+                        "($atribut='$nilai_panjangRuas[5]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlpanjangRuas == 5) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "($atribut='$nilai_panjangRuas[2]')",
+                        "($atribut='$nilai_panjangRuas[3]')",
+                        "($atribut='$nilai_panjangRuas[4]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlpanjangRuas == 4) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "($atribut='$nilai_panjangRuas[2]')",
+                        "($atribut='$nilai_panjangRuas[3]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlpanjangRuas == 3) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "($atribut='$nilai_panjangRuas[2]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                } elseif ($jmlpanjangRuas == 2) {
+                    proses_DT(
+                        $conn,
+                        $kondisi,
+                        "($atribut='$nilai_panjangRuas[0]')",
+                        "($atribut='$nilai_panjangRuas[1]')",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    );
+                }
             }
         }
     }
@@ -580,8 +1191,23 @@ function totalData($jml_total, $jml_baik, $jml_sedang, $jml_rusak_ringan, $jml_r
     echo "<tr><td colspan='16'></td></tr>";
 }
 
-function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $kondisi3, $kondisi4, $kondisi5, $kondisi6, $kondisi7, $kondisi8, $kondisi9, $kondisi10, $kondisi11)
-{
+function hitung_gain(
+    $conn,
+    $kasus,
+    $atribut,
+    $ent_all,
+    $kondisi1,
+    $kondisi2,
+    $kondisi3,
+    $kondisi4,
+    $kondisi5,
+    $kondisi6,
+    $kondisi7,
+    $kondisi8,
+    $kondisi9,
+    $kondisi10,
+    $kondisi11
+) {
 
     $data_kasus = '';
     if ($kasus != '') {
@@ -606,8 +1232,8 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         $jml_total = $jml1 + $jml2;
         $ent1 = hitung_entropy($j_B1, $j_S1, $j_RR1, $j_RB1);
         $ent2 = hitung_entropy($j_B2, $j_S2, $j_RR2, $j_RB2);
-        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='P'");
-        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='PB'");
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
         $gain = $ent_all - @((($jml1 / $jml_total) * $ent1) + (($jml2 / $jml_total) * $ent2));
         $tot_opsi1 = $nilai1 + $nilai2;
         $atribut1 = @(- ($nilai1 / $tot_opsi1) * (log(($nilai1 / $tot_opsi1), 2))) + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)));
@@ -630,7 +1256,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $gain . "</td>";
         echo "<td>" . $splitinfo . "</td>";
         echo "<td>" . $gainRasio . "</td>";
-
         echo "</tr>";
         echo "<tr>";
         echo "<td>&nbsp;</td>";
@@ -641,8 +1266,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RR2 . "</td>";
         echo "<td>" . $j_RB2 . "</td>";
         echo "<td>" . $ent2 . "</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "<td>&nbsp;</td>";
         echo "</tr>";
         echo "<tr><td colspan='8'></td></tr>";
@@ -672,13 +1295,15 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         $ent2 = hitung_entropy($j_B2, $j_S2, $j_RR2, $j_RB2);
         $ent3 = hitung_entropy($j_B3, $j_S3, $j_RR3, $j_RB3);
         //hitung nilai split dan gain rasio
-        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='LJN'");
-        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='LJK'");
-        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='LJP'");
-        $tot_opsi1 = $nilai4 + $nilai5 + $nilai3;
-        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1) + (($jml2 / $jml_total) * $ent2) + (($jml3 / $jml_total) * $ent3));
-        $atribut1 = @(- ($nilai4 / $tot_opsi1) * (log(($nilai4 / $tot_opsi1), 2)))
-            + (- ($nilai5 / $tot_opsi1) * (log(($nilai5 / $tot_opsi1), 2)))
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
+        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='$kondisi3'");
+        $tot_opsi1 = $nilai1 + $nilai2 + $nilai3;
+        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1)
+            + (($jml2 / $jml_total) * $ent2)
+            + (($jml3 / $jml_total) * $ent3));
+        $atribut1 = @(- ($nilai1 / $tot_opsi1) * (log(($nilai1 / $tot_opsi1), 2)))
+            + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)))
             + (- ($nilai3 / $tot_opsi1) * (log(($nilai3 / $tot_opsi1), 2)));
         $atribut1 = is_nan($atribut1) ? 0 : $atribut1;
         $splitinfo = format_decimal($atribut1);
@@ -712,8 +1337,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB2 . "</td>";
         echo "<td>" . $ent2 . "</td>";
         echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>&nbsp;</td>";
@@ -725,9 +1348,109 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB3 . "</td>";
         echo "<td>" . $ent3 . "</td>";
         echo "<td>&nbsp;</td>";
+        echo "</tr>";
+        echo "<tr><td colspan='8'></td></tr>";
+    } elseif ($kondisi5 == '') {
+        $j_B1 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi1'");
+        $j_S1 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi1'");
+        $j_RR1 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi1'");
+        $j_RB1 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi1'");
+        $jml1 = $j_B1 + $j_S1 + $j_RR1 + $j_RB1;
+
+        $j_B2 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi2'");
+        $j_S2 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi2'");
+        $j_RR2 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi2'");
+        $j_RB2 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi2'");
+        $jml2 = $j_B2 + $j_S2 + $j_RR2 + $j_RB2;
+
+        $j_B3 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi3'");
+        $j_S3 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi3'");
+        $j_RR3 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi3'");
+        $j_RB3 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi3'");
+        $jml3 = $j_B3 + $j_S3 + $j_RR3 + $j_RB3;
+
+        $j_B4 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi4'");
+        $j_S4 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi4'");
+        $j_RR4 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi4'");
+        $j_RB4 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi4'");
+        $jml4 = $j_B4 + $j_S4 + $j_RR4 + $j_RB4;
+
+        //hitung entropy masing-masing kondisi
+        $jml_total = $jml1 + $jml2 + $jml3 + $jml4;
+        $ent1 = hitung_entropy($j_B1, $j_S1, $j_RR1, $j_RB1);
+        $ent2 = hitung_entropy($j_B2, $j_S2, $j_RR2, $j_RB2);
+        $ent3 = hitung_entropy($j_B3, $j_S3, $j_RR3, $j_RB3);
+        $ent4 = hitung_entropy($j_B4, $j_S4, $j_RR4, $j_RB4);
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
+        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='$kondisi3'");
+        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='$kondisi4'");
+        $tot_opsi1 = $nilai1 + $nilai2 + $nilai3 + $nilai4;
+        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1)
+            + (($jml2 / $jml_total) * $ent2)
+            + (($jml3 / $jml_total) * $ent3)
+            + (($jml4 / $jml_total) * $ent4));
+        $atribut1 = @(- ($nilai1 / $tot_opsi1) * (log(($nilai1 / $tot_opsi1), 2)))
+            + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)))
+            + (- ($nilai3 / $tot_opsi1) * (log(($nilai3 / $tot_opsi1), 2)))
+            + (- ($nilai4 / $tot_opsi1) * (log(($nilai4 / $tot_opsi1), 2)));
+        $atribut1 = @is_nan($atribut1) ? 0 : $atribut1;
+        $splitinfo = format_decimal($atribut1);
+        //desimal 3 angka dibelakang koma
+        $gain = format_decimal($gain);
+        $gainRasio = $gain / $splitinfo;
+        $gainRasio = is_nan($gainRasio) ? 0 : $gainRasio;
+        $gainRasio = format_decimal($gainRasio);
+        echo "<tr>";
+        echo "<td>" . $atribut . "</td>";
+        echo "<td>" . $kondisi1 . "</td>";
+        echo "<td>" . $jml1 . "</td>";
+        echo "<td>" . $j_B1 . "</td>";
+        echo "<td>" . $j_S1 . "</td>";
+        echo "<td>" . $j_RR1 . "</td>";
+        echo "<td>" . $j_RB1 . "</td>";
+        echo "<td>" . $ent1 . "</td>";
+        echo "<td>" . $gain . "</td>";
+        echo "<td>" . $splitinfo . "</td>";
+        echo "<td>" . $gainRasio . "</td>";
+        echo "</tr>";
+
+        echo "<tr>";
         echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi2 . "</td>";
+        echo "<td>" . $jml2 . "</td>";
+        echo "<td>" . $j_B2 . "</td>";
+        echo "<td>" . $j_S2 . "</td>";
+        echo "<td>" . $j_RR2 . "</td>";
+        echo "<td>" . $j_RB2 . "</td>";
+        echo "<td>" . $ent2 . "</td>";
         echo "<td>&nbsp;</td>";
         echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi3 . "</td>";
+        echo "<td>" . $jml3 . "</td>";
+        echo "<td>" . $j_B3 . "</td>";
+        echo "<td>" . $j_S3 . "</td>";
+        echo "<td>" . $j_RR3 . "</td>";
+        echo "<td>" . $j_RB3 . "</td>";
+        echo "<td>" . $ent3 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi4 . "</td>";
+        echo "<td>" . $jml4 . "</td>";
+        echo "<td>" . $j_B4 . "</td>";
+        echo "<td>" . $j_S4 . "</td>";
+        echo "<td>" . $j_RR4 . "</td>";
+        echo "<td>" . $j_RB4 . "</td>";
+        echo "<td>" . $ent4 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
         echo "<tr><td colspan='8'></td></tr>";
     } elseif ($kondisi6 == '') {
         $j_B1 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi1'");
@@ -767,11 +1490,11 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         $ent3 = hitung_entropy($j_B3, $j_S3, $j_RR3, $j_RB3);
         $ent4 = hitung_entropy($j_B4, $j_S4, $j_RR4, $j_RB4);
         $ent5 = hitung_entropy($j_B5, $j_S5, $j_RR5, $j_RB5);
-        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='KMI'");
-        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='KA'");
-        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='KP'");
-        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='KM'");
-        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='KCT'");
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
+        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='$kondisi3'");
+        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='$kondisi4'");
+        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='$kondisi5'");
         $tot_opsi1 = $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5;
         $gain = $ent_all - @((($jml1 / $jml_total) * $ent1)
             + (($jml2 / $jml_total) * $ent2)
@@ -814,8 +1537,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB2 . "</td>";
         echo "<td>" . $ent2 . "</td>";
         echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "</tr>";
 
         echo "<tr>";
@@ -827,8 +1548,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RR3 . "</td>";
         echo "<td>" . $j_RB3 . "</td>";
         echo "<td>" . $ent3 . "</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "<td>&nbsp;</td>";
         echo "</tr>";
 
@@ -842,7 +1561,139 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB4 . "</td>";
         echo "<td>" . $ent4 . "</td>";
         echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
         echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi5 . "</td>";
+        echo "<td>" . $jml5 . "</td>";
+        echo "<td>" . $j_B5 . "</td>";
+        echo "<td>" . $j_S5 . "</td>";
+        echo "<td>" . $j_RR5 . "</td>";
+        echo "<td>" . $j_RB5 . "</td>";
+        echo "<td>" . $ent5 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr><td colspan='8'></td></tr>";
+    } elseif ($kondisi7 == '') {
+        $j_B1 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi1'");
+        $j_S1 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi1'");
+        $j_RR1 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi1'");
+        $j_RB1 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi1'");
+        $jml1 = $j_B1 + $j_S1 + $j_RR1 + $j_RB1;
+
+        $j_B2 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi2'");
+        $j_S2 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi2'");
+        $j_RR2 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi2'");
+        $j_RB2 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi2'");
+        $jml2 = $j_B2 + $j_S2 + $j_RR2 + $j_RB2;
+
+        $j_B3 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi3'");
+        $j_S3 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi3'");
+        $j_RR3 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi3'");
+        $j_RB3 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi3'");
+        $jml3 = $j_B3 + $j_S3 + $j_RR3 + $j_RB3;
+
+        $j_B4 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi4'");
+        $j_S4 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi4'");
+        $j_RR4 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi4'");
+        $j_RB4 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi4'");
+        $jml4 = $j_B4 + $j_S4 + $j_RR4 + $j_RB4;
+
+        $j_B5 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi5'");
+        $j_S5 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi5'");
+        $j_RR5 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi5'");
+        $j_RB5 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi5'");
+        $jml5 = $j_B5 + $j_S5 + $j_RR5 + $j_RB5;
+
+        $j_B6 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi6'");
+        $j_S6 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi6'");
+        $j_RR6 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi6'");
+        $j_RB6 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi6'");
+        $jml6 = $j_B6 + $j_S6 + $j_RR6 + $j_RB6;
+
+        //hitung entropy masing-masing kondisi
+        $jml_total = $jml1 + $jml2 + $jml3 + $jml4 + $jml5;
+        $ent1 = hitung_entropy($j_B1, $j_S1, $j_RR1, $j_RB1);
+        $ent2 = hitung_entropy($j_B2, $j_S2, $j_RR2, $j_RB2);
+        $ent3 = hitung_entropy($j_B3, $j_S3, $j_RR3, $j_RB3);
+        $ent4 = hitung_entropy($j_B4, $j_S4, $j_RR4, $j_RB4);
+        $ent5 = hitung_entropy($j_B5, $j_S5, $j_RR5, $j_RB5);
+        $ent6 = hitung_entropy($j_B6, $j_S6, $j_RR6, $j_RB6);
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
+        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='$kondisi3'");
+        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='$kondisi4'");
+        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='$kondisi5'");
+        $nilai6 = jumlah_data($conn, "$data_kasus $atribut='$kondisi6'");
+        $tot_opsi1 = $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6;
+        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1)
+            + (($jml2 / $jml_total) * $ent2)
+            + (($jml3 / $jml_total) * $ent3)
+            + (($jml4 / $jml_total) * $ent4)
+            + (($jml5 / $jml_total) * $ent5)
+            + (($jml6 / $jml_total) * $ent6));
+        $atribut1 = @(- ($nilai1 / $tot_opsi1) * (log(($nilai1 / $tot_opsi1), 2)))
+            + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)))
+            + (- ($nilai3 / $tot_opsi1) * (log(($nilai3 / $tot_opsi1), 2)))
+            + (- ($nilai4 / $tot_opsi1) * (log(($nilai4 / $tot_opsi1), 2)))
+            + (- ($nilai5 / $tot_opsi1) * (log(($nilai5 / $tot_opsi1), 2)))
+            + (- ($nilai6 / $tot_opsi1) * (log(($nilai6 / $tot_opsi1), 2)));
+        $atribut1 = @is_nan($atribut1) ? 0 : $atribut1;
+        $splitinfo = format_decimal($atribut1);
+        //desimal 3 angka dibelakang koma
+        $gain = format_decimal($gain);
+        $gainRasio = $gain / $splitinfo;
+        $gainRasio = is_nan($gainRasio) ? 0 : $gainRasio;
+        $gainRasio = format_decimal($gainRasio);
+        echo "<tr>";
+        echo "<td>" . $atribut . "</td>";
+        echo "<td>" . $kondisi1 . "</td>";
+        echo "<td>" . $jml1 . "</td>";
+        echo "<td>" . $j_B1 . "</td>";
+        echo "<td>" . $j_S1 . "</td>";
+        echo "<td>" . $j_RR1 . "</td>";
+        echo "<td>" . $j_RB1 . "</td>";
+        echo "<td>" . $ent1 . "</td>";
+        echo "<td>" . $gain . "</td>";
+        echo "<td>" . $splitinfo . "</td>";
+        echo "<td>" . $gainRasio . "</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi2 . "</td>";
+        echo "<td>" . $jml2 . "</td>";
+        echo "<td>" . $j_B2 . "</td>";
+        echo "<td>" . $j_S2 . "</td>";
+        echo "<td>" . $j_RR2 . "</td>";
+        echo "<td>" . $j_RB2 . "</td>";
+        echo "<td>" . $ent2 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi3 . "</td>";
+        echo "<td>" . $jml3 . "</td>";
+        echo "<td>" . $j_B3 . "</td>";
+        echo "<td>" . $j_S3 . "</td>";
+        echo "<td>" . $j_RR3 . "</td>";
+        echo "<td>" . $j_RB3 . "</td>";
+        echo "<td>" . $ent3 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi4 . "</td>";
+        echo "<td>" . $jml4 . "</td>";
+        echo "<td>" . $j_B4 . "</td>";
+        echo "<td>" . $j_S4 . "</td>";
+        echo "<td>" . $j_RR4 . "</td>";
+        echo "<td>" . $j_RB4 . "</td>";
+        echo "<td>" . $ent4 . "</td>";
         echo "<td>&nbsp;</td>";
         echo "</tr>";
 
@@ -856,11 +1707,589 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB5 . "</td>";
         echo "<td>" . $ent5 . "</td>";
         echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-
         echo "</tr>";
 
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi6 . "</td>";
+        echo "<td>" . $jml6 . "</td>";
+        echo "<td>" . $j_B6 . "</td>";
+        echo "<td>" . $j_S6 . "</td>";
+        echo "<td>" . $j_RR6 . "</td>";
+        echo "<td>" . $j_RB6 . "</td>";
+        echo "<td>" . $ent6 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+        echo "<tr><td colspan='8'></td></tr>";
+    } elseif ($kondisi8 == '') {
+        $j_B1 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi1'");
+        $j_S1 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi1'");
+        $j_RR1 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi1'");
+        $j_RB1 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi1'");
+        $jml1 = $j_B1 + $j_S1 + $j_RR1 + $j_RB1;
+
+        $j_B2 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi2'");
+        $j_S2 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi2'");
+        $j_RR2 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi2'");
+        $j_RB2 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi2'");
+        $jml2 = $j_B2 + $j_S2 + $j_RR2 + $j_RB2;
+
+        $j_B3 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi3'");
+        $j_S3 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi3'");
+        $j_RR3 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi3'");
+        $j_RB3 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi3'");
+        $jml3 = $j_B3 + $j_S3 + $j_RR3 + $j_RB3;
+
+        $j_B4 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi4'");
+        $j_S4 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi4'");
+        $j_RR4 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi4'");
+        $j_RB4 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi4'");
+        $jml4 = $j_B4 + $j_S4 + $j_RR4 + $j_RB4;
+
+        $j_B5 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi5'");
+        $j_S5 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi5'");
+        $j_RR5 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi5'");
+        $j_RB5 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi5'");
+        $jml5 = $j_B5 + $j_S5 + $j_RR5 + $j_RB5;
+
+        $j_B6 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi6'");
+        $j_S6 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi6'");
+        $j_RR6 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi6'");
+        $j_RB6 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi6'");
+        $jml6 = $j_B6 + $j_S6 + $j_RR6 + $j_RB6;
+
+        $j_B7 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi7'");
+        $j_S7 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi7'");
+        $j_RR7 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi7'");
+        $j_RB7 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi7'");
+        $jml7 = $j_B7 + $j_S7 + $j_RR7 + $j_RB7;
+
+        //hitung entropy masing-masing kondisi
+        $jml_total = $jml1 + $jml2 + $jml3 + $jml4 + $jml5 + $jml6 + $jml7;
+        $ent1 = hitung_entropy($j_B1, $j_S1, $j_RR1, $j_RB1);
+        $ent2 = hitung_entropy($j_B2, $j_S2, $j_RR2, $j_RB2);
+        $ent3 = hitung_entropy($j_B3, $j_S3, $j_RR3, $j_RB3);
+        $ent4 = hitung_entropy($j_B4, $j_S4, $j_RR4, $j_RB4);
+        $ent5 = hitung_entropy($j_B5, $j_S5, $j_RR5, $j_RB5);
+        $ent6 = hitung_entropy($j_B6, $j_S6, $j_RR6, $j_RB6);
+        $ent7 = hitung_entropy($j_B7, $j_S7, $j_RR7, $j_RB7);
+        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1)
+            + (($jml2 / $jml_total) * $ent2)
+            + (($jml3 / $jml_total) * $ent3)
+            + (($jml4 / $jml_total) * $ent4)
+            + (($jml5 / $jml_total) * $ent5)
+            + (($jml6 / $jml_total) * $ent6)
+            + (($jml7 / $jml_total) * $ent7));
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
+        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='$kondisi3'");
+        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='$kondisi4'");
+        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='$kondisi5'");
+        $nilai6 = jumlah_data($conn, "$data_kasus $atribut='$kondisi6'");
+        $nilai7 = jumlah_data($conn, "$data_kasus $atribut='$kondisi7'");
+        $tot_opsi1 = $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6 + $nilai7;
+        $atribut1 = @(- ($nilai1 / $tot_opsi1) * (log(($nilai1 / $tot_opsi1), 2)))
+            + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)))
+            + (- ($nilai3 / $tot_opsi1) * (log(($nilai3 / $tot_opsi1), 2)))
+            + (- ($nilai4 / $tot_opsi1) * (log(($nilai4 / $tot_opsi1), 2)))
+            + (- ($nilai5 / $tot_opsi1) * (log(($nilai5 / $tot_opsi1), 2)))
+            + (- ($nilai6 / $tot_opsi1) * (log(($nilai6 / $tot_opsi1), 2)))
+            + (- ($nilai7 / $tot_opsi1) * (log(($nilai7 / $tot_opsi1), 2)));
+        $atribut1 = is_nan($atribut1) ? 0 : $atribut1;
+        $splitinfo = format_decimal($atribut1);
+
+        //desimal 3 angka dibelakang koma
+        $gain = format_decimal($gain);
+        $gainRasio = @$gain / $splitinfo;
+        $gainRasio = is_nan($gainRasio) ? 0 : $gainRasio;
+        $gainRasio = format_decimal($gainRasio);
+        echo "<tr>";
+        echo "<td>" . $atribut . "</td>";
+        echo "<td>" . $kondisi1 . "</td>";
+        echo "<td>" . $jml1 . "</td>";
+        echo "<td>" . $j_B1 . "</td>";
+        echo "<td>" . $j_S1 . "</td>";
+        echo "<td>" . $j_RR1 . "</td>";
+        echo "<td>" . $j_RB1 . "</td>";
+        echo "<td>" . $ent1 . "</td>";
+        echo "<td>" . $gain . "</td>";
+        echo "<td>" . $splitinfo . "</td>";
+        echo "<td>" . $gainRasio . "</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi2 . "</td>";
+        echo "<td>" . $jml2 . "</td>";
+        echo "<td>" . $j_B2 . "</td>";
+        echo "<td>" . $j_S2 . "</td>";
+        echo "<td>" . $j_RR2 . "</td>";
+        echo "<td>" . $j_RB2 . "</td>";
+        echo "<td>" . $ent2 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi3 . "</td>";
+        echo "<td>" . $jml3 . "</td>";
+        echo "<td>" . $j_B3 . "</td>";
+        echo "<td>" . $j_S3 . "</td>";
+        echo "<td>" . $j_RR3 . "</td>";
+        echo "<td>" . $j_RB3 . "</td>";
+        echo "<td>" . $ent3 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi4 . "</td>";
+        echo "<td>" . $jml4 . "</td>";
+        echo "<td>" . $j_B4 . "</td>";
+        echo "<td>" . $j_S4 . "</td>";
+        echo "<td>" . $j_RR4 . "</td>";
+        echo "<td>" . $j_RB4 . "</td>";
+        echo "<td>" . $ent4 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi5 . "</td>";
+        echo "<td>" . $jml5 . "</td>";
+        echo "<td>" . $j_B5 . "</td>";
+        echo "<td>" . $j_S5 . "</td>";
+        echo "<td>" . $j_RR5 . "</td>";
+        echo "<td>" . $j_RB5 . "</td>";
+        echo "<td>" . $ent5 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi6 . "</td>";
+        echo "<td>" . $jml6 . "</td>";
+        echo "<td>" . $j_B6 . "</td>";
+        echo "<td>" . $j_S6 . "</td>";
+        echo "<td>" . $j_RR6 . "</td>";
+        echo "<td>" . $j_RB6 . "</td>";
+        echo "<td>" . $ent6 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi7 . "</td>";
+        echo "<td>" . $jml7 . "</td>";
+        echo "<td>" . $j_B7 . "</td>";
+        echo "<td>" . $j_S7 . "</td>";
+        echo "<td>" . $j_RR7 . "</td>";
+        echo "<td>" . $j_RB7 . "</td>";
+        echo "<td>" . $ent7 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr><td colspan='8'></td></tr>";
+    } elseif ($kondisi9 == '') {
+        $j_B1 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi1'");
+        $j_S1 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi1'");
+        $j_RR1 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi1'");
+        $j_RB1 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi1'");
+        $jml1 = $j_B1 + $j_S1 + $j_RR1 + $j_RB1;
+
+        $j_B2 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi2'");
+        $j_S2 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi2'");
+        $j_RR2 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi2'");
+        $j_RB2 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi2'");
+        $jml2 = $j_B2 + $j_S2 + $j_RR2 + $j_RB2;
+
+        $j_B3 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi3'");
+        $j_S3 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi3'");
+        $j_RR3 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi3'");
+        $j_RB3 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi3'");
+        $jml3 = $j_B3 + $j_S3 + $j_RR3 + $j_RB3;
+
+        $j_B4 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi4'");
+        $j_S4 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi4'");
+        $j_RR4 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi4'");
+        $j_RB4 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi4'");
+        $jml4 = $j_B4 + $j_S4 + $j_RR4 + $j_RB4;
+
+        $j_B5 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi5'");
+        $j_S5 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi5'");
+        $j_RR5 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi5'");
+        $j_RB5 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi5'");
+        $jml5 = $j_B5 + $j_S5 + $j_RR5 + $j_RB5;
+
+        $j_B6 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi6'");
+        $j_S6 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi6'");
+        $j_RR6 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi6'");
+        $j_RB6 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi6'");
+        $jml6 = $j_B6 + $j_S6 + $j_RR6 + $j_RB6;
+
+        $j_B7 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi7'");
+        $j_S7 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi7'");
+        $j_RR7 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi7'");
+        $j_RB7 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi7'");
+        $jml7 = $j_B7 + $j_S7 + $j_RR7 + $j_RB7;
+
+        $j_B8 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi8'");
+        $j_S8 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi8'");
+        $j_RR8 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi8'");
+        $j_RB8 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi8'");
+        $jml8 = $j_B8 + $j_S8 + $j_RR8 + $j_RB8;
+
+        //hitung entropy masing-masing kondisi
+        $jml_total = $jml1 + $jml2 + $jml3 + $jml4 + $jml5 + $jml6 + $jml7 + $jml8;
+        $ent1 = hitung_entropy($j_B1, $j_S1, $j_RR1, $j_RB1);
+        $ent2 = hitung_entropy($j_B2, $j_S2, $j_RR2, $j_RB2);
+        $ent3 = hitung_entropy($j_B3, $j_S3, $j_RR3, $j_RB3);
+        $ent4 = hitung_entropy($j_B4, $j_S4, $j_RR4, $j_RB4);
+        $ent5 = hitung_entropy($j_B5, $j_S5, $j_RR5, $j_RB5);
+        $ent6 = hitung_entropy($j_B6, $j_S6, $j_RR6, $j_RB6);
+        $ent7 = hitung_entropy($j_B7, $j_S7, $j_RR7, $j_RB7);
+        $ent8 = hitung_entropy($j_B8, $j_S8, $j_RR8, $j_RB8);
+        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1)
+            + (($jml2 / $jml_total) * $ent2)
+            + (($jml3 / $jml_total) * $ent3)
+            + (($jml4 / $jml_total) * $ent4)
+            + (($jml6 / $jml_total) * $ent6)
+            + (($jml7 / $jml_total) * $ent7)
+            + (($jml8 / $jml_total) * $ent8));
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
+        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='$kondisi3'");
+        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='$kondisi4'");
+        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='$kondisi5'");
+        $nilai6 = jumlah_data($conn, "$data_kasus $atribut='$kondisi6'");
+        $nilai7 = jumlah_data($conn, "$data_kasus $atribut='$kondisi7'");
+        $nilai8 = jumlah_data($conn, "$data_kasus $atribut='$kondisi8'");
+        $tot_opsi1 = $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6 + $nilai7 + $nilai8;
+        $atribut1 = @(- ($nilai1 / $tot_opsi1) * (log(($nilai1 / $tot_opsi1), 2)))
+            + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)))
+            + (- ($nilai3 / $tot_opsi1) * (log(($nilai3 / $tot_opsi1), 2)))
+            + (- ($nilai4 / $tot_opsi1) * (log(($nilai4 / $tot_opsi1), 2)))
+            + (- ($nilai5 / $tot_opsi1) * (log(($nilai5 / $tot_opsi1), 2)))
+            + (- ($nilai6 / $tot_opsi1) * (log(($nilai6 / $tot_opsi1), 2)))
+            + (- ($nilai7 / $tot_opsi1) * (log(($nilai7 / $tot_opsi1), 2)))
+            + (- ($nilai8 / $tot_opsi1) * (log(($nilai8 / $tot_opsi1), 2)));
+        $atribut1 = is_nan($atribut1) ? 0 : $atribut1;
+        $splitinfo = format_decimal($atribut1);
+
+        //desimal 3 angka dibelakang koma
+        $gain = format_decimal($gain);
+        $gainRasio = @$gain / $splitinfo;
+        $gainRasio = is_nan($gainRasio) ? 0 : $gainRasio;
+        $gainRasio = format_decimal($gainRasio);
+        echo "<tr>";
+        echo "<td>" . $atribut . "</td>";
+        echo "<td>" . $kondisi1 . "</td>";
+        echo "<td>" . $jml1 . "</td>";
+        echo "<td>" . $j_B1 . "</td>";
+        echo "<td>" . $j_S1 . "</td>";
+        echo "<td>" . $j_RR1 . "</td>";
+        echo "<td>" . $j_RB1 . "</td>";
+        echo "<td>" . $ent1 . "</td>";
+        echo "<td>" . $gain . "</td>";
+        echo "<td>" . $splitinfo . "</td>";
+        echo "<td>" . $gainRasio . "</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi2 . "</td>";
+        echo "<td>" . $jml2 . "</td>";
+        echo "<td>" . $j_B2 . "</td>";
+        echo "<td>" . $j_S2 . "</td>";
+        echo "<td>" . $j_RR2 . "</td>";
+        echo "<td>" . $j_RB2 . "</td>";
+        echo "<td>" . $ent2 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi3 . "</td>";
+        echo "<td>" . $jml3 . "</td>";
+        echo "<td>" . $j_B3 . "</td>";
+        echo "<td>" . $j_S3 . "</td>";
+        echo "<td>" . $j_RR3 . "</td>";
+        echo "<td>" . $j_RB3 . "</td>";
+        echo "<td>" . $ent3 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi4 . "</td>";
+        echo "<td>" . $jml4 . "</td>";
+        echo "<td>" . $j_B4 . "</td>";
+        echo "<td>" . $j_S4 . "</td>";
+        echo "<td>" . $j_RR4 . "</td>";
+        echo "<td>" . $j_RB4 . "</td>";
+        echo "<td>" . $ent4 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi5 . "</td>";
+        echo "<td>" . $jml5 . "</td>";
+        echo "<td>" . $j_B5 . "</td>";
+        echo "<td>" . $j_S5 . "</td>";
+        echo "<td>" . $j_RR5 . "</td>";
+        echo "<td>" . $j_RB5 . "</td>";
+        echo "<td>" . $ent5 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi6 . "</td>";
+        echo "<td>" . $jml6 . "</td>";
+        echo "<td>" . $j_B6 . "</td>";
+        echo "<td>" . $j_S6 . "</td>";
+        echo "<td>" . $j_RR6 . "</td>";
+        echo "<td>" . $j_RB6 . "</td>";
+        echo "<td>" . $ent6 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi7 . "</td>";
+        echo "<td>" . $jml7 . "</td>";
+        echo "<td>" . $j_B7 . "</td>";
+        echo "<td>" . $j_S7 . "</td>";
+        echo "<td>" . $j_RR7 . "</td>";
+        echo "<td>" . $j_RB7 . "</td>";
+        echo "<td>" . $ent7 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi8 . "</td>";
+        echo "<td>" . $jml8 . "</td>";
+        echo "<td>" . $j_B8 . "</td>";
+        echo "<td>" . $j_S8 . "</td>";
+        echo "<td>" . $j_RR8 . "</td>";
+        echo "<td>" . $j_RB8 . "</td>";
+        echo "<td>" . $ent8 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+        echo "<tr><td colspan='8'></td></tr>";
+    } elseif ($kondisi10 == '') {
+        $j_B1 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi1'");
+        $j_S1 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi1'");
+        $j_RR1 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi1'");
+        $j_RB1 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi1'");
+        $jml1 = $j_B1 + $j_S1 + $j_RR1 + $j_RB1;
+
+        $j_B2 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi2'");
+        $j_S2 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi2'");
+        $j_RR2 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi2'");
+        $j_RB2 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi2'");
+        $jml2 = $j_B2 + $j_S2 + $j_RR2 + $j_RB2;
+
+        $j_B3 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi3'");
+        $j_S3 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi3'");
+        $j_RR3 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi3'");
+        $j_RB3 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi3'");
+        $jml3 = $j_B3 + $j_S3 + $j_RR3 + $j_RB3;
+
+        $j_B4 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi4'");
+        $j_S4 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi4'");
+        $j_RR4 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi4'");
+        $j_RB4 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi4'");
+        $jml4 = $j_B4 + $j_S4 + $j_RR4 + $j_RB4;
+
+        $j_B5 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi5'");
+        $j_S5 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi5'");
+        $j_RR5 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi5'");
+        $j_RB5 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi5'");
+        $jml5 = $j_B5 + $j_S5 + $j_RR5 + $j_RB5;
+
+        $j_B6 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi6'");
+        $j_S6 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi6'");
+        $j_RR6 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi6'");
+        $j_RB6 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi6'");
+        $jml6 = $j_B6 + $j_S6 + $j_RR6 + $j_RB6;
+
+        $j_B7 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi7'");
+        $j_S7 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi7'");
+        $j_RR7 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi7'");
+        $j_RB7 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi7'");
+        $jml7 = $j_B7 + $j_S7 + $j_RR7 + $j_RB7;
+
+        $j_B8 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi8'");
+        $j_S8 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi8'");
+        $j_RR8 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi8'");
+        $j_RB8 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi8'");
+        $jml8 = $j_B8 + $j_S8 + $j_RR8 + $j_RB8;
+
+        $j_B9 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi9'");
+        $j_S9 = jumlah_data($conn, "$data_kasus target='S' AND $atribut='$kondisi9'");
+        $j_RR9 = jumlah_data($conn, "$data_kasus target='RR' AND $atribut='$kondisi9'");
+        $j_RB9 = jumlah_data($conn, "$data_kasus target='RB' AND $atribut='$kondisi9'");
+        $jml9 = $j_B9 + $j_S9 + $j_RR9 + $j_RB9;
+
+        //hitung entropy masing-masing kondisi
+        $jml_total = $jml1 + $jml2 + $jml3 + $jml4 + $jml5 + $jml6 + $jml7 + $jml8 + $jml9;
+        $ent1 = hitung_entropy($j_B1, $j_S1, $j_RR1, $j_RB1);
+        $ent2 = hitung_entropy($j_B2, $j_S2, $j_RR2, $j_RB2);
+        $ent3 = hitung_entropy($j_B3, $j_S3, $j_RR3, $j_RB3);
+        $ent4 = hitung_entropy($j_B4, $j_S4, $j_RR4, $j_RB4);
+        $ent5 = hitung_entropy($j_B5, $j_S5, $j_RR5, $j_RB5);
+        $ent6 = hitung_entropy($j_B6, $j_S6, $j_RR6, $j_RB6);
+        $ent7 = hitung_entropy($j_B7, $j_S7, $j_RR7, $j_RB7);
+        $ent8 = hitung_entropy($j_B8, $j_S8, $j_RR8, $j_RB8);
+        $ent9 = hitung_entropy($j_B9, $j_S9, $j_RR9, $j_RB9);
+        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1)
+            + (($jml2 / $jml_total) * $ent2)
+            + (($jml3 / $jml_total) * $ent3)
+            + (($jml4 / $jml_total) * $ent4)
+            + (($jml5 / $jml_total) * $ent5)
+            + (($jml6 / $jml_total) * $ent6)
+            + (($jml7 / $jml_total) * $ent7)
+            + (($jml8 / $jml_total) * $ent8)
+            + (($jml9 / $jml_total) * $ent9));
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
+        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='$kondisi3'");
+        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='$kondisi4'");
+        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='$kondisi5'");
+        $nilai6 = jumlah_data($conn, "$data_kasus $atribut='$kondisi6'");
+        $nilai7 = jumlah_data($conn, "$data_kasus $atribut='$kondisi7'");
+        $nilai8 = jumlah_data($conn, "$data_kasus $atribut='$kondisi8'");
+        $nilai9 = jumlah_data($conn, "$data_kasus $atribut='$kondisi9'");
+        $tot_opsi1 = $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6 + $nilai7 + $nilai8 + $nilai9;
+        $atribut1 = @(- ($nilai1 / $tot_opsi1) * (log(($nilai1 / $tot_opsi1), 2)))
+            + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)))
+            + (- ($nilai3 / $tot_opsi1) * (log(($nilai3 / $tot_opsi1), 2)))
+            + (- ($nilai4 / $tot_opsi1) * (log(($nilai4 / $tot_opsi1), 2)))
+            + (- ($nilai5 / $tot_opsi1) * (log(($nilai5 / $tot_opsi1), 2)))
+            + (- ($nilai6 / $tot_opsi1) * (log(($nilai6 / $tot_opsi1), 2)))
+            + (- ($nilai7 / $tot_opsi1) * (log(($nilai7 / $tot_opsi1), 2)))
+            + (- ($nilai8 / $tot_opsi1) * (log(($nilai8 / $tot_opsi1), 2)))
+            + (- ($nilai9 / $tot_opsi1) * (log(($nilai9 / $tot_opsi1), 2)));
+        $atribut1 = is_nan($atribut1) ? 0 : $atribut1;
+        $splitinfo = format_decimal($atribut1);
+
+        //desimal 3 angka dibelakang koma
+        $gain = format_decimal($gain);
+        $gainRasio = @$gain / $splitinfo;
+        $gainRasio = is_nan($gainRasio) ? 0 : $gainRasio;
+        $gainRasio = format_decimal($gainRasio);
+        echo "<tr>";
+        echo "<td>" . $atribut . "</td>";
+        echo "<td>" . $kondisi1 . "</td>";
+        echo "<td>" . $jml1 . "</td>";
+        echo "<td>" . $j_B1 . "</td>";
+        echo "<td>" . $j_S1 . "</td>";
+        echo "<td>" . $j_RR1 . "</td>";
+        echo "<td>" . $j_RB1 . "</td>";
+        echo "<td>" . $ent1 . "</td>";
+        echo "<td>" . $gain . "</td>";
+        echo "<td>" . $splitinfo . "</td>";
+        echo "<td>" . $gainRasio . "</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi2 . "</td>";
+        echo "<td>" . $jml2 . "</td>";
+        echo "<td>" . $j_B2 . "</td>";
+        echo "<td>" . $j_S2 . "</td>";
+        echo "<td>" . $j_RR2 . "</td>";
+        echo "<td>" . $j_RB2 . "</td>";
+        echo "<td>" . $ent2 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi3 . "</td>";
+        echo "<td>" . $jml3 . "</td>";
+        echo "<td>" . $j_B3 . "</td>";
+        echo "<td>" . $j_S3 . "</td>";
+        echo "<td>" . $j_RR3 . "</td>";
+        echo "<td>" . $j_RB3 . "</td>";
+        echo "<td>" . $ent3 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi4 . "</td>";
+        echo "<td>" . $jml4 . "</td>";
+        echo "<td>" . $j_B4 . "</td>";
+        echo "<td>" . $j_S4 . "</td>";
+        echo "<td>" . $j_RR4 . "</td>";
+        echo "<td>" . $j_RB4 . "</td>";
+        echo "<td>" . $ent4 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi5 . "</td>";
+        echo "<td>" . $jml5 . "</td>";
+        echo "<td>" . $j_B5 . "</td>";
+        echo "<td>" . $j_S5 . "</td>";
+        echo "<td>" . $j_RR5 . "</td>";
+        echo "<td>" . $j_RB5 . "</td>";
+        echo "<td>" . $ent5 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi6 . "</td>";
+        echo "<td>" . $jml6 . "</td>";
+        echo "<td>" . $j_B6 . "</td>";
+        echo "<td>" . $j_S6 . "</td>";
+        echo "<td>" . $j_RR6 . "</td>";
+        echo "<td>" . $j_RB6 . "</td>";
+        echo "<td>" . $ent6 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi7 . "</td>";
+        echo "<td>" . $jml7 . "</td>";
+        echo "<td>" . $j_B7 . "</td>";
+        echo "<td>" . $j_S7 . "</td>";
+        echo "<td>" . $j_RR7 . "</td>";
+        echo "<td>" . $j_RB7 . "</td>";
+        echo "<td>" . $ent7 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi8 . "</td>";
+        echo "<td>" . $jml8 . "</td>";
+        echo "<td>" . $j_B8 . "</td>";
+        echo "<td>" . $j_S8 . "</td>";
+        echo "<td>" . $j_RR8 . "</td>";
+        echo "<td>" . $j_RB8 . "</td>";
+        echo "<td>" . $ent8 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
+
+        echo "<tr>";
+        echo "<td>&nbsp;</td>";
+        echo "<td>" . $kondisi9 . "</td>";
+        echo "<td>" . $jml9 . "</td>";
+        echo "<td>" . $j_B9 . "</td>";
+        echo "<td>" . $j_S9 . "</td>";
+        echo "<td>" . $j_RR9 . "</td>";
+        echo "<td>" . $j_RB9 . "</td>";
+        echo "<td>" . $ent9 . "</td>";
+        echo "<td>&nbsp;</td>";
+        echo "</tr>";
         echo "<tr><td colspan='8'></td></tr>";
     } elseif ($kondisi11 == '') {
         $j_B1 = jumlah_data($conn, "$data_kasus target='B' AND $atribut='$kondisi1'");
@@ -935,18 +2364,28 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         $ent8 = hitung_entropy($j_B8, $j_S8, $j_RR8, $j_RB8);
         $ent9 = hitung_entropy($j_B9, $j_S9, $j_RR9, $j_RB9);
         $ent10 = hitung_entropy($j_B10, $j_S10, $j_RR10, $j_RB10);
-        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1) + (($jml2 / $jml_total) * $ent2) + (($jml3 / $jml_total) * $ent3) + (($jml4 / $jml_total) * $ent4) + (($jml6 / $jml_total) * $ent6) + (($jml7 / $jml_total) * $ent7) + (($jml8 / $jml_total) * $ent8) + (($jml9 / $jml_total) * $ent9) + (($jml10 / $jml_total) * $ent10));
-        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='SPES'");
-        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='SPE'");
-        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='PE'");
-        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='SS'");
-        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='CS'");
-        $nilai6 = jumlah_data($conn, "$data_kasus $atribut='S'");
-        $nilai7 = jumlah_data($conn, "$data_kasus $atribut='PA'");
-        $nilai8 = jumlah_data($conn, "$data_kasus $atribut='CP'");
-        $nilai9 = jumlah_data($conn, "$data_kasus $atribut='SPA'");
-        $nilai10 = jumlah_data($conn, "$data_kasus $atribut='SPAS'");
-        $tot_opsi1 = $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6 + $nilai7 + $nilai8 + $nilai9 + $nilai10;
+        $gain = $ent_all - @((($jml1 / $jml_total) * $ent1)
+            + (($jml2 / $jml_total) * $ent2)
+            + (($jml3 / $jml_total) * $ent3)
+            + (($jml4 / $jml_total) * $ent4)
+            + (($jml5 / $jml_total) * $ent5)
+            + (($jml6 / $jml_total) * $ent6)
+            + (($jml7 / $jml_total) * $ent7)
+            + (($jml8 / $jml_total) * $ent8)
+            + (($jml9 / $jml_total) * $ent9)
+            + (($jml10 / $jml_total) * $ent10));
+        $nilai1 = jumlah_data($conn, "$data_kasus $atribut='$kondisi1'");
+        $nilai2 = jumlah_data($conn, "$data_kasus $atribut='$kondisi2'");
+        $nilai3 = jumlah_data($conn, "$data_kasus $atribut='$kondisi3'");
+        $nilai4 = jumlah_data($conn, "$data_kasus $atribut='$kondisi4'");
+        $nilai5 = jumlah_data($conn, "$data_kasus $atribut='$kondisi5'");
+        $nilai6 = jumlah_data($conn, "$data_kasus $atribut='$kondisi6'");
+        $nilai7 = jumlah_data($conn, "$data_kasus $atribut='$kondisi7'");
+        $nilai8 = jumlah_data($conn, "$data_kasus $atribut='$kondisi8'");
+        $nilai9 = jumlah_data($conn, "$data_kasus $atribut='$kondisi9'");
+        $nilai10 = jumlah_data($conn, "$data_kasus $atribut='$kondisi10'");
+        $tot_opsi1 = $nilai1 + $nilai2 + $nilai3 + $nilai4
+            + $nilai5 + $nilai6 + $nilai7 + $nilai8 + $nilai9 + $nilai10;
         $atribut1 = @(- ($nilai1 / $tot_opsi1) * (log(($nilai1 / $tot_opsi1), 2)))
             + (- ($nilai2 / $tot_opsi1) * (log(($nilai2 / $tot_opsi1), 2)))
             + (- ($nilai3 / $tot_opsi1) * (log(($nilai3 / $tot_opsi1), 2)))
@@ -954,6 +2393,8 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
             + (- ($nilai5 / $tot_opsi1) * (log(($nilai5 / $tot_opsi1), 2)))
             + (- ($nilai6 / $tot_opsi1) * (log(($nilai6 / $tot_opsi1), 2)))
             + (- ($nilai7 / $tot_opsi1) * (log(($nilai7 / $tot_opsi1), 2)))
+            + (- ($nilai8 / $tot_opsi1) * (log(($nilai8 / $tot_opsi1), 2)))
+            + (- ($nilai9 / $tot_opsi1) * (log(($nilai9 / $tot_opsi1), 2)))
             + (- ($nilai10 / $tot_opsi1) * (log(($nilai10 / $tot_opsi1), 2)));
         $atribut1 = is_nan($atribut1) ? 0 : $atribut1;
         $splitinfo = format_decimal($atribut1);
@@ -987,8 +2428,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB2 . "</td>";
         echo "<td>" . $ent2 . "</td>";
         echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "</tr>";
 
         echo "<tr>";
@@ -1000,8 +2439,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RR3 . "</td>";
         echo "<td>" . $j_RB3 . "</td>";
         echo "<td>" . $ent3 . "</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "<td>&nbsp;</td>";
         echo "</tr>";
 
@@ -1015,8 +2452,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB4 . "</td>";
         echo "<td>" . $ent4 . "</td>";
         echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "</tr>";
 
         echo "<tr>";
@@ -1028,8 +2463,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RR5 . "</td>";
         echo "<td>" . $j_RB5 . "</td>";
         echo "<td>" . $ent5 . "</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "<td>&nbsp;</td>";
         echo "</tr>";
 
@@ -1043,8 +2476,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB6 . "</td>";
         echo "<td>" . $ent6 . "</td>";
         echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "</tr>";
 
         echo "<tr>";
@@ -1056,8 +2487,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RR7 . "</td>";
         echo "<td>" . $j_RB7 . "</td>";
         echo "<td>" . $ent7 . "</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "<td>&nbsp;</td>";
         echo "</tr>";
 
@@ -1071,8 +2500,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB8 . "</td>";
         echo "<td>" . $ent8 . "</td>";
         echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "</tr>";
 
         echo "<tr>";
@@ -1084,8 +2511,6 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RR9 . "</td>";
         echo "<td>" . $j_RB9 . "</td>";
         echo "<td>" . $ent9 . "</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "<td>&nbsp;</td>";
         echo "</tr>";
 
@@ -1099,10 +2524,7 @@ function hitung_gain($conn, $kasus, $atribut, $ent_all, $kondisi1, $kondisi2, $k
         echo "<td>" . $j_RB10 . "</td>";
         echo "<td>" . $ent10 . "</td>";
         echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
-        echo "<td>&nbsp;</td>";
         echo "</tr>";
-
         echo "<tr><td colspan='8'></td></tr>";
     }
 
@@ -1174,12 +2596,26 @@ function klasifikasi(
             $explodeRule1 = explode(" s ", $explodeAND[1]);
             $explodeRule2 = explode(" s ", $explodeAND[2]);
             $explodeRule3 = explode(" s ", $explodeAND[3]);
+            $explodeRule4 = explode(" s ", $explodeAND[4]);
+            $explodeRule5 = explode(" s ", $explodeAND[5]);
             //nilai true false						
             if ($explodeRule[0] == $explodeRule[1]) {
                 if ($explodeRule1[0] == $explodeRule1[1]) {
                     if ($explodeRule2[0] == $explodeRule2[1]) {
                         if ($explodeRule3[0] == $explodeRule3[1]) {
-                            $bolAND[$n] = "Benar";
+                            if ($explodeRule4[0] == $explodeRule4[1]) {
+                                if ($explodeRule5[0] == $explodeRule5[1]) {
+                                    $bolAND[$n] = "Benar";
+                                } else if ($explodeRule5 == NULL) {
+                                    $bolAND[$n] = "Benar";
+                                } else {
+                                    $bolAND[$n] = "Salah";
+                                }
+                            } else if ($explodeRule4 == NULL) {
+                                $bolAND[$n] = "Benar";
+                            } else {
+                                $bolAND[$n] = "Salah";
+                            }
                         } else if ($explodeRule3 == NULL) {
                             $bolAND[$n] = "Benar";
                         } else {
