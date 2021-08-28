@@ -183,6 +183,7 @@ if (
                                                                     <div class="container">
                                                                         <h6 class="text-center"><?php echo $asp['namaUser']; ?></h6>
                                                                         <p class="mt-0" style="font-size: 10px; line-height: 1.5em">Alamat : <?php echo $asp['alamat']; ?></p>
+                                                                        <p class="mt-0" style="font-size: 10px; ">Nik : <?php echo $asp['email']; ?></p>
                                                                         <p class="mt-0" style="font-size: 10px;">Tanggal : <?php echo $asp['tgl']; ?></p>
                                                                         <hr class="mt-0">
                                                                         <p><?php echo $asp['komentar']; ?></p>

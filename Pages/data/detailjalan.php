@@ -107,13 +107,20 @@ $adm = redairec('datajalan', 'id', $id);;
                             </table>
                         </div>
                     </div>
-                    <div class="col-lg col-xl-12 col-md-12 mb-8">
-                        <div class="p-5">
+                    <div class="col-lg col-xl-12 col-md-12 mb-8 bg-gray-200">
+                        <div class="p-3">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 ">PETA</h1>
+                                <h1 class="h4 text-gray-900 ">Gambar Jalan</h1>
                             </div>
-                            <div id="map">
-                                <Center>Data Internet Non Aktif</Center>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card shadow-lg"><img src="img/jalan/<?php echo $adm['gambar1']; ?>"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card shadow-lg"><img src="img/jalan/<?php echo $adm['gambar2']; ?>"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,38 +129,3 @@ $adm = redairec('datajalan', 'id', $id);;
         </div>
     </div>
 </div>
-
-<script>
-    function initMap() {
-        var myLatlng = new google.maps.LatLng(<?php echo $adm['latitude']; ?>, <?php echo $adm['longitude']; ?>);
-        var mapOptions = {
-            zoom: 15,
-            center: myLatlng
-        };
-
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        var contentString = '<div id="content">' +
-            '<div id="siteNotice">' +
-            '</div>' +
-            '<h1 id="firstHeading" class="firstHeading"><?php echo $adm['namajalan']; ?></h1>' +
-            '<div id="bodyContent">' +
-            '<p><?php echo $adm['namajalan']; ?></p>' +
-            '</div>' +
-            '</div>';
-
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            title: 'Maps Info',
-            icon: 'img/marker.png'
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map, marker);
-        });
-    }
-</script>

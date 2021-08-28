@@ -78,7 +78,7 @@ $spesifisitas = round($spesifisitas, 2);
   <div class="row">
     <div class="col-md-12">
       <center>
-        <h2>Sistem Informasi Klasifikasi Jalan Pada Dinas PUPR PIDIE</h2>
+        <h2>Sistem Informasi Klasifikasi Kondisi Jalan Pada Dinas PUPR PIDIE</h2>
         <h5>Menggunakan Algoritma C4.5. </h5>
       </center>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -194,6 +194,24 @@ $spesifisitas = round($spesifisitas, 2);
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-3">
+    <h5 class="text-center">Grafik Data Kondisi Jalan</h5>
+    <div class="row">
+      <div class="col-md-9 card">
+        <div style="width: 700px;margin: 0px auto;">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+      <div class="col-md-3 card mt-10">
+        <ul>
+          <li><button class="btn btn-success"></button> Kondisi Baik</li>
+          <li><button class="btn btn-info"></button> Kondisi Sedang</li>
+          <li><button class="btn btn-warning"></button> Kondisi Rusak Ringan</li>
+          <li><button class="btn btn-danger"></button> Kondisi Rusak Berat</li>
+        </ul>
       </div>
     </div>
   </div>

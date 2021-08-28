@@ -1,16 +1,15 @@
 <?php
 include 'koneksi.php';
 $id = $_GET['id'];
+$kon = $_GET['kondisi'];
 $adm = redairec('datajalan', 'id', $id);
 $iduser = $_SESSION['login']['id'];
 
 if (isset($_POST['submit'])) {
     if (tambahusulan($_POST, $adm['id'], $iduser) > 0) {
-        echo "
-        <div class='alert alert-info alert-dismissable' id='divAlert'>
-            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-            Data Usulan Tersimpan 
-            </div>";
+        echo ' <script>
+        location.replace("index.php?page=tampilklasifikasi&kondisi=' . $kon . '&pesan_success= Jalan Berhasil di usulkan");
+    </script>';
     } else {
         echo mysqli_error($conn);
     }
@@ -34,7 +33,7 @@ if (isset($_POST['submit'])) {
                                 <form action="" method="post">
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Tahun Usulan:</label>
-                                        <input type="date" name="tahun" class="form-control" id="recipient-name">
+                                        <input type="text" name="tahun" class="form-control" id="recipient-name">
                                     </div>
                                     <tr>
                                         <th>Nama Jalan</th>

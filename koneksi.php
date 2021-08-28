@@ -289,11 +289,11 @@ function hapusJalan($id)
 	$id = $_GET['hapus'];
 	$as = mysqli_query($conn, "SELECT * FROM aspirasi WHERE idjalan='$id'");
 	$data = mysqli_num_rows($as);
+	$dataklasiikasi = "DELETE FROM data_hasil_klasifikasi WHERE idjalan='$id'";
+	mysqli_query($conn, $dataklasiikasi);
 	if ($data > 0) {
 		$query = "DELETE FROM datajalan WHERE id='$id'";
 		$aspirasi = "DELETE FROM aspirasi WHERE idjalan='$id'";
-		$dataklasiikasi = "DELETE FROM data_hasil_klasifikasi WHERE idjalan='$id'";
-		mysqli_query($conn, $dataklasiikasi);
 		mysqli_query($conn, $query);
 		mysqli_query($conn, $aspirasi);
 	} else {
@@ -303,6 +303,16 @@ function hapusJalan($id)
 
 	return mysqli_affected_rows($conn);
 }
+
+function hapususulan($id)
+{
+	global $conn;
+	$id = $_GET['hapus'];
+	$query = "DELETE FROM datausulan WHERE idjalan='$id'";
+	mysqli_query($conn, $query);
+	return mysqli_affected_rows($conn);
+}
+
 // ====================================== FUNGSI UPLOAD =========================================================//
 function uploadprofile()
 {
@@ -461,7 +471,7 @@ function display_success($msg)
 
 // ============================================ FUNGSI UBAH DATA =====================================//
 
-function ubahdatajalan($data)
+function ubahdatajalan($data, $keputusan, $id_rule_keputusan)
 {
 	global $conn;
 	$id = $data["id"];
@@ -512,11 +522,11 @@ function ubahdatajalan($data)
 				mandor = '$mandor',
 				gambar1 = '$gambarbaru1',
 				gambar2 = '$gambarbaru2'
-			  WHERE id = $id
+			  WHERE id = '$id'
 			";
 
+	mysqli_query($conn, "UPDATE data_hasil_klasifikasi SET kondisi_hasil='$keputusan',id_rule='$id_rule_keputusan' WHERE idjalan='$id'");
 	mysqli_query($conn, $query);
-
 	return mysqli_affected_rows($conn);
 }
 
@@ -550,6 +560,22 @@ function ubahprofile($data)
 				jk = '$jk',
 				gambar = '$gambarbaru1'
 			  WHERE id = $id
+			";
+
+	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+}
+
+function ubahdatatahun($data)
+{
+	global $conn;
+
+	$id = $data["id"];
+	$tahun = $data["tahun"];
+	$query = "UPDATE datausulan SET
+				tahunusulan = '$tahun'
+			  WHERE idjalan = '$id'
 			";
 
 	mysqli_query($conn, $query);

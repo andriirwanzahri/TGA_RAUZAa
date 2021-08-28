@@ -26,16 +26,12 @@ if (!isset($_SESSION['login']['nama'])) {
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
-    <!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    <link href="css/datepicker.min.css" rel="stylesheet">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <!-- <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script> -->
+    <script src="js/datepicker.min.js"></script>
 
 
     <!-- Custom styles for this template-->
@@ -95,6 +91,11 @@ if (!isset($_SESSION['login']['nama'])) {
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=usulanjalan">
+                        <i class="fas fa-percent"></i>
+                        <span>Data Usulan</span></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="index.php?page=laporan">
                         <i class="fas fa-percent"></i>
                         <span>Laporan</span></a>
@@ -137,9 +138,17 @@ if (!isset($_SESSION['login']['nama'])) {
                         <span>Akurasi</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=laporan">
-                        <i class="fas fa-percent"></i>
-                        <span>Laporan</span></a>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Laporan</span>
+                    </a>
+                    <div id="laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Data Laporan Olahan C45</h6>
+                            <a class="collapse-item" href="index.php?page=laporan">Cetak Laporan</a>
+                            <a class="collapse-item" href="index.php?page=grafik">Grafik Kondisi Jalan</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?page=registrasi">

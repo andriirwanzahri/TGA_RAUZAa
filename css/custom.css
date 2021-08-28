@@ -12,7 +12,6 @@ body {
     padding: 30px;
     overflow: scroll;
     height: 800px;
-    font-size: 12px;
     line-height: 1.5em;
     /*script tambahan khusus untuk IE */
     scrollbar-face-color: #CE7E00;
@@ -22,8 +21,4 @@ body {
     scrollbar-darkshadow-color: #6F4709;
     scrollbar-track-color: #FFE8C1;
     scrollbar-arrow-color: #6F4709;
-}
-
-p {
-    line-height: 2px;
 }

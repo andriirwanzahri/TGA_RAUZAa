@@ -10,6 +10,8 @@ include "Pages/template/header.php";
       include 'admin.php';
     } elseif ($_GET['page'] == "datatraining") {
       include 'Pages/data/datatraining.php';
+    } elseif ($_GET['page'] == "grafik") {
+      include 'Pages/laporan/grafikmen.php';
     } elseif ($_GET['page'] == "tampilusulan") {
       include 'Pages/data/tampil_datausulan.php';
     } elseif ($_GET['page'] == "dataMasyarakat") {
@@ -28,6 +30,8 @@ include "Pages/template/header.php";
       include 'Pages/data/datajalan.php';
     } elseif ($_GET['page'] == "datausulan") {
       include 'Pages/data/datausulan.php';
+    } elseif ($_GET['page'] == "usulanjalan") {
+      include 'Pages/data/usulanjalan.php';
     } elseif ($_GET['page'] == "dashboard") {
       include 'Pages/dashboard.php';
     } elseif ($_GET['page'] == "aspirasi") {

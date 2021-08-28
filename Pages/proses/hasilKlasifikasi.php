@@ -21,7 +21,7 @@ $rusakberat = target("kondisi_hasil='RB'");
         <div class="row card mt-3 mb-5">
             <div class="container">
                 <div class="col-md-12 mt-3 mb-5">
-                    <h1 class="text-center">Hasil KLasifikasi Jalan</h1>
+                    <h1 class="text-center">Hasil KLasifikasi Kondisi Jalan</h1>
                 </div>
                 <?php
                 $pesan_error = $pesan_success = "";
